@@ -1,5 +1,5 @@
 name: akisni_app
-description: A new Flutter project.
+description: AKISNI DANGKOR.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -34,6 +34,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  get: ^4.6.5
+  build_runner: ^2.3.0
+  json_serializable: ^6.5.1
+  cached_network_image: ^3.2.2
+
+  # Google
+  google_maps_flutter_web: ^0.4.0+3
+  google_maps: ^6.2.0
+  googleapis: ^9.2.0
+
 
 dev_dependencies:
   flutter_test:
