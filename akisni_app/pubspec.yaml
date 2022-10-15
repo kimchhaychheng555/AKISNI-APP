@@ -46,6 +46,7 @@ dependencies:
   json_serializable: ^6.5.1
   cached_network_image: ^3.0.0
   mongo_dart: ^0.7.4+1
+  intl: ^0.17.0
 
   # Google
   google_maps_flutter_web: ^0.4.0+3
