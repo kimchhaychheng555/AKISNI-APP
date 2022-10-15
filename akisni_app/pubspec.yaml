@@ -35,9 +35,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  hexcolor: ^2.0.7
+  get_storage: ^2.0.3
+  json_annotation: ^4.7.0
+  darq: ^1.2.1
+  uuid: ^3.0.6
+  get_it: ^7.2.0
+  file_picker: ^5.2.1
   build_runner: ^2.3.0
   json_serializable: ^6.5.1
-  cached_network_image: ^3.2.2
+  cached_network_image: ^3.0.0
 
   # Google
   google_maps_flutter_web: ^0.4.0+3
