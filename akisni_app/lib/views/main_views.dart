@@ -25,16 +25,19 @@ class MainViews extends StatelessWidget {
         body: LoadingOverlayComponent(
           isLoading: controller.isLoading.value,
           child: Container(
+            padding: EdgeInsets.all(DEFAULT_PADDING),
             color: Colors.white,
-            child: Column(
-              children: [
-                ...controller.userList.map(
-                  (user) => TextComponent(
-                    text: user.fullName ?? "",
-                    color: BluePrimary,
+            child: Center(
+              child: Column(
+                children: [
+                  ...controller.userList.map(
+                    (user) => TextComponent(
+                      text: user.fullName ?? "",
+                      color: BluePrimary,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_services.dart';
-import 'package:akisni_app/services/respository_services.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
@@ -11,7 +11,8 @@ class MainController extends GetxController {
   void onInit() async {
     isLoading(true);
     await AppService.onStartUp();
-    userList(await RespositoryServices.getUser());
+    userList(await ResponsitoryServices.getUser());
+    await ResponsitoryServices.checkLogin();
     isLoading(false);
 
     super.onInit();

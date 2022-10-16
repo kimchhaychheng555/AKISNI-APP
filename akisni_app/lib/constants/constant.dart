@@ -9,6 +9,7 @@ const String CONNECTION_STR_MONOGO_DB =
 
 // Size
 double DEFAULT_FONT_SIZE = 16;
+double DEFAULT_PADDING = 15;
 
 // Color Constant
 Color RedPrimary = HexColor("#C62F30");
