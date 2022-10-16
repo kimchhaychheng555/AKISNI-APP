@@ -1,8 +1,20 @@
+import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppService {
   static String currentLanguage = "en";
+
+  static String get getFont {
+    switch (currentLanguage) {
+      case "en":
+        return EN_FONT;
+      case "kh":
+        return KH_FONT;
+      default:
+        return EN_FONT;
+    }
+  }
 
   static Locale get getLanguage {
     switch (currentLanguage) {

@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       translations: TranslateText(),
       locale: AppService.getLanguage,
       title: APP_TITLE.tr,
+      theme: ThemeData(fontFamily: AppService.getFont),
       getPages: AppRoute.getPages,
       initialRoute: AppRoute.initialRoute,
       initialBinding: AppBindings(),
