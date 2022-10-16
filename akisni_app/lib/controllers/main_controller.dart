@@ -9,8 +9,11 @@ class MainController extends GetxController {
   void onInit() async {
     isLoading(true);
     await AppService.onStartUp();
-
-    await RespositoryServices.getUser();
+    // await RespositoryServices.getUser();
+    await RespositoryServices.checkLogin(
+      username: "chhaylow",
+      password: "123456789",
+    );
     isLoading(false);
 
     super.onInit();

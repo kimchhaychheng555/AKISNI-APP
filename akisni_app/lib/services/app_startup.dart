@@ -14,6 +14,7 @@ class AppStartup {
       AppService.currentLanguage = await AppStorage.read("language");
     } else {
       AppService.currentLanguage = "en";
+      await AppStorage.write("language", AppService.currentLanguage);
     }
   }
 

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
@@ -35,7 +33,6 @@ class AppService {
   static onStartUp() async {
     await AppStartup.mongDbCreate();
     await AppStartup.languageStartup();
-    // loginUser = UserModel.fromJson(json.decode(await AppStartup.userStartup()));
   }
 
   static Future<void> onChangeLanguage({String lang = ""}) async {
