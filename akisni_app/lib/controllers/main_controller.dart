@@ -1,3 +1,4 @@
+import 'package:akisni_app/services/app_services.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
@@ -6,7 +7,7 @@ class MainController extends GetxController {
   @override
   void onInit() async {
     isLoading(true);
-    await Future.delayed(const Duration(seconds: 5));
+    await AppService.onStartUp();
     isLoading(false);
 
     super.onInit();

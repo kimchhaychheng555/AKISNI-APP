@@ -1,9 +1,11 @@
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/services/app_startup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppService {
   static String currentLanguage = "en";
+  static String connectionStringMongo = "";
 
   static String get getFont {
     switch (currentLanguage) {
@@ -27,7 +29,10 @@ class AppService {
     }
   }
 
-  static onStartUp() {}
+  static onStartUp() async {
+    await AppStartup.languageStartup();
+    await AppStartup.userStartup();
+  }
 
   static Future<void> onChangeLanguage({String lang = ""}) async {
     if (lang != "") {
