@@ -16,5 +16,5 @@ Color GrayTertiary = HexColor("#CFCFCE");
 Color GrayQuaternary = HexColor("#D6D6D6");
 
 // Font Constant
-const String EN_FONT = "";
-const String KH_FONT = "";
+const String EN_FONT = "MavenPro";
+const String KH_FONT = "KhAngWritehand";
