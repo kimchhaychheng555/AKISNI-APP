@@ -1,12 +1,32 @@
+import 'package:akisni_app/components/loading_overlay_component.dart';
+import 'package:akisni_app/components/text_header_component.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainViews extends StatelessWidget {
   const MainViews({Key? key}) : super(key: key);
 
-  static String routeName = "main";
+  static String routeName = "/main";
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    var controller = Get.find<MainController>();
+
+    return Obx(
+      () => Scaffold(
+        appBar: AppBar(
+          title: TextHeaderComponent(
+            text: "home".tr.toUpperCase(),
+          ),
+        ),
+        body: LoadingOverlayComponent(
+          isLoading: controller.isLoading.value,
+          child: Container(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
   }
 }

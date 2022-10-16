@@ -19,17 +19,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
-      onInit: AppService.onStartUp,
       debugShowCheckedModeBanner: false,
       translations: TranslateText(),
       locale: AppService.getLanguage,
       title: APP_TITLE.tr,
-      theme: ThemeData(fontFamily: AppService.getFont),
+      theme: ThemeData(
+        fontFamily: AppService.getFont,
+        backgroundColor: BluePrimary,
+      ),
       getPages: AppRoute.getPages,
       initialRoute: AppRoute.initialRoute,
       initialBinding: AppBindings(),

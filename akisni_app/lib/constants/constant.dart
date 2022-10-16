@@ -5,6 +5,9 @@ import 'package:hexcolor/hexcolor.dart';
 
 const String APP_TITLE = "AKISNI DANGKOR";
 
+// Size
+double DEFAULT_FONT_SIZE = 16;
+
 // Color Constant
 Color RedPrimary = HexColor("#C62F30");
 Color RedSeconday = HexColor("#C54D53");
