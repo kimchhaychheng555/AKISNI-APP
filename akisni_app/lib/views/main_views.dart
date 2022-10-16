@@ -1,5 +1,7 @@
 import 'package:akisni_app/components/loading_overlay_component.dart';
+import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/components/text_header_component.dart';
+import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +26,16 @@ class MainViews extends StatelessWidget {
           isLoading: controller.isLoading.value,
           child: Container(
             color: Colors.white,
+            child: Column(
+              children: [
+                ...controller.userList.map(
+                  (user) => TextComponent(
+                    text: user.fullName ?? "",
+                    color: BluePrimary,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

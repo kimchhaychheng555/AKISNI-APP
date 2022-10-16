@@ -5,7 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 const String APP_TITLE = "AKISNI DANGKOR";
 const String CONNECTION_STR_MONOGO_DB =
-    "mongodb+srv://admin:S0nFHLdtmTM4SVPD@cluster0.89d88no.mongodb.net/?retryWrites=true&w=majority";
+    "mongodb+srv://admin:S0nFHLdtmTM4SVPD@cluster0.89d88no.mongodb.net/MobileApp?retryWrites=true&w=majority";
 
 // Size
 double DEFAULT_FONT_SIZE = 16;
