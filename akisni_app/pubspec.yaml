@@ -48,8 +48,8 @@ dependencies:
   json_serializable: ^6.5.1
   cached_network_image: ^3.0.0
   mongo_dart: ^0.7.4+1
-  intl: ^0.17.0
-  hive: ^2.2.3
+  intl: ^0.17.0 
+  flutter_launcher_icons: ^0.10.0
 
   # Google
   google_maps_flutter_web: ^0.4.0+3
@@ -70,6 +70,11 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21 
 
 # The following section is specific to Flutter packages.
 flutter:

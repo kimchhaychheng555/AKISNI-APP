@@ -32,7 +32,7 @@ class MainViews extends StatelessWidget {
                 children: [
                   ...controller.userList.map(
                     (user) => TextComponent(
-                      text: user.fullName ?? "",
+                      text: "${user.lastLongitude} - ${user.lastLatitude}",
                       color: BluePrimary,
                     ),
                   ),

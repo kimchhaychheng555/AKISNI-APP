@@ -12,7 +12,7 @@ class ResponsitoryServices {
     List<UserModel> userList =
         dataUser.map((u) => UserModel.fromJson(u)).toList();
 
-    mongoDb.close();
+    await mongoDb.close();
     return userList;
   }
 
@@ -27,7 +27,7 @@ class ResponsitoryServices {
       user = UserModel(id: Uuid.NAMESPACE_NIL);
     }
 
-    mongoDb.close();
+    await mongoDb.close();
     return user;
   }
 
@@ -41,8 +41,18 @@ class ResponsitoryServices {
     var user = await collection
         .findOne({'username': 'chhaylow', 'password': '1234156789'});
 
-    mongoDb.close();
-
+    await mongoDb.close();
     return user == null ? false : true;
+  }
+
+  static Future<List<UserModel>> getTrackUser() async {
+    var trackDb = await Db.create(CONNECTION_STR_MONOGO_DB);
+    await trackDb.open();
+    var collection = trackDb.collection(TRACK_USER_COLLECTION);
+    var dataUser = await collection.find().toList();
+    List<UserModel> userList =
+        dataUser.map((e) => UserModel.fromJson(e)).toList();
+    await trackDb.close();
+    return userList;
   }
 }

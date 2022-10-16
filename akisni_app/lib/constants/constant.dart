@@ -7,7 +7,8 @@ const String APP_TITLE = "AKISNI DANGKOR";
 const String CONNECTION_STR_MONOGO_DB =
     "mongodb+srv://admin:S0nFHLdtmTM4SVPD@cluster0.89d88no.mongodb.net/MobileApp?retryWrites=true&w=majority";
 
-// Size
+// DEFAULT
+int DEFAULT_TRACK_SERVICE_DURATION = 1; // Second
 double DEFAULT_FONT_SIZE = 16;
 double DEFAULT_PADDING = 15;
 
@@ -27,3 +28,4 @@ const String KH_FONT = "KhAngWritehand";
 
 // Collection
 const String USER_COLLECTION = "data_user";
+const String TRACK_USER_COLLECTION = "data_track_user";

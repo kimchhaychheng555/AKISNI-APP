@@ -1,12 +1,15 @@
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppService {
   static String currentLanguage = "en";
   static UserModel loginUser = UserModel();
+  static List<UserModel> userTrack = [];
 
   static String get getFont {
     switch (currentLanguage) {
@@ -48,5 +51,14 @@ class AppService {
 
     // Re update translatation
     await Get.updateLocale(AppService.getLanguage);
+  }
+
+  static void onTrackUser() async {
+    while (true) {
+      var controller = Get.find<MainController>();
+      userTrack = await ResponsitoryServices.getTrackUser();
+      controller.userList(userTrack);
+      await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
+    }
   }
 }
