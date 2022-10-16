@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppService {
   static String currentLanguage = "en";
-  static String connectionStringMongo = "";
+  static UserModel loginUser = UserModel();
 
   static String get getFont {
     switch (currentLanguage) {
@@ -30,8 +33,9 @@ class AppService {
   }
 
   static onStartUp() async {
+    await AppStartup.mongDbCreate();
     await AppStartup.languageStartup();
-    await AppStartup.userStartup();
+    // loginUser = UserModel.fromJson(json.decode(await AppStartup.userStartup()));
   }
 
   static Future<void> onChangeLanguage({String lang = ""}) async {

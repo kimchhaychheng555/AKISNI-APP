@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 const String APP_TITLE = "AKISNI DANGKOR";
+const String CONNECTION_STR_MONOGO_DB =
+    "mongodb+srv://admin:S0nFHLdtmTM4SVPD@cluster0.89d88no.mongodb.net/?retryWrites=true&w=majority";
 
 // Size
 double DEFAULT_FONT_SIZE = 16;
@@ -21,3 +23,6 @@ Color GrayQuaternary = HexColor("#D6D6D6");
 // Font Constant
 const String EN_FONT = "MavenPro";
 const String KH_FONT = "KhAngWritehand";
+
+// Collection
+const String USER_COLLECTION = "data_user";
