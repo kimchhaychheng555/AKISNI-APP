@@ -1,8 +1,50 @@
-import 'package:akisni_app/app.dart';
-import 'package:akisni_app/controllers/home_controller.dart';
+import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/helper/app_bindings.dart';
+import 'package:akisni_app/helper/app_routes.dart';
+import 'package:akisni_app/services/app_services.dart';
+import 'package:akisni_app/translation/translate_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
-  runApp(const App());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage.init("setting");
+
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      scrollBehavior: MyCustomScrollBehavior(),
+      onInit: () => AppService.onTrackUser(),
+      debugShowCheckedModeBanner: false,
+      translations: TranslateText(),
+      locale: AppService.getLanguage,
+      title: APP_TITLE.tr,
+      theme: ThemeData(
+        fontFamily: AppService.getFont,
+        backgroundColor: BluePrimary,
+      ),
+      getPages: AppRoute.getPages,
+      initialRoute: AppRoute.initialRoute,
+      initialBinding: AppBindings(),
+    );
+  }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
 }

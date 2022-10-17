@@ -41,11 +41,15 @@ dependencies:
   darq: ^1.2.1
   uuid: ^3.0.6
   get_it: ^7.2.0
-  file_picker: ^5.2.1
+  # file_picker: ^5.2.1
+  loading_overlay: ^0.3.0
+  encrypt: ^5.0.1
   build_runner: ^2.3.0
   json_serializable: ^6.5.1
   cached_network_image: ^3.0.0
   mongo_dart: ^0.7.4+1
+  intl: ^0.17.0 
+  flutter_launcher_icons: ^0.10.0
 
   # Google
   google_maps_flutter_web: ^0.4.0+3
@@ -66,6 +70,11 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21 
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -76,9 +85,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/ 
+    - assets/fonts/
+    - assets/svg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -91,17 +101,23 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: MavenPro
+      fonts:
+        - asset: assets/fonts/Maven_Pro/MavenPro-Regular.ttf
+        - asset: assets/fonts/Maven_Pro/MavenPro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Maven_Pro/MavenPro-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Maven_Pro/MavenPro-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/Maven_Pro/MavenPro-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Maven_Pro/MavenPro-Black.ttf
+          weight: 900          
+    - family: KhAngWritehand
+      fonts:
+        - asset: assets/fonts/Kh Ang Writehand.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
