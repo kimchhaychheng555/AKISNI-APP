@@ -3,7 +3,7 @@ import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/check_box_component.dart';
 import 'package:akisni_app/components/input_text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
-import 'package:akisni_app/screens/home_view.dart';
+import 'package:akisni_app/views/main_views.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -41,7 +41,7 @@ class LoginView extends StatelessWidget {
                 onClick: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomeView()),
+                    MaterialPageRoute(builder: (context) => const MainViews()),
                   );
                 },
                 titleButton: 'Log In',
