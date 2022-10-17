@@ -1,4 +1,4 @@
-import 'package:akisni_app/screens/login_view.dart';
+import 'package:akisni_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

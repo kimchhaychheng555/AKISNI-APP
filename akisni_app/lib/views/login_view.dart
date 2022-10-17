@@ -1,7 +1,7 @@
 import 'package:akisni_app/app.dart';
-import 'package:akisni_app/component/button_component.dart';
-import 'package:akisni_app/component/check_box_component.dart';
-import 'package:akisni_app/component/input_text_component.dart';
+import 'package:akisni_app/components/button_component.dart';
+import 'package:akisni_app/components/check_box_component.dart';
+import 'package:akisni_app/components/input_text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/screens/home_view.dart';
 import 'package:flutter/cupertino.dart';
