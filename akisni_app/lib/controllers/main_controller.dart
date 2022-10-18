@@ -17,4 +17,6 @@ class MainController extends GetxController {
 
     super.onInit();
   }
+
+  void onLoginPressed() async {}
 }
