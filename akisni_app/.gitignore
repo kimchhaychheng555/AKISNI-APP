@@ -48,4 +48,5 @@ app.*.map.json
 
 
 
-/cache
+key.properties
+app/upload-keystore.jks

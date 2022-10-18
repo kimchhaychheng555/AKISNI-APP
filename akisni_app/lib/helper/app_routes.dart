@@ -4,7 +4,7 @@ import 'package:akisni_app/views/main_views.dart';
 import 'package:get/get.dart';
 
 class AppRoute {
-  static String initialRoute = MainViews.routeName;
+  static String initialRoute = LoginView.routeName;
 
   static List<GetPage<dynamic>> get getPages => [
         GetPage(
