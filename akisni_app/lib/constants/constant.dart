@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -12,6 +11,7 @@ const String CONNECTION_STR_MONOGO_DB =
 int DEFAULT_TRACK_SERVICE_DURATION = 1; // Second
 double DEFAULT_FONT_SIZE = 16;
 double DEFAULT_PADDING = 15;
+double FONT_SIZE_HEADER = 30;
 
 // Color Constant
 Color RedPrimary = HexColor("#C62F30");
@@ -21,7 +21,7 @@ Color BlueSeconday = HexColor("#577AAE");
 Color GrayPrimary = HexColor("#666766");
 Color GraySeconday = HexColor("#A5A4A4");
 Color GrayTertiary = HexColor("#CFCFCE");
-Color GrayQuaternary = HexColor("#D6D6D6");
+Color GrayQuaternary = HexColor("#f6f6f6");
 
 // Font Constant
 const String EN_FONT = "MavenPro";
@@ -35,10 +35,4 @@ class AppSpacing {
   static const bodyPandding = EdgeInsets.only(left: 15, right: 15);
   static const marginInputText = EdgeInsets.only(top: 8, bottom: 8);
   static const paddingContentInputeText = EdgeInsets.all(8);
-}
-
-class AppColors {
-  static const pramiryColor = Color(0xFF3B65AF);
-  static const bgInputText = Color(0xFFF6F6F6);
-  static const bgBorderInputText = Color(0xFFE8E8E8);
 }

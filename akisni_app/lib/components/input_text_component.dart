@@ -1,13 +1,16 @@
 import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class InputTextComponent extends StatelessWidget {
-  final String placeholder;
+  final String? placeholder;
+  final TextEditingController? controller;
+  final bool isPassword;
   const InputTextComponent({
     super.key,
-    this.placeholder = 'Please input text',
+    this.controller,
+    this.placeholder,
+    this.isPassword = false,
   });
 
   @override
@@ -15,22 +18,22 @@ class InputTextComponent extends StatelessWidget {
     return Container(
       margin: AppSpacing.marginInputText,
       child: TextField(
+        controller: controller,
+        obscureText: isPassword,
         decoration: InputDecoration(
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 12,
           ),
           contentPadding: AppSpacing.paddingContentInputeText,
-          fillColor: AppColors.bgInputText,
+          fillColor: GrayQuaternary,
           filled: true,
-          enabledBorder: const OutlineInputBorder(
-            // width: 0.0 produces a thin "hairline" border
-            borderSide: const BorderSide(
-                color: AppColors.bgBorderInputText, width: 0.0),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: GraySeconday, width: 0.0),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(4.0),
           ),
-          hintText: placeholder,
+          hintText: placeholder ?? 'please_input_text'.tr,
         ),
       ),
     );

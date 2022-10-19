@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppService {
+  static bool isHasNetwork = true;
   static String currentLanguage = "en";
   static UserModel loginUser = UserModel();
   static List<UserModel> userTrack = [];
@@ -36,6 +37,7 @@ class AppService {
   static onStartUp() async {
     await AppStartup.mongDbCreate();
     await AppStartup.languageStartup();
+    await AppStartup.userStartup();
   }
 
   static Future<void> onChangeLanguage({String lang = ""}) async {
@@ -57,7 +59,7 @@ class AppService {
     while (true) {
       var controller = Get.find<MainController>();
       userTrack = await ResponsitoryServices.getTrackUser();
-      controller.userList(userTrack);
+      controller.trackUserList(userTrack);
       await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
     }
   }

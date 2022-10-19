@@ -1,7 +1,5 @@
 import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ButtonComponent extends StatelessWidget {
   final String titleButton;
@@ -19,7 +17,7 @@ class ButtonComponent extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: AppColors.pramiryColor,
+          primary: BluePrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(32.0),
           ), //////// HERE
@@ -29,7 +27,7 @@ class ButtonComponent extends StatelessWidget {
         },
         child: Text(
           titleButton,
-          style: TextStyle(),
+          style: const TextStyle(),
         ),
       ),
     );

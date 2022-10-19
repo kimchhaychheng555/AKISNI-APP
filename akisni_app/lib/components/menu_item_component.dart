@@ -1,16 +1,13 @@
 import 'package:akisni_app/components/text_component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:googleapis/chat/v1.dart';
 
 class MenuItemComponent extends StatelessWidget {
   final String title;
-  final Function? OnClick;
+  final Function? onClick;
   const MenuItemComponent({
     super.key,
     required this.title,
-    this.OnClick,
+    this.onClick,
   });
 
   @override
@@ -22,7 +19,7 @@ class MenuItemComponent extends StatelessWidget {
         text: title,
       ),
       onTap: () {
-        OnClick!();
+        onClick!();
       },
     );
   }

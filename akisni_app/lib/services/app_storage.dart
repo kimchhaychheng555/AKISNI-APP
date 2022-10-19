@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:akisni_app/services/app_services.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -14,8 +17,16 @@ class AppStorage {
 
   static Future<String> read(String key) async {
     var readValue = await storage.read(key);
-    var value = _encrypter.decrypt16(readValue, iv: _iv);
+
+    String value = "";
+    if (readValue != "") {
+      value = _encrypter.decrypt16(readValue, iv: _iv);
+    }
 
     return value;
+  }
+
+  static void saveLogin() async {
+    await write("user", jsonEncode(AppService.loginUser));
   }
 }

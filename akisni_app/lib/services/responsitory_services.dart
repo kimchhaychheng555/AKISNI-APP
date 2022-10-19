@@ -1,5 +1,6 @@
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class ResponsitoryServices {
@@ -38,10 +39,15 @@ class ResponsitoryServices {
   }) async {
     await mongoDb.open();
     var collection = mongoDb.collection(USER_COLLECTION);
-    var user = await collection
-        .findOne({'username': 'chhaylow', 'password': '1234156789'});
+    var user =
+        await collection.findOne({'username': username, 'password': password});
 
     await mongoDb.close();
+
+    if (user != null) {
+      AppService.loginUser = UserModel.fromJson(user);
+    }
+
     return user == null ? false : true;
   }
 

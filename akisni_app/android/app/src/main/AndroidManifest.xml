@@ -1,14 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.chhaylow.akisni_app">
+    package="com.example.akisni_app">
 
+    <uses-permission android:name="android.permission.INTERNET" /> 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" /> 
 
    <application
         android:label="AKISNI DONGKOR"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
+        <meta-data  android:name="com.google.android.geo.API_KEY"
+                    android:value="AIzaSyARff_idReqeqD2-xGv63IJAztCS9pRxZc"/>
+
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

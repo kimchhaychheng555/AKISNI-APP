@@ -1,22 +1,32 @@
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_services.dart';
-import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/views/home_views/home_view.dart';
+import 'package:akisni_app/views/login_views/login_view.dart';
+import 'package:akisni_app/views/no_network_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
   var isLoading = false.obs;
-  RxList<UserModel> userList = (<UserModel>[]).obs;
+  var isDbLoad = false.obs;
+  var isLogin = false.obs;
+  RxList<UserModel> trackUserList = (<UserModel>[]).obs;
 
   @override
   void onInit() async {
     isLoading(true);
     await AppService.onStartUp();
-    userList(await ResponsitoryServices.getUser());
-    await ResponsitoryServices.checkLogin();
+    isDbLoad(true);
     isLoading(false);
 
     super.onInit();
   }
 
-  void onLoginPressed() async {}
+  Widget get afterLoading {
+    return AppService.isHasNetwork
+        ? isLogin.value
+            ? const HomeView()
+            : const LoginView()
+        : const NoNetWorkView();
+  }
 }
