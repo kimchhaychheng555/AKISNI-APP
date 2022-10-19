@@ -35,11 +35,6 @@ class HomeView extends StatelessWidget {
                   target: LatLng(37.42796133580664, -122.085749655962),
                   zoom: 0,
                 ),
-                // onMapCreated: (GoogleMapController controller) {
-                //   _controller.complete(controller);
-                // },
-                // markers: customMarkers.toSet(),
-                // onLongPress: (_) => pinMarker(_),
               ),
             ),
             Positioned(
