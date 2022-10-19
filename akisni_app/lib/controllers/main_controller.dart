@@ -1,8 +1,10 @@
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
+import 'package:akisni_app/views/location_views/location_view.dart';
 import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/no_network_view.dart';
+import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +28,7 @@ class MainController extends GetxController {
     return AppService.isHasNetwork
         ? isLogin.value
             ? const HomeView()
-            : const LoginView()
+            : const UserListView()
         : const NoNetWorkView();
   }
 }

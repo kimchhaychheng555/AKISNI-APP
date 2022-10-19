@@ -57,8 +57,12 @@ class DrawerComponent extends StatelessWidget {
                       ],
                     )),
               ),
-              const MenuItemComponent(title: 'Home'),
-              const MenuItemComponent(title: 'Locator List'),
+              const MenuItemComponent(
+                title: 'Home',
+              ),
+              const MenuItemComponent(
+                title: 'Locator List',
+              ),
               const MenuItemComponent(title: 'Manage'),
               const MenuItemComponent(title: 'Permission'),
               const MenuItemComponent(title: 'User'),

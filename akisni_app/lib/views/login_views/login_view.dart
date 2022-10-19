@@ -21,7 +21,7 @@ class LoginView extends StatelessWidget {
         body: LoadingOverlayComponent(
           isLoading: controller.isLoading.value,
           child: Padding(
-            padding: AppSpacing.bodyPandding,
+            padding: EdgeInsets.all(DEFAULT_PADDING),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

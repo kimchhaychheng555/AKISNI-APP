@@ -73,21 +73,21 @@ class HomeView extends StatelessWidget {
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               TextComponent(
-                                text: 'Location : Borey Lim Chhay Hak',
+                                text: '${'location'.tr} : Borey Lim Chhay Hak',
                                 color: Color(0xFF3B65AF),
                               ),
                               TextComponent(
-                                text: 'Power : 400kVA (Thibidi)',
+                                text: '${'power'.tr} : 400kVA (Thibidi)',
                                 color: Color(0xFF3B65AF),
                               ),
                               TextComponent(
-                                text: 'Install Date : 01 October 2020',
+                                text: '${'install_date'.tr} : 01 October 2020',
                                 color: Color(0xFF3B65AF),
                               ),
                               TextComponent(
-                                text: 'Company : ',
+                                text: '${'company'.tr} : ',
                                 color: Color(0xFF3B65AF),
                               ),
                             ],
