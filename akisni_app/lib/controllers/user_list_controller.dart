@@ -1,9 +1,9 @@
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:get/get.dart';
-import 'package:googleapis/dfareporting/v3_5.dart';
 
 class UserListController extends GetxController {
   var isLoading = false.obs;
+
   final List<UserModel> users = [
     UserModel(
         fullName: 'Chanthou',
