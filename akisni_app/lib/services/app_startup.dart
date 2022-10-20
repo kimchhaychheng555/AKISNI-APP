@@ -18,7 +18,6 @@ class AppStartup {
       success = true;
     });
 
-    print(success);
     AppService.isHasNetwork = success;
   }
 
@@ -39,7 +38,7 @@ class AppStartup {
       user = UserModel(id: Uuid.NAMESPACE_NIL);
     }
 
-    if (user.id == Uuid.NAMESPACE_NIL) {
+    if (user.id != Uuid.NAMESPACE_NIL) {
       var checkLogin = await ResponsitoryServices.checkLogin(
         username: user.username,
         password: user.password,

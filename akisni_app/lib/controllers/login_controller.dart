@@ -25,7 +25,7 @@ class LoginController extends GetxController {
       Get.toNamed(HomeView.routeName);
     } else {
       Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
+        msg: "incorrect_username_password".tr,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
