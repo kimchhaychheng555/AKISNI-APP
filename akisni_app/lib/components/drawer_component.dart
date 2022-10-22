@@ -1,13 +1,16 @@
 import 'package:akisni_app/components/menu_item_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<MainController>();
     return SafeArea(
       child: Drawer(
         child: Container(
@@ -16,7 +19,7 @@ class DrawerComponent extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
               SizedBox(
-                height: 150,
+                height: 100,
                 child: DrawerHeader(
                     decoration: BoxDecoration(
                       color: BluePrimary,
@@ -57,17 +60,34 @@ class DrawerComponent extends StatelessWidget {
                       ],
                     )),
               ),
-              const MenuItemComponent(
-                title: 'Home',
+              MenuItemComponent(
+                title: 'home'.tr,
+                onClick: () => controller.onHomePressed(),
               ),
-              const MenuItemComponent(
+              MenuItemComponent(
                 title: 'Locator List',
+                onClick: () => controller.onLocatorListPressed(),
               ),
-              const MenuItemComponent(title: 'Manage'),
-              const MenuItemComponent(title: 'Permission'),
-              const MenuItemComponent(title: 'User'),
-              const MenuItemComponent(title: 'Track Location'),
-              const MenuItemComponent(title: 'Logout'),
+              MenuItemComponent(
+                title: 'Manage',
+                onClick: () => controller.onManagePressed(),
+              ),
+              MenuItemComponent(
+                title: 'Permission',
+                onClick: () => controller.onPermissionPressed(),
+              ),
+              MenuItemComponent(
+                title: 'User',
+                onClick: () => controller.onUserPressed(),
+              ),
+              MenuItemComponent(
+                title: 'Track Location',
+                onClick: () => controller.onTrackLocationPressed(),
+              ),
+              MenuItemComponent(
+                title: 'Logout',
+                onClick: () => controller.onLogoutPreseed(),
+              ),
             ],
           ),
         ),

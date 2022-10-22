@@ -1,9 +1,6 @@
 import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/card_component.dart';
-import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../../components/text_component.dart';
@@ -34,10 +31,10 @@ class LocationListCardComponent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextComponent(
-            text: '${title}',
+            text: title,
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: Color(0xFFC63030),
+            color: const Color(0xFFC63030),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,24 +43,24 @@ class LocationListCardComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextComponent(
-                    text: '${'location'.tr} : ${location}',
-                    color: Color(0xFF3B65AF),
+                    text: '${'location'.tr} : $location',
+                    color: const Color(0xFF3B65AF),
                   ),
                   TextComponent(
-                    text: '${'power'.tr} : ${power}',
-                    color: Color(0xFF3B65AF),
+                    text: '${'power'.tr} : $power',
+                    color: const Color(0xFF3B65AF),
                   ),
                   TextComponent(
-                    text: '${'install_date'.tr} : ${installDate}',
-                    color: Color(0xFF3B65AF),
+                    text: '${'install_date'.tr} : $installDate',
+                    color: const Color(0xFF3B65AF),
                   ),
                   TextComponent(
-                    text: '${'company'.tr} : ${company}',
-                    color: Color(0xFF3B65AF),
+                    text: '${'company'.tr} : $company',
+                    color: const Color(0xFF3B65AF),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Expanded(
@@ -71,13 +68,13 @@ class LocationListCardComponent extends StatelessWidget {
                 child: Image.asset(
                   imageUrl.isEmpty
                       ? 'assets/images/Rectangle 242.png'
-                      : '${imageUrl}',
+                      : imageUrl,
                   width: 100,
                 ),
               )
             ],
           ),
-          ButtonComponent(
+          const ButtonComponent(
             titleButton: 'direction',
             width: 120,
           )

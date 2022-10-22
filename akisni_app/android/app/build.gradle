@@ -49,11 +49,8 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.chhaylow.akisni"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+    defaultConfig { 
+        applicationId "com.example.akisni" 
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
@@ -73,6 +70,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
+ 
 }
 
 flutter {
@@ -81,4 +79,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

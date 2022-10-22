@@ -2,8 +2,6 @@ import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/views/location_views/components/location_list_card_component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../components/input_text_component.dart';
@@ -20,7 +18,7 @@ class LocationView extends StatelessWidget {
     var controller = Get.find<LocationController>();
     return Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios),
+          leading: const Icon(Icons.arrow_back_ios),
           elevation: 0,
           automaticallyImplyLeading: true,
           backgroundColor: BluePrimary,
@@ -34,7 +32,7 @@ class LocationView extends StatelessWidget {
             padding: EdgeInsets.all(DEFAULT_PADDING),
             child: Column(
               children: [
-                InputTextComponent(
+                const InputTextComponent(
                   isSearch: true,
                   placeholder: 'Search',
                 ),

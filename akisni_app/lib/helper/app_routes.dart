@@ -4,6 +4,7 @@ import 'package:akisni_app/views/location_views/location_view.dart';
 import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/main_views.dart';
 import 'package:akisni_app/views/no_network_view.dart';
+import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:get/get.dart';
 
 class AppRoute {
@@ -18,6 +19,11 @@ class AppRoute {
         GetPage(
           page: () => const MainViews(),
           name: MainViews.routeName,
+          binding: AppBindings(),
+        ),
+        GetPage(
+          page: () => const UserListView(),
+          name: UserListView.routeName,
           binding: AppBindings(),
         ),
         GetPage(

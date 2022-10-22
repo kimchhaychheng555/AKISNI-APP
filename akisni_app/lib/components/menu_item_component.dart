@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class MenuItemComponent extends StatelessWidget {
   final String title;
-  final Function? onClick;
+  final Function()? onClick;
   const MenuItemComponent({
     super.key,
     required this.title,
@@ -18,9 +18,7 @@ class MenuItemComponent extends StatelessWidget {
       title: TextComponent(
         text: title,
       ),
-      onTap: () {
-        onClick!();
-      },
+      onTap: onClick,
     );
   }
 }
