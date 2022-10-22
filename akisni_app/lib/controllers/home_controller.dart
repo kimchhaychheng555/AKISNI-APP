@@ -1,8 +1,11 @@
+import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
@@ -11,18 +14,34 @@ class HomeController extends GetxController {
   RxList<Marker> listLocation = (<Marker>[]).obs;
   final GlobalKey currentMarkerKey = GlobalKey();
 
+  var currentMarkerActive = Rxn<LocationListModel>();
+
   @override
   void onInit() async {
     isLoading(true);
-
     await _determinePosition();
-    await _onLoadMarker();
-
     isLoading(false);
+
+    await _onCurrentMarker();
+    await _onLoadMarker();
     super.onInit();
   }
 
+  void onMarkerPressed(Marker marker) {}
+
   Future<void> _onLoadMarker() async {
+    BitmapDescriptor icon = await MarkerIcon.pictureAsset(
+        assetPath: "assets/images/tower.png", height: 300, width: 300);
+
+    ResponsitoryServices.getLocation().map((m) => _addLocationList(Marker(
+        markerId: MarkerId(m.id ?? "0"),
+        infoWindow: InfoWindow(title: m.title),
+        position: LatLng(m.latitude ?? 0, m.longitude ?? 0),
+        icon: icon,
+        onTap: () => currentMarkerActive(m))));
+  }
+
+  Future<void> _onCurrentMarker() async {
     _addLocationList(
       Marker(
         markerId: const MarkerId("0"),
@@ -46,9 +65,13 @@ class HomeController extends GetxController {
     }
   }
 
-  void onclick() async {
-    _onLoadMarker();
-    print(listLocation.toJson());
+  void onclick(String latitude, String longitude) async {
+    String dir = "google.navigation:q=$latitude,$longitude";
+    final Uri uri = Uri.parse(dir);
+
+    if (!await launchUrl(uri)) {
+      throw 'Could not launch $uri';
+    }
   }
 
   Future<void> _determinePosition() async {

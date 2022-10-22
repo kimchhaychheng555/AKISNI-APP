@@ -1,4 +1,5 @@
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:mongo_dart/mongo_dart.dart';
@@ -60,5 +61,42 @@ class ResponsitoryServices {
         dataUser.map((e) => UserModel.fromJson(e)).toList();
     await trackDb.close();
     return userList;
+  }
+
+  static List<LocationListModel> getLocation() {
+    List<LocationListModel> tempList = <LocationListModel>[];
+    tempList.add(LocationListModel(
+      id: const Uuid().v4(),
+      title: "DK41-055",
+      power: "630 kVA ( Fuji )",
+      type: "LV",
+      name: "អ៊ឺង ប៊ុនប៉េង​ ទី១៤",
+      company: "DK",
+      latitude: 11.493302,
+      longitude: 104.872099,
+    ));
+    tempList.add(LocationListModel(
+      id: const Uuid().v4(),
+      title: "DK41-046",
+      power: "630 kVA ( Precise )",
+      type: "LV",
+      name: "អ៊ឺង ប៊ុនប៉េង​ ទី៩",
+      company: "DK",
+      latitude: 11.485075,
+      longitude: 104.872250,
+    ));
+    tempList.add(LocationListModel(
+      id: const Uuid().v4(),
+      title: "DK41-048",
+      power: "630 kVA ( Thaipat )",
+      location: "រោងចក្រ",
+      type: "LV",
+      name: "អ៊ឺង ប៊ុនប៉េង​ ទី១០",
+      company: "DK",
+      latitude: 11.484592,
+      longitude: 104.874533,
+    ));
+
+    return tempList;
   }
 }

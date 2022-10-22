@@ -1,17 +1,18 @@
 import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/card_component.dart';
+import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../components/text_component.dart';
 
 class LocationListCardComponent extends StatelessWidget {
-  final String title;
-  final String location;
-  final String power;
-  final String company;
-  final String installDate;
-  final String imageUrl;
+  final String? title;
+  final String? location;
+  final String? power;
+  final String? company;
+  final String? installDate;
+  final String? imageUrl;
 
   const LocationListCardComponent({
     super.key,
@@ -31,7 +32,7 @@ class LocationListCardComponent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextComponent(
-            text: title,
+            text: title ?? "",
             fontSize: 18,
             fontWeight: FontWeight.w500,
             color: const Color(0xFFC63030),
@@ -44,19 +45,19 @@ class LocationListCardComponent extends StatelessWidget {
                 children: [
                   TextComponent(
                     text: '${'location'.tr} : $location',
-                    color: const Color(0xFF3B65AF),
+                    color: BluePrimary,
                   ),
                   TextComponent(
                     text: '${'power'.tr} : $power',
-                    color: const Color(0xFF3B65AF),
+                    color: BluePrimary,
                   ),
                   TextComponent(
                     text: '${'install_date'.tr} : $installDate',
-                    color: const Color(0xFF3B65AF),
+                    color: BluePrimary,
                   ),
                   TextComponent(
                     text: '${'company'.tr} : $company',
-                    color: const Color(0xFF3B65AF),
+                    color: BluePrimary,
                   ),
                 ],
               ),
@@ -66,9 +67,7 @@ class LocationListCardComponent extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Image.asset(
-                  imageUrl.isEmpty
-                      ? 'assets/images/Rectangle 242.png'
-                      : imageUrl,
+                  "$imageUrl",
                   width: 100,
                 ),
               )

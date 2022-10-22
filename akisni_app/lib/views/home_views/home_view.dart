@@ -48,91 +48,99 @@ class HomeView extends StatelessWidget {
                           ),
                       markers: controller.listLocation.toSet(),
                     ),
-              Positioned(
-                width: MediaQuery.of(context).size.width,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color.fromARGB(255, 244, 192, 192)
-                            .withOpacity(0.4),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const TextComponent(
-                          text: 'DK20-098',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFFC63030),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextComponent(
-                                  text:
-                                      '${'location'.tr} : Borey Lim Chhay Hak',
-                                  color: BluePrimary,
-                                ),
-                                TextComponent(
-                                  text: '${'power'.tr} : 400kVA (Thibidi)',
-                                  color: BluePrimary,
-                                ),
-                                TextComponent(
-                                  text:
-                                      '${'install_date'.tr} : 01 October 2020',
-                                  color: BluePrimary,
-                                ),
-                                TextComponent(
-                                  text: '${'company'.tr} : ',
-                                  color: BluePrimary,
-                                ),
-                              ],
-                            ),
-                            Image.asset('assets/images/Rectangle 242.png')
-                          ],
+              if (controller.currentMarkerActive.value != null)
+                Positioned(
+                  width: MediaQuery.of(context).size.width,
+                  bottom: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 244, 192, 192)
+                              .withOpacity(0.4),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextComponent(
+                            text: controller.currentMarkerActive.value?.name ??
+                                "",
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: RedPrimary,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextComponent(
+                                    text:
+                                        '${'location'.tr} : ${controller.currentMarkerActive.value?.location}',
+                                    color: BluePrimary,
+                                  ),
+                                  TextComponent(
+                                    text:
+                                        '${'power'.tr} : ${controller.currentMarkerActive.value?.power}',
+                                    color: BluePrimary,
+                                  ),
+                                  TextComponent(
+                                    text:
+                                        '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate}',
+                                    color: BluePrimary,
+                                  ),
+                                  TextComponent(
+                                    text:
+                                        '${'company'.tr} : ${controller.currentMarkerActive.value?.company}',
+                                    color: BluePrimary,
+                                  ),
+                                ],
+                              ),
+                              Image.asset('assets/images/Rectangle 242.png')
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                right: 10,
-                bottom: 160,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: BluePrimary,
-                  ),
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    color: Colors.white,
-                    icon: const Icon(
-                      Icons.directions,
-                      size: 36,
+              if (controller.currentMarkerActive.value != null)
+                Positioned(
+                  right: 10,
+                  bottom: 160,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: BluePrimary,
                     ),
-                    onPressed: () => controller.onclick(),
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      color: Colors.white,
+                      icon: const Icon(
+                        Icons.directions,
+                        size: 36,
+                      ),
+                      onPressed: () => controller.onclick(
+                        "${controller.currentMarkerActive.value?.latitude}",
+                        "${controller.currentMarkerActive.value?.longitude}",
+                      ),
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

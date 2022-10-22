@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 const String APP_TITLE = "AKISNI DANGKOR";
 const String CONNECTION_STR_MONOGO_DB =
     "mongodb+srv://admin:S0nFHLdtmTM4SVPD@cluster0.89d88no.mongodb.net/MobileApp?retryWrites=true&w=majority";
+const String GOOGLE_API_KEY = "AIzaSyCAnJNq2PnO9stzYVa1Wha2rxGmJiULqgo";
 
 // DEFAULT
 int DEFAULT_TRACK_SERVICE_DURATION = 1; // Second
