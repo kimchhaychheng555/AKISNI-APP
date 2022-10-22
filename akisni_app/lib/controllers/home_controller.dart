@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
@@ -27,18 +28,26 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  void onMarkerPressed(Marker marker) {}
+  void onMapPressed() {
+    currentMarkerActive(LocationListModel(id: Uuid.NAMESPACE_NIL));
+    update();
+  }
 
   Future<void> _onLoadMarker() async {
-    BitmapDescriptor icon = await MarkerIcon.pictureAsset(
-        assetPath: "assets/images/tower.png", height: 300, width: 300);
+    var locations = ResponsitoryServices.getLocation();
 
-    ResponsitoryServices.getLocation().map((m) => _addLocationList(Marker(
-        markerId: MarkerId(m.id ?? "0"),
-        infoWindow: InfoWindow(title: m.title),
-        position: LatLng(m.latitude ?? 0, m.longitude ?? 0),
-        icon: icon,
-        onTap: () => currentMarkerActive(m))));
+    for (var marker in locations) {
+      _addLocationList(
+        Marker(
+          infoWindow: InfoWindow(title: marker.title),
+          onTap: () => currentMarkerActive(marker),
+          markerId: MarkerId("${marker.id ?? 0}"),
+          position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
+          icon: await MarkerIcon.pictureAsset(
+              assetPath: "assets/images/tower.png", height: 150, width: 150),
+        ),
+      );
+    }
   }
 
   Future<void> _onCurrentMarker() async {
@@ -51,7 +60,6 @@ class HomeController extends GetxController {
             assetPath: "assets/images/location.png", height: 60, width: 60),
       ),
     );
-    update();
   }
 
   void _addLocationList(Marker marker) async {
@@ -63,6 +71,7 @@ class HomeController extends GetxController {
       listLocation.removeWhere((x) => x.markerId == marker.markerId);
       listLocation.add(marker);
     }
+    update();
   }
 
   void onclick(String latitude, String longitude) async {

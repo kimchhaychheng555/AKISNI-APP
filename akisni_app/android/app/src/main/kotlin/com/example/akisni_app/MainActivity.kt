@@ -1,4 +1,4 @@
-package com.example.akisni
+package com.chhaylow.akisni.dangkor
 
 import io.flutter.embedding.android.FlutterActivity
 

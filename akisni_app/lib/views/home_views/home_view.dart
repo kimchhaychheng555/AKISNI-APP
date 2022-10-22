@@ -7,6 +7,7 @@ import 'package:akisni_app/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -46,9 +47,12 @@ class HomeView extends StatelessWidget {
                             tilt: 0.0,
                             zoom: 16.373828887939453,
                           ),
+                      onTap: (_) => controller.onMapPressed(),
                       markers: controller.listLocation.toSet(),
                     ),
-              if (controller.currentMarkerActive.value != null)
+              if ((controller.currentMarkerActive.value?.id ??
+                      Uuid.NAMESPACE_NIL) !=
+                  Uuid.NAMESPACE_NIL)
                 Positioned(
                   width: MediaQuery.of(context).size.width,
                   bottom: 0,
@@ -76,7 +80,7 @@ class HomeView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextComponent(
-                            text: controller.currentMarkerActive.value?.name ??
+                            text: controller.currentMarkerActive.value?.title ??
                                 "",
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -90,22 +94,22 @@ class HomeView extends StatelessWidget {
                                 children: [
                                   TextComponent(
                                     text:
-                                        '${'location'.tr} : ${controller.currentMarkerActive.value?.location}',
+                                        '${'location'.tr} : ${controller.currentMarkerActive.value?.location ?? ""}',
                                     color: BluePrimary,
                                   ),
                                   TextComponent(
                                     text:
-                                        '${'power'.tr} : ${controller.currentMarkerActive.value?.power}',
+                                        '${'power'.tr} : ${controller.currentMarkerActive.value?.power ?? ""}',
                                     color: BluePrimary,
                                   ),
                                   TextComponent(
                                     text:
-                                        '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate}',
+                                        '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate ?? ""}',
                                     color: BluePrimary,
                                   ),
                                   TextComponent(
                                     text:
-                                        '${'company'.tr} : ${controller.currentMarkerActive.value?.company}',
+                                        '${'company'.tr} : ${controller.currentMarkerActive.value?.company ?? ""}',
                                     color: BluePrimary,
                                   ),
                                 ],
@@ -118,7 +122,9 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (controller.currentMarkerActive.value != null)
+              if ((controller.currentMarkerActive.value?.id ??
+                      Uuid.NAMESPACE_NIL) !=
+                  Uuid.NAMESPACE_NIL)
                 Positioned(
                   right: 10,
                   bottom: 160,

@@ -50,7 +50,7 @@ android {
     }
 
     defaultConfig { 
-        applicationId "com.example.akisni" 
+        applicationId "com.chhaylow.akisni.dangkor" 
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
