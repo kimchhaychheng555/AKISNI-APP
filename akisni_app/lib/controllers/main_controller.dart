@@ -27,7 +27,7 @@ class MainController extends GetxController {
     return AppService.isHasNetwork
         ? isLogin.value
             ? const HomeView()
-            : const LoginView()
+            : const HomeView()
         : const NoNetWorkView();
   }
 

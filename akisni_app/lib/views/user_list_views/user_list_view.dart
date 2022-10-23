@@ -59,6 +59,13 @@ class UserListView extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.onAddNewUserPress();
+        },
+        backgroundColor: BluePrimary,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

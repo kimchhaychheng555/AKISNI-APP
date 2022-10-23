@@ -6,11 +6,13 @@ class ButtonComponent extends StatelessWidget {
   final void Function()? onClick;
   final double? width;
   final double? height;
-  final Widget? surfix;
+  final bool isSurfix;
+  final IconData? surfix;
   const ButtonComponent({
     super.key,
     this.onClick,
     this.height,
+    this.isSurfix = false,
     this.width,
     this.titleButton,
     this.surfix,
@@ -20,7 +22,7 @@ class ButtonComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height ?? 50,
-      width: double.infinity,
+      width: width ?? double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: BluePrimary,
@@ -31,10 +33,20 @@ class ButtonComponent extends StatelessWidget {
         onPressed: () {
           onClick!();
         },
-        child: Text(
-          titleButton ?? "Button",
-          style: const TextStyle(),
-        ),
+        child: isSurfix == false
+            ? Text(
+                titleButton ?? "Button",
+                style: const TextStyle(),
+              )
+            : Row(
+                children: [
+                  Text(
+                    titleButton ?? "Button",
+                    style: const TextStyle(),
+                  ),
+                  Icon(surfix),
+                ],
+              ),
       ),
     );
   }

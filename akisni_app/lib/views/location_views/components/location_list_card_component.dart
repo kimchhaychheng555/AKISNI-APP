@@ -76,6 +76,9 @@ class LocationListCardComponent extends StatelessWidget {
           const ButtonComponent(
             titleButton: 'direction',
             width: 120,
+            height: 30,
+            isSurfix: true,
+            surfix: Icons.directions,
           )
         ],
       ),

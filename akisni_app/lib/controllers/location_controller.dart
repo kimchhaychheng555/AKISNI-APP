@@ -1,9 +1,13 @@
+import 'package:akisni_app/views/location_views/new_location_view.dart';
+import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:get/get.dart';
 
 import '../models/location_list_models/location_list_model.dart';
 
 class LocationController extends GetxController {
   var isLoading = false.obs;
+
+  void onAddNewLocatorPressed() => Get.offAllNamed(NewLocationView.routeName);
 
   final List<LocationListModel> locations = [
     LocationListModel(

@@ -1,8 +1,11 @@
 import 'package:akisni_app/models/user_models/user_model.dart';
+import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:get/get.dart';
 
 class UserListController extends GetxController {
   var isLoading = false.obs;
+
+  void onAddNewUserPress() => Get.offAllNamed(NewUserView.routeName);
 
   final List<UserModel> users = [
     UserModel(

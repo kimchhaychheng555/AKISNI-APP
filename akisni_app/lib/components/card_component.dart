@@ -1,11 +1,17 @@
+import 'package:akisni_app/components/text_component.dart';
+import 'package:akisni_app/components/text_header_component.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/constant.dart';
 
 class CardComponent extends StatelessWidget {
   final Widget child;
+  final String? title;
+  final bool isHasTitle;
   const CardComponent({
     super.key,
+    this.title,
+    this.isHasTitle = false,
     required this.child,
   });
 
@@ -19,8 +25,29 @@ class CardComponent extends StatelessWidget {
       shadowColor: const Color.fromARGB(255, 244, 192, 192).withOpacity(0.5),
       margin: EdgeInsets.only(bottom: SPACING_15),
       child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: child,
+        padding: EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            isHasTitle == true
+                ? Column(
+                    children: [
+                      TextComponent(
+                        text: '${title}',
+                        fontWeight: FontWeight.w500,
+                        color: RedPrimary,
+                      ),
+                      SizedBox(
+                        height: SPACING_10,
+                      ),
+                    ],
+                  )
+                : SizedBox(
+                    height: 0,
+                  ),
+            child,
+          ],
+        ),
       ),
     );
   }
