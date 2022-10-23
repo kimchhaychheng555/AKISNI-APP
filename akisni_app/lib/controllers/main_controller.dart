@@ -1,5 +1,6 @@
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_services.dart';
+import 'package:akisni_app/services/app_storage.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
 import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/no_network_view.dart';
@@ -43,5 +44,8 @@ class MainController extends GetxController {
 
   void onTrackLocationPressed() {}
 
-  void onLogoutPreseed() {}
+  void onLogoutPreseed() async {
+    Get.offAllNamed(LoginView.routeName);
+    await AppStorage.storage.remove("user");
+  }
 }
