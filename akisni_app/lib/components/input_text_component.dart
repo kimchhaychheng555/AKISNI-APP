@@ -6,11 +6,13 @@ class InputTextComponent extends StatelessWidget {
   final String? placeholder;
   final TextEditingController? controller;
   final bool isPassword;
+  final bool isTextArea;
   final bool isSearch;
   const InputTextComponent({
     super.key,
     this.controller,
     this.placeholder,
+    this.isTextArea = false,
     this.isPassword = false,
     this.isSearch = false,
   });
@@ -20,6 +22,7 @@ class InputTextComponent extends StatelessWidget {
     return Container(
       margin: AppSpacing.marginInputText,
       child: TextField(
+        maxLines: isTextArea == true ? 4 : 1,
         controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(

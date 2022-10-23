@@ -1,3 +1,4 @@
+import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/views/location_views/components/location_list_card_component.dart';
@@ -18,7 +19,6 @@ class LocationView extends StatelessWidget {
     var controller = Get.find<LocationController>();
     return Scaffold(
         appBar: AppBar(
-          leading: const Icon(Icons.arrow_back_ios),
           elevation: 0,
           automaticallyImplyLeading: true,
           backgroundColor: BluePrimary,
@@ -26,6 +26,7 @@ class LocationView extends StatelessWidget {
             text: "location_list".tr.toUpperCase(),
           ),
         ),
+        drawer: DrawerComponent(),
         body: LoadingOverlayComponent(
           isLoading: controller.isLoading.value,
           child: Padding(

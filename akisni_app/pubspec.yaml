@@ -47,7 +47,7 @@ dependencies:
   encrypt: ^5.0.1
   build_runner: ^2.3.0
   json_serializable: ^6.5.1
-  flutter_datetime_picker: ^1.5.1
+  date_time_picker: "^2.1.0"
   badges: ^2.0.3
   cached_network_image: ^3.0.0
   mongo_dart: ^0.7.4+1
