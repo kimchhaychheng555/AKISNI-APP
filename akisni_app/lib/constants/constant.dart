@@ -34,6 +34,7 @@ const String KH_FONT = "KhAngWritehand";
 
 // Collection
 const String USER_COLLECTION = "data_user";
+const String LOCATION_COLLECTION = "data_location";
 const String TRACK_USER_COLLECTION = "data_track_user";
 
 class AppSpacing {
