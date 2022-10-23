@@ -6,17 +6,17 @@ import 'package:uuid/uuid.dart';
 
 class ManageController extends GetxController {
   var isLoading = false.obs;
-
+  final formKey = GlobalKey<FormState>();
   // Var Location Temp
   var installDate = ''.obs;
   var nameCtrl = TextEditingController();
-  var power = ''.obs;
-  var type = ''.obs;
-  var location = ''.obs;
-  var customerName = ''.obs;
-  var companyName = ''.obs;
-  var latitude = ''.obs;
-  var longtitude = ''.obs;
+  var powerCtrl = TextEditingController();
+  var typeCtrl = TextEditingController();
+  var locationCtrl = TextEditingController();
+  var customerNameCtrl = TextEditingController();
+  var companyNameCtrl = TextEditingController();
+  var latitudeCtrl = TextEditingController();
+  var longtitudeCtrl = TextEditingController();
   // End
 
   void onSelectChangeDate(String? value) {

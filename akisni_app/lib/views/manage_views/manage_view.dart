@@ -1,4 +1,5 @@
 import 'package:akisni_app/components/date_time_picker_component.dart';
+import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/controllers/manage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,91 +15,77 @@ class ManageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<ManageController>();
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {},
+    return Form(
+      key: controller.formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: true,
+          backgroundColor: BluePrimary,
+          actions: [
+            IconButton(
+              onPressed: () {
+                controller.onSave();
+              },
+              icon: Icon(Icons.check),
+            )
+          ],
+          title: TextHeaderComponent(
+            text: "new_loaction".tr.toUpperCase(),
+          ),
         ),
-        elevation: 0,
-        automaticallyImplyLeading: true,
-        backgroundColor: BluePrimary,
-        actions: [Icon(Icons.check)],
-        title: TextHeaderComponent(
-          text: "new_loaction".tr.toUpperCase(),
-        ),
-      ),
-      body: LoadingOverlayComponent(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(DEFAULT_PADDING),
-          child: Column(
-            children: [
-              CardComponent(
-                title: 'general_information'.tr,
-                isHasTitle: true,
-                child: Column(
-                  children: [
-                    DateTimePickerComponent(
-                      onSelectonChange: (date) =>
-                          controller.onSelectChangeDate(date),
-                    ),
-                    InputTextComponent(
-                      controller: controller.nameCtrl,
-                      placeholder: 'customer_name',
-                    ),
-                    InputTextComponent(
-                      placeholder: 'company_name'.tr,
-                    ),
-                    InputTextComponent(
-                      isTextArea: true,
-                      placeholder: 'location'.tr,
-                    ),
-                  ],
+        drawer: DrawerComponent(),
+        body: LoadingOverlayComponent(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(DEFAULT_PADDING),
+            child: Column(
+              children: [
+                CardComponent(
+                  title: 'general_information'.tr,
+                  isHasTitle: true,
+                  child: Column(
+                    children: [
+                      InputTextComponent(
+                        controller: controller.nameCtrl,
+                        placeholder: 'dk'.toUpperCase(),
+                      ),
+                      DateTimePickerComponent(
+                        onSelectonChange: (date) =>
+                            controller.onSelectChangeDate(date),
+                      ),
+                      InputTextComponent(
+                        controller: controller.customerNameCtrl,
+                        placeholder: 'customer_name',
+                      ),
+                      InputTextComponent(
+                        controller: controller.companyNameCtrl,
+                        placeholder: 'company_name'.tr,
+                      ),
+                      InputTextComponent(
+                        controller: controller.powerCtrl,
+                        placeholder: 'power'.tr,
+                      ),
+                      InputTextComponent(
+                        controller: controller.typeCtrl,
+                        placeholder: 'type'.tr,
+                      ),
+                      InputTextComponent(
+                        controller: controller.latitudeCtrl,
+                        placeholder: 'latitude'.tr,
+                      ),
+                      InputTextComponent(
+                        controller: controller.longtitudeCtrl,
+                        placeholder: 'longtitude'.tr,
+                      ),
+                      InputTextComponent(
+                        isTextArea: true,
+                        placeholder: 'location'.tr,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              CardComponent(
-                title: 'marches_information'.tr,
-                isHasTitle: true,
-                child: Column(
-                  children: [
-                    InputTextComponent(
-                      placeholder: 'company_name'.tr,
-                    ),
-                    InputTextComponent(
-                      placeholder: 'location_name'.tr,
-                    ),
-                  ],
-                ),
-              ),
-              CardComponent(
-                title: 'map_information'.tr,
-                isHasTitle: true,
-                child: Column(
-                  children: [
-                    InputTextComponent(
-                      placeholder: 'company_name'.tr,
-                    ),
-                    InputTextComponent(
-                      placeholder: 'location_name'.tr,
-                    ),
-                  ],
-                ),
-              ),
-              CardComponent(
-                title: 'image'.tr,
-                isHasTitle: true,
-                child: Column(
-                  children: [
-                    InputTextComponent(
-                      placeholder: 'company_name'.tr,
-                    ),
-                    InputTextComponent(
-                      placeholder: 'location_name'.tr,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
