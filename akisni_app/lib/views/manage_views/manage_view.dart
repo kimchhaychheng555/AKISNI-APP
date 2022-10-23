@@ -39,9 +39,11 @@ class ManageView extends StatelessWidget {
                 child: Column(
                   children: [
                     DateTimePickerComponent(
-                      onSelectonChange: controller.onSelectChangeDate,
+                      onSelectonChange: (date) =>
+                          controller.onSelectChangeDate(date),
                     ),
                     InputTextComponent(
+                      controller: controller.nameCtrl,
                       placeholder: 'customer_name',
                     ),
                     InputTextComponent(

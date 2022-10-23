@@ -7,7 +7,7 @@ import '../constants/constant.dart';
 
 class DateTimePickerComponent extends StatelessWidget {
   final String label;
-  final void Function()? onSelectonChange;
+  final void Function(String?)? onSelectonChange;
   const DateTimePickerComponent({
     super.key,
     this.label = 'Please Select Date',
@@ -36,12 +36,7 @@ class DateTimePickerComponent extends StatelessWidget {
       fieldHintText: label,
       lastDate: DateTime(2100),
       dateHintText: label,
-      onChanged: (val) => print(val),
-      validator: (val) {
-        print(val);
-        return null;
-      },
-      onSaved: (val) => print(val),
+      onSaved: onSelectonChange,
     );
   }
 }
