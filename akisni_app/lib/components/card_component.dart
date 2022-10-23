@@ -1,5 +1,4 @@
 import 'package:akisni_app/components/text_component.dart';
-import 'package:akisni_app/components/text_header_component.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/constant.dart';

@@ -1,5 +1,25 @@
 Map<String, String> get enTranslate {
   return {
-    "home": "Home",
+    "AKISNI_DANGKOR": "AKISNI DANGKOR",
+    "home": "home",
+    "please_input_text": "Please Input Text",
+    "incorrect_username_password": "Incorrect Username Password",
+    "no_internet": "No Internet",
+    "location": "Location",
+    "power": "Power",
+    "install_date": "Install Date",
+    "company": "Company",
+    "location_list": "Location List",
+    "new_location": "New Location",
+    "general_information": "General Information",
+    "company_name": "Company Name",
+    "location_name": "Location Name",
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "remember_me": "Remember Me",
+    "new_user": "New User",
+    "phone": "Phone",
+    "phone_number": "Phone Number",
   };
 }
