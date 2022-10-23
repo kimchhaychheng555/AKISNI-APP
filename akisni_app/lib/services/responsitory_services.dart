@@ -99,4 +99,13 @@ class ResponsitoryServices {
 
     return tempList;
   }
+
+  static Future<Map<String, dynamic>> insertLocation(
+      LocationListModel locate) async {
+    await mongoDb.open();
+    var collection = mongoDb.collection(USER_COLLECTION);
+    var dataLocation = await collection.insert(locate.toJson());
+    await mongoDb.close();
+    return dataLocation;
+  }
 }
