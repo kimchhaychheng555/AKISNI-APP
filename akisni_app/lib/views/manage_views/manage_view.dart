@@ -25,7 +25,7 @@ class ManageView extends StatelessWidget {
         backgroundColor: BluePrimary,
         actions: [Icon(Icons.check)],
         title: TextHeaderComponent(
-          text: "new_loaction".tr.toUpperCase(),
+          text: "new_location".tr.toUpperCase(),
         ),
       ),
       body: LoadingOverlayComponent(

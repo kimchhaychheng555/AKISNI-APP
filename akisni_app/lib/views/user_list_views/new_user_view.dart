@@ -42,7 +42,7 @@ class NewUserView extends StatelessWidget {
                   child: Column(
                     children: [
                       InputTextComponent(
-                        placeholder: 'user_name'.tr,
+                        placeholder: 'username'.tr,
                       ),
                       InputTextComponent(
                         placeholder: 'email'.tr,
