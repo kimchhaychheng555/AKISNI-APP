@@ -17,46 +17,45 @@ class LocationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<LocationController>();
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: true,
-          backgroundColor: BluePrimary,
-          title: TextHeaderComponent(
-            text: "location_list".tr.toUpperCase(),
-          ),
-        ),
-        drawer: DrawerComponent(),
-        body: LoadingOverlayComponent(
-          isLoading: controller.isLoading.value,
-          child: Padding(
-            padding: EdgeInsets.all(DEFAULT_PADDING),
-            child: Column(
-              children: [
-                const InputTextComponent(
-                  isSearch: true,
-                  placeholder: 'Search',
-                ),
-                SizedBox(
-                  height: SPACING_10,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.locations.length,
-                    itemBuilder: ((BuildContext context, int index) {
-                      final locations = controller.locations[index];
-                      return LocationListCardComponent(
-                        title: locations.title,
-                        location: locations.location,
-                        power: locations.power,
-                        installDate: locations.installDate,
-                      );
-                    }),
-                  ),
-                ),
-              ],
+    return Obx(
+      () => Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            automaticallyImplyLeading: true,
+            backgroundColor: BluePrimary,
+            title: TextHeaderComponent(
+              text: "location_list".tr.toUpperCase(),
             ),
           ),
-        ));
+          drawer: const DrawerComponent(),
+          body: LoadingOverlayComponent(
+            isLoading: controller.isLoading.value,
+            child: Padding(
+              padding: EdgeInsets.all(DEFAULT_PADDING),
+              child: Column(
+                children: [
+                  const InputTextComponent(
+                    isSearch: true,
+                    placeholder: 'Search',
+                  ),
+                  SizedBox(
+                    height: SPACING_10,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: controller.listLocations.length,
+                      itemBuilder: ((BuildContext context, int index) {
+                        final locations = controller.listLocations[index];
+                        return LocationListCardComponent(
+                          location: locations,
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )),
+    );
   }
 }

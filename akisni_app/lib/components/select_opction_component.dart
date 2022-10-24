@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SelectOpctionComponenet extends StatelessWidget {
   final String? dropdownValue;
@@ -13,8 +11,6 @@ class SelectOpctionComponenet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("==");
-    print(dataValue);
     return DropdownButton<String>(
       value: dropdownValue,
       onChanged: (String? value) {

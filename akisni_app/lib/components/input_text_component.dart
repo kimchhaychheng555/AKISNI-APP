@@ -1,3 +1,4 @@
+import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,30 +22,41 @@ class InputTextComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: AppSpacing.marginInputText,
-      child: TextField(
-        maxLines: isTextArea == true ? 4 : 1,
-        controller: controller,
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          hintStyle: const TextStyle(
-            fontSize: 12,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextComponent(
+            text: placeholder ?? "",
+            color: BluePrimary,
+            fontSize: DEFAULT_FONT_SIZE,
           ),
-          contentPadding: AppSpacing.paddingContentInputeText,
-          fillColor: GrayQuaternary,
-          filled: true,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: GraySeconday, width: 0.0),
-            borderRadius: isSearch
-                ? BorderRadius.circular(100)
-                : BorderRadius.circular(4.0),
+          const SizedBox(height: 10),
+          TextField(
+            maxLines: isTextArea == true ? 4 : 1,
+            controller: controller,
+            obscureText: isPassword,
+            decoration: InputDecoration(
+              hintStyle: const TextStyle(
+                fontSize: 12,
+              ),
+              contentPadding: AppSpacing.paddingContentInputeText,
+              fillColor: GrayQuaternary,
+              filled: true,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: GraySeconday, width: 0.0),
+                borderRadius: isSearch
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(4.0),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: isSearch
+                    ? BorderRadius.circular(100)
+                    : BorderRadius.circular(4.0),
+              ),
+              hintText: placeholder ?? 'please_input_text'.tr,
+            ),
           ),
-          border: OutlineInputBorder(
-            borderRadius: isSearch
-                ? BorderRadius.circular(100)
-                : BorderRadius.circular(4.0),
-          ),
-          hintText: placeholder ?? 'please_input_text'.tr,
-        ),
+        ],
       ),
     );
   }

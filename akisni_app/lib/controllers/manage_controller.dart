@@ -24,10 +24,22 @@ class ManageController extends GetxController {
   }
 
   void onSave() async {
+    isLoading(true);
     var locate = LocationListModel(
-      id: Uuid().v4(),
+      id: const Uuid().v4(),
+      company: companyNameCtrl.text,
+      installDate: installDate.value,
+      location: locationCtrl.text,
+      latitude: double.tryParse(latitudeCtrl.text),
+      longitude: double.tryParse(longtitudeCtrl.text),
+      name: nameCtrl.text,
+      power: powerCtrl.text,
     );
 
     var res = await ResponsitoryServices.insertLocation(locate);
+
+    Get.snackbar("Heloo", "");
+
+    isLoading(false);
   }
 }

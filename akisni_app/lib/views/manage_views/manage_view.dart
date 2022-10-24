@@ -27,64 +27,68 @@ class ManageView extends StatelessWidget {
               onPressed: () {
                 controller.onSave();
               },
-              icon: Icon(Icons.check),
+              icon: const Icon(Icons.check),
             )
           ],
           title: TextHeaderComponent(
-            text: "new_loaction".tr.toUpperCase(),
+            text: "new_location".tr.toUpperCase(),
           ),
         ),
-        drawer: DrawerComponent(),
-        body: LoadingOverlayComponent(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(DEFAULT_PADDING),
-            child: Column(
-              children: [
-                CardComponent(
-                  title: 'general_information'.tr,
-                  isHasTitle: true,
-                  child: Column(
-                    children: [
-                      InputTextComponent(
-                        controller: controller.nameCtrl,
-                        placeholder: 'dk'.toUpperCase(),
-                      ),
-                      DateTimePickerComponent(
-                        onSelectonChange: (date) =>
-                            controller.onSelectChangeDate(date),
-                      ),
-                      InputTextComponent(
-                        controller: controller.customerNameCtrl,
-                        placeholder: 'customer_name',
-                      ),
-                      InputTextComponent(
-                        controller: controller.companyNameCtrl,
-                        placeholder: 'company_name'.tr,
-                      ),
-                      InputTextComponent(
-                        controller: controller.powerCtrl,
-                        placeholder: 'power'.tr,
-                      ),
-                      InputTextComponent(
-                        controller: controller.typeCtrl,
-                        placeholder: 'type'.tr,
-                      ),
-                      InputTextComponent(
-                        controller: controller.latitudeCtrl,
-                        placeholder: 'latitude'.tr,
-                      ),
-                      InputTextComponent(
-                        controller: controller.longtitudeCtrl,
-                        placeholder: 'longtitude'.tr,
-                      ),
-                      InputTextComponent(
-                        isTextArea: true,
-                        placeholder: 'location'.tr,
-                      ),
-                    ],
+        drawer: const DrawerComponent(),
+        body: Obx(
+          () => LoadingOverlayComponent(
+            isLoading: controller.isLoading.value,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(DEFAULT_PADDING),
+              child: Column(
+                children: [
+                  CardComponent(
+                    title: 'general_information'.tr,
+                    isHasTitle: true,
+                    child: Column(
+                      children: [
+                        InputTextComponent(
+                          controller: controller.nameCtrl,
+                          placeholder: 'dk'.toUpperCase(),
+                        ),
+                        DateTimePickerComponent(
+                          label: "install_date".tr,
+                          onSelectonChange: (date) =>
+                              controller.onSelectChangeDate(date),
+                        ),
+                        InputTextComponent(
+                          controller: controller.customerNameCtrl,
+                          placeholder: 'customer_name'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.companyNameCtrl,
+                          placeholder: 'company_name'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.powerCtrl,
+                          placeholder: 'power'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.typeCtrl,
+                          placeholder: 'type'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.latitudeCtrl,
+                          placeholder: 'latitude'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.longtitudeCtrl,
+                          placeholder: 'longtitude'.tr,
+                        ),
+                        InputTextComponent(
+                          isTextArea: true,
+                          placeholder: 'location'.tr,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

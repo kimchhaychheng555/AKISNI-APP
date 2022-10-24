@@ -63,48 +63,26 @@ class ResponsitoryServices {
     return userList;
   }
 
-  static List<LocationListModel> getLocation() {
+  static Future<List<LocationListModel>> getLocation() async {
     List<LocationListModel> tempList = <LocationListModel>[];
-    tempList.add(LocationListModel(
-      id: const Uuid().v4(),
-      title: "DK41-055",
-      power: "630 kVA ( Fuji )",
-      type: "LV",
-      name: "អ៊ឺង ប៊ុនប៉េង​ ទី១៤",
-      company: "DK",
-      latitude: 11.493302,
-      longitude: 104.872099,
-    ));
-    tempList.add(LocationListModel(
-      id: const Uuid().v4(),
-      title: "DK41-046",
-      power: "630 kVA ( Precise )",
-      type: "LV",
-      name: "អ៊ឺង ប៊ុនប៉េង​ ទី៩",
-      company: "DK",
-      latitude: 11.485075,
-      longitude: 104.872250,
-    ));
-    tempList.add(LocationListModel(
-      id: const Uuid().v4(),
-      title: "DK41-048",
-      power: "630 kVA ( Thaipat )",
-      location: "រោងចក្រ",
-      type: "LV",
-      name: "អ៊ឺង ប៊ុនប៉េង​ ទី១០",
-      company: "DK",
-      latitude: 11.484592,
-      longitude: 104.874533,
-    ));
+    await mongoDb.open();
+    var collection = mongoDb.collection(LOCATION_COLLECTION);
+    var dataLocation = await collection.find().toList();
+
+    tempList.addAll(
+        dataLocation.map((e) => LocationListModel.fromJson(e)).toList());
+
+    await mongoDb.close();
 
     return tempList;
   }
 
-  static Future<Map<String, dynamic>> insertLocation(
-      LocationListModel locate) async {
+  static Future<dynamic> insertLocation(LocationListModel locate) async {
     await mongoDb.open();
-    var collection = mongoDb.collection(USER_COLLECTION);
-    var dataLocation = await collection.insert(locate.toJson());
+    var collection = mongoDb.collection(LOCATION_COLLECTION);
+
+    var json = locate.toJson();
+    var dataLocation = await collection.insertOne(json);
     await mongoDb.close();
     return dataLocation;
   }

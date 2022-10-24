@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeController extends GetxController {
@@ -34,7 +33,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> _onLoadMarker() async {
-    var locations = ResponsitoryServices.getLocation();
+    var locations = await ResponsitoryServices.getLocation();
 
     for (var marker in locations) {
       _addLocationList(
@@ -72,15 +71,6 @@ class HomeController extends GetxController {
       listLocation.add(marker);
     }
     update();
-  }
-
-  void onclick(String latitude, String longitude) async {
-    String dir = "google.navigation:q=$latitude,$longitude";
-    final Uri uri = Uri.parse(dir);
-
-    if (!await launchUrl(uri)) {
-      throw 'Could not launch $uri';
-    }
   }
 
   Future<void> _determinePosition() async {

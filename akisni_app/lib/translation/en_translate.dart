@@ -19,7 +19,7 @@ Map<String, String> get enTranslate {
     "password": "Password",
     "remember_me": "Remember Me",
     "new_user": "New User",
-    "phone": "Phone",
     "phone_number": "Phone Number",
+    "customer_name": "Customer Name",
   };
 }

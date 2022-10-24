@@ -4,6 +4,7 @@ import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/components/text_header_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/home_controller.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,6 +18,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<HomeController>();
+    var mainController = Get.find<MainController>();
     return Obx(
       () => Scaffold(
         appBar: AppBar(
@@ -140,7 +142,7 @@ class HomeView extends StatelessWidget {
                         Icons.directions,
                         size: 36,
                       ),
-                      onPressed: () => controller.onclick(
+                      onPressed: () => mainController.onDirectionPressed(
                         "${controller.currentMarkerActive.value?.latitude}",
                         "${controller.currentMarkerActive.value?.longitude}",
                       ),
