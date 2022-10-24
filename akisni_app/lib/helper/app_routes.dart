@@ -34,7 +34,7 @@ class AppRoute {
           binding: AppBindings(),
         ),
         GetPage(
-          page: () => const HomeView(),
+          page: () => HomeView(),
           name: HomeView.routeName,
           binding: AppBindings(),
         ),

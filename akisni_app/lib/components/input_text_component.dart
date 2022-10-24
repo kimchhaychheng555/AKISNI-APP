@@ -7,12 +7,16 @@ class InputTextComponent extends StatelessWidget {
   final String? placeholder;
   final TextEditingController? controller;
   final bool isPassword;
+  final TextInputType textInputType;
   final bool isTextArea;
   final bool isSearch;
+  final String? Function(String?)? validator;
   const InputTextComponent({
     super.key,
     this.controller,
     this.placeholder,
+    this.validator,
+    this.textInputType = TextInputType.text,
     this.isTextArea = false,
     this.isPassword = false,
     this.isSearch = false,
@@ -25,13 +29,17 @@ class InputTextComponent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextComponent(
-            text: placeholder ?? "",
-            color: BluePrimary,
-            fontSize: DEFAULT_FONT_SIZE,
-          ),
+          isSearch == false
+              ? TextComponent(
+                  text: placeholder ?? "",
+                  color: BluePrimary,
+                  fontSize: DEFAULT_FONT_SIZE,
+                )
+              : Container(),
           const SizedBox(height: 10),
-          TextField(
+          TextFormField(
+            validator: validator,
+            keyboardType: textInputType,
             maxLines: isTextArea == true ? 4 : 1,
             controller: controller,
             obscureText: isPassword,

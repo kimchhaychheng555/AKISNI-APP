@@ -44,7 +44,10 @@ class ButtonComponent extends StatelessWidget {
                     titleButton ?? "Button",
                     style: const TextStyle(),
                   ),
-                  Icon(surfix),
+                  Icon(
+                    surfix,
+                    size: 20,
+                  ),
                 ],
               ),
       ),

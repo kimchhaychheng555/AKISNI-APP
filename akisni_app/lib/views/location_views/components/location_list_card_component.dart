@@ -32,49 +32,56 @@ class LocationListCardComponent extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextComponent(
-                    text: '${'location'.tr} : ${location.location}',
-                    color: BluePrimary,
-                  ),
-                  TextComponent(
-                    text: '${'power'.tr} : ${location.power}',
-                    color: BluePrimary,
-                  ),
-                  TextComponent(
-                    text: '${'install_date'.tr} : ${location.installDate}',
-                    color: BluePrimary,
-                  ),
-                  TextComponent(
-                    text: '${'company'.tr} : ${location.company}',
-                    color: BluePrimary,
-                  ),
-                ],
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextComponent(
+                      text: '${'location'.tr} : ${location.location}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
+                      text: '${'power'.tr} : ${location.power}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
+                      text: '${'install_date'.tr} : ${location.installDate}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
+                      text: '${'company'.tr} : ${location.company}',
+                      color: BluePrimary,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    ButtonComponent(
+                      titleButton: 'direction'.tr,
+                      onClick: () => mainController.onDirectionPressed(
+                          location.latitude.toString(),
+                          location.longitude.toString()),
+                      height: 30,
+                      width: 120,
+                      isSurfix: true,
+                      surfix: Icons.directions,
+                    )
+                  ],
+                ),
               ),
               const SizedBox(
                 width: 5,
               ),
-              // Expanded(
-              //   flex: 1,
-              //   child: Image.asset(
-              //     "$imageUrl",
-              //     width: 100,
-              //   ),
-              // )
+              Expanded(
+                flex: 1,
+                child: Image.asset(
+                  "assets/images/Rectangle 242.png",
+                ),
+              )
             ],
           ),
-          ButtonComponent(
-            titleButton: 'direction'.tr,
-            onClick: () => mainController.onDirectionPressed(
-                location.latitude.toString(), location.longitude.toString()),
-            width: 120,
-            height: 30,
-            isSurfix: true,
-            surfix: Icons.directions,
-          )
         ],
       ),
     );

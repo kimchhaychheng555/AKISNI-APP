@@ -30,7 +30,7 @@ class MainController extends GetxController {
   Widget get afterLoading {
     return AppService.isHasNetwork
         ? isLogin.value
-            ? const HomeView()
+            ? HomeView()
             : const LoginView()
         : const NoNetWorkView();
   }

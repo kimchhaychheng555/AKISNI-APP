@@ -38,6 +38,7 @@ class DateTimePickerComponent extends StatelessWidget {
                 borderSide: BorderSide(color: GraySeconday, width: 0.0),
               ),
             ),
+            initialValue: DateTime.now().toString(),
             firstDate: DateTime(2000),
             style: const TextStyle(
               fontSize: 12,

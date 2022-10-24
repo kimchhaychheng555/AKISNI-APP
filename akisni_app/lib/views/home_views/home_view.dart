@@ -11,7 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeView extends GetResponsiveView<MainController> {
-  const HomeView({super.key});
+  HomeView({super.key});
 
   static String routeName = "/home";
 
@@ -83,7 +83,7 @@ class HomeView extends GetResponsiveView<MainController> {
                         children: [
                           TextComponent(
                             text: controller.currentMarkerActive.value?.title ??
-                                "",
+                                "HERE NO TITLE",
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                             color: RedPrimary,
@@ -129,7 +129,7 @@ class HomeView extends GetResponsiveView<MainController> {
                   Uuid.NAMESPACE_NIL)
                 Positioned(
                   right: 10,
-                  bottom: 160,
+                  bottom: 155,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),

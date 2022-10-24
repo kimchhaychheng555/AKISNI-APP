@@ -49,7 +49,21 @@ class ManageView extends StatelessWidget {
                       children: [
                         InputTextComponent(
                           controller: controller.nameCtrl,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'please_enter_DK'.tr;
+                            }
+                            return null;
+                          },
                           placeholder: 'dk'.toUpperCase(),
+                        ),
+                        InputTextComponent(
+                          controller: controller.powerCtrl,
+                          placeholder: 'power'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.typeCtrl,
+                          placeholder: 'type'.tr,
                         ),
                         DateTimePickerComponent(
                           label: "install_date".tr,
@@ -65,23 +79,17 @@ class ManageView extends StatelessWidget {
                           placeholder: 'company_name'.tr,
                         ),
                         InputTextComponent(
-                          controller: controller.powerCtrl,
-                          placeholder: 'power'.tr,
-                        ),
-                        InputTextComponent(
-                          controller: controller.typeCtrl,
-                          placeholder: 'type'.tr,
-                        ),
-                        InputTextComponent(
                           controller: controller.latitudeCtrl,
                           placeholder: 'latitude'.tr,
                         ),
                         InputTextComponent(
                           controller: controller.longtitudeCtrl,
+                          textInputType: TextInputType.number,
                           placeholder: 'longtitude'.tr,
                         ),
                         InputTextComponent(
                           isTextArea: true,
+                          textInputType: TextInputType.number,
                           placeholder: 'location'.tr,
                         ),
                       ],
