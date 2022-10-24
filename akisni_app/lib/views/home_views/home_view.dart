@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends GetResponsiveView<MainController> {
   const HomeView({super.key});
 
   static String routeName = "/home";

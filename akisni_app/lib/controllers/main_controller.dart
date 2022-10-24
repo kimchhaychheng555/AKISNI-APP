@@ -44,15 +44,15 @@ class MainController extends GetxController {
     }
   }
 
-  void onHomePressed() => Get.offAndToNamed(HomeView.routeName);
+  void onHomePressed() => Get.offNamed(HomeView.routeName);
 
-  void onLocatorListPressed() => Get.offAndToNamed(LocationView.routeName);
+  void onLocatorListPressed() => Get.offNamed(LocationView.routeName);
 
-  void onManagePressed() => Get.offAndToNamed(ManageView.routeName);
+  void onManagePressed() => Get.offNamed(ManageView.routeName);
 
   void onPermissionPressed() {}
 
-  void onUserPressed() => Get.offAndToNamed(UserListView.routeName);
+  void onUserPressed() => Get.offNamed(UserListView.routeName);
 
   void onTrackLocationPressed() {}
 

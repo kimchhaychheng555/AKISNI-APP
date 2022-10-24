@@ -28,7 +28,7 @@ class LocationListCardComponent extends StatelessWidget {
             text: location.name ?? "",
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: const Color(0xFFC63030),
+            color: RedPrimary,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +67,7 @@ class LocationListCardComponent extends StatelessWidget {
             ],
           ),
           ButtonComponent(
-            titleButton: 'direction',
+            titleButton: 'direction'.tr,
             onClick: () => mainController.onDirectionPressed(
                 location.latitude.toString(), location.longitude.toString()),
             width: 120,
