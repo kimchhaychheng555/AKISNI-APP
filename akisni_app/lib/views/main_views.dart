@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-class MainViews extends StatelessWidget {
-  const MainViews({Key? key}) : super(key: key);
+class MainViews extends GetResponsiveView<MainController> {
+  MainViews({Key? key}) : super(key: key);
 
   static String routeName = "/main";
 

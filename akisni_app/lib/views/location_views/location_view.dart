@@ -1,6 +1,7 @@
 import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/views/location_views/components/location_list_card_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,13 +10,13 @@ import '../../components/input_text_component.dart';
 import '../../components/loading_overlay_component.dart';
 import '../../components/text_header_component.dart';
 
-class LocationView extends StatelessWidget {
-  const LocationView({super.key});
+class LocationView extends GetResponsiveView<MainController> {
+  LocationView({super.key});
 
   static String routeName = "/location";
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder() {
     var controller = Get.find<LocationController>();
     return Obx(
       () => Scaffold(

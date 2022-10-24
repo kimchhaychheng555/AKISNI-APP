@@ -1,6 +1,7 @@
 import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/components/input_text_component.dart';
 import 'package:akisni_app/components/loading_overlay_component.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/user_list_controller.dart';
 import 'package:akisni_app/views/user_list_views/components/user_list_item.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,13 @@ import 'package:get/get.dart';
 import '../../components/text_header_component.dart';
 import '../../constants/constant.dart';
 
-class UserListView extends StatelessWidget {
-  const UserListView({super.key});
+class UserListView extends GetResponsiveView<MainController> {
+  UserListView({super.key});
 
   static String routeName = "/user";
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder() {
     var controller = Get.find<UserListController>();
 
     return Scaffold(

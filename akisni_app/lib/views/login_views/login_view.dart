@@ -5,16 +5,17 @@ import 'package:akisni_app/components/loading_overlay_component.dart';
 import 'package:akisni_app/components/text_header_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/login_controller.dart';
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class LoginView extends GetResponsiveView<MainController> {
+  LoginView({super.key});
 
   static String routeName = "/login";
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder() {
     var controller = Get.find<LoginController>();
     return Obx(
       () => Scaffold(

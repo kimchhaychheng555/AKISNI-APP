@@ -30,9 +30,9 @@ class MainController extends GetxController {
   Widget get afterLoading {
     return AppService.isHasNetwork
         ? isLogin.value
-            ? const HomeView()
-            : const LoginView()
-        : const NoNetWorkView();
+            ? HomeView()
+            : LoginView()
+        : NoNetWorkView();
   }
 
   void onDirectionPressed(String latitude, String longitude) async {
