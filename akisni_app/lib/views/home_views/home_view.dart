@@ -16,7 +16,7 @@ class HomeView extends GetResponsiveView<MainController> {
   static String routeName = "/home";
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder() {
     var controller = Get.find<HomeController>();
     var mainController = Get.find<MainController>();
     return Obx(
@@ -56,7 +56,7 @@ class HomeView extends GetResponsiveView<MainController> {
                       Uuid.NAMESPACE_NIL) !=
                   Uuid.NAMESPACE_NIL)
                 Positioned(
-                  width: MediaQuery.of(context).size.width,
+                  width: Get.width,
                   bottom: 0,
                   child: Container(
                     decoration: BoxDecoration(

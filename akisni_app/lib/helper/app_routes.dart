@@ -14,22 +14,22 @@ class AppRoute {
 
   static List<GetPage<dynamic>> get getPages => [
         GetPage(
-          page: () => const NoNetWorkView(),
+          page: () => NoNetWorkView(),
           name: NoNetWorkView.routeName,
           binding: AppBindings(),
         ),
         GetPage(
-          page: () => const MainViews(),
+          page: () => MainViews(),
           name: MainViews.routeName,
           binding: AppBindings(),
         ),
         GetPage(
-          page: () => const UserListView(),
+          page: () => UserListView(),
           name: UserListView.routeName,
           binding: AppBindings(),
         ),
         GetPage(
-          page: () => const LoginView(),
+          page: () => LoginView(),
           name: LoginView.routeName,
           binding: AppBindings(),
         ),
@@ -40,7 +40,7 @@ class AppRoute {
         ),
         GetPage(
           name: LocationView.routeName,
-          page: () => const LocationView(),
+          page: () => LocationView(),
           binding: AppBindings(),
         ),
         GetPage(
@@ -50,7 +50,7 @@ class AppRoute {
         ),
         GetPage(
           name: ManageView.routeName,
-          page: () => const ManageView(),
+          page: () => ManageView(),
           binding: AppBindings(),
         )
       ];

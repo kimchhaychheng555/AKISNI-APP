@@ -1,9 +1,10 @@
+import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:get/get.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:flutter/material.dart';
 
-class NoNetWorkView extends StatelessWidget {
-  const NoNetWorkView({super.key});
+class NoNetWorkView extends GetResponsiveView<MainController> {
+  NoNetWorkView({super.key});
 
   static String routeName = "/no-network";
 
