@@ -55,7 +55,7 @@ class LocationListCardComponent extends StatelessWidget {
                       text: '${'company'.tr} : ${location.company}',
                       color: BluePrimary,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     ButtonComponent(

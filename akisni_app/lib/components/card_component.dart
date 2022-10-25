@@ -24,7 +24,7 @@ class CardComponent extends StatelessWidget {
       shadowColor: const Color.fromARGB(255, 244, 192, 192).withOpacity(0.5),
       margin: EdgeInsets.only(bottom: SPACING_15),
       child: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -32,7 +32,7 @@ class CardComponent extends StatelessWidget {
                 ? Column(
                     children: [
                       TextComponent(
-                        text: '${title}',
+                        text: '$title',
                         fontWeight: FontWeight.w500,
                         color: RedPrimary,
                       ),
@@ -41,7 +41,7 @@ class CardComponent extends StatelessWidget {
                       ),
                     ],
                   )
-                : SizedBox(
+                : const SizedBox(
                     height: 0,
                   ),
             child,

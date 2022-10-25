@@ -135,7 +135,7 @@ class CustomSnackBar extends StatelessWidget {
                 onTap: () {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 },
-                child: Icon(Icons.close, color: Colors.black54),
+                child: const Icon(Icons.close, color: Colors.black54),
               ),
         ],
       ),

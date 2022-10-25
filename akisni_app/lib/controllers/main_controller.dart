@@ -31,8 +31,8 @@ class MainController extends GetxController {
     return AppService.isHasNetwork
         ? isLogin.value
             ? HomeView()
-            : const LoginView()
-        : const NoNetWorkView();
+            : LoginView()
+        : NoNetWorkView();
   }
 
   void onDirectionPressed(String latitude, String longitude) async {
