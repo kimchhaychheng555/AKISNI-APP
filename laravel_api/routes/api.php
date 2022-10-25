@@ -26,6 +26,7 @@ Route::post("image", function (Request $request) {
     return ImageController::upload($request);
 });
 
+
 # USER API
 Route::get("user", function () {
     return UserController::getUser();
