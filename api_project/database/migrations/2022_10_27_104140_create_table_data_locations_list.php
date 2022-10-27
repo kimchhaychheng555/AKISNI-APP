@@ -15,15 +15,15 @@ class CreateTableDataLocationsList extends Migration
     {
         Schema::create('data_locations_list', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('title');
-            $table->string('company');
-            $table->string('name');
-            $table->string('installDate');
-            $table->string('power');
-            $table->string('type');
-            $table->string('location');
-            $table->double('latitude');
-            $table->double('longitude');
+            $table->string('title')->nullable();
+            $table->string('company')->nullable();
+            $table->string('name')->nullable();
+            $table->string('installDate')->nullable();
+            $table->string('power')->nullable();
+            $table->string('type')->nullable();
+            $table->string('location')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->timestamps();
         });
     }

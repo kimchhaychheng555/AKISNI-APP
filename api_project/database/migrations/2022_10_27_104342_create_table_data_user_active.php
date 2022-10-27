@@ -15,16 +15,16 @@ class CreateTableDataUserActive extends Migration
     {
         Schema::create('data_user_active', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('fullName');
-            $table->string('phoneNumber');
+            $table->string('user_id')->nullable();
+            $table->string('fullName')->nullable();
+            $table->string('phoneNumber')->nullable();
             $table->string('username')->unique();
-            $table->string('password');
-            $table->string('role');
-            $table->string('profile');
-            $table->string('active');
-            $table->double('lastLatitude');
-            $table->double('lastLongitude');
+            $table->string('password')->nullable();
+            $table->string('role')->nullable();
+            $table->string('profile')->nullable();
+            $table->string('active')->nullable();
+            $table->double('lastLatitude')->nullable();
+            $table->double('lastLongitude')->nullable();
             $table->timestamps();
         });
     }
