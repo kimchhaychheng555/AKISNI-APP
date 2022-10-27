@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../components/card_component.dart';
 import '../../components/input_text_component.dart';
 import '../../components/loading_overlay_component.dart';
+import '../../components/select_opction_component.dart';
 import '../../components/text_header_component.dart';
 import '../../constants/constant.dart';
 
@@ -64,10 +65,15 @@ class ManageView extends GetResponsiveView<MainController> {
                           controller: controller.powerCtrl,
                           placeholder: 'power'.tr,
                         ),
-                        InputTextComponent(
-                          controller: controller.typeCtrl,
-                          placeholder: 'type'.tr,
-                        ),
+                        SelectOpctionComponent(
+                            placeholder: 'type'.tr,
+                            items: controller.listTypes.map((e) {
+                              return DropdownMenuItem<String>(
+                                value: e,
+                                child: Text(e.toString()),
+                              );
+                            }).toList(),
+                            onChanged: (value) {}),
                         DateTimePickerComponent(
                           label: "install_date".tr,
                           onSelectonChange: (date) =>

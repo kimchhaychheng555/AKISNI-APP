@@ -24,11 +24,35 @@ class LocationListCardComponent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextComponent(
-            text: location.name ?? "",
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: RedPrimary,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextComponent(
+                text: location.name ?? "",
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: RedPrimary,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.edit,
+                    color: BluePrimary,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Icon(
+                    Icons.delete,
+                    color: RedPrimary,
+                  ),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,7 +79,7 @@ class LocationListCardComponent extends StatelessWidget {
                       text: '${'company'.tr} : ${location.company}',
                       color: BluePrimary,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     ButtonComponent(

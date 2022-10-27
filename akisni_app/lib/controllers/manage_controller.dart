@@ -29,6 +29,8 @@ class ManageController extends GetxController {
     installDate(value);
   }
 
+  final List<String> listTypes = ['LV', 'CG', 'LD'];
+
   void onSave() async {
     isLoading(true);
     var locate = LocationListModel(
@@ -46,7 +48,7 @@ class ManageController extends GetxController {
       Get.snackbar(
         "Save Success",
         "",
-        icon: Icon(
+        icon: const Icon(
           Icons.check_circle,
           color: Colors.green,
           size: 24,

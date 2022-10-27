@@ -1,4 +1,5 @@
 import 'package:akisni_app/components/drawer_component.dart';
+import 'package:akisni_app/components/select_opction_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_user_controller.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,6 @@ class NewUserView extends GetResponsiveView<MainController> {
     var controller = Get.find<NewUserController>();
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Get.back();
-          },
-        ),
         elevation: 0,
         automaticallyImplyLeading: true,
         backgroundColor: BluePrimary,
@@ -51,10 +46,20 @@ class NewUserView extends GetResponsiveView<MainController> {
                       //   dataValue: controller.list,
                       //   dropdownValue: 'select_user_type'.tr,
                       // ),
+
                       InputTextComponent(
                         controller: controller.userNameCtrl,
                         placeholder: 'user_name'.tr,
                       ),
+                      SelectOpctionComponent(
+                          placeholder: 'rule'.tr,
+                          items: controller.list.map((e) {
+                            return DropdownMenuItem<String>(
+                              value: e,
+                              child: Text(e.toString()),
+                            );
+                          }).toList(),
+                          onChanged: (value) {}),
                       InputTextComponent(
                         controller: controller.phoneNumberCtrl,
                         placeholder: 'phone_number'.tr,
