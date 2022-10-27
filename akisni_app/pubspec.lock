@@ -730,6 +730,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.1"
+  power_extensions:
+    dependency: transitive
+    description:
+      name: power_extensions
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.2"
   process:
     dependency: transitive
     description:
@@ -993,7 +1000,7 @@ packages:
       name: vy_string_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4"
+    version: "0.4.5"
   watcher:
     dependency: transitive
     description:

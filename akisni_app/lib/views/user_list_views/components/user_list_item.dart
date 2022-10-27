@@ -72,7 +72,7 @@ class UserListItem extends StatelessWidget {
                   height: SPACING_10,
                 ),
                 isActive == true
-                    ? ButtonComponent(
+                    ? const ButtonComponent(
                         isSurfix: true,
                         surfix: Icons.directions,
                         titleButton: 'direction',

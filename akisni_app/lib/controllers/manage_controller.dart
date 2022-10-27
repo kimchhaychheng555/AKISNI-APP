@@ -1,8 +1,5 @@
-import 'package:akisni_app/components/custom_sna_bar.dart';
-import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -44,7 +41,7 @@ class ManageController extends GetxController {
       power: powerCtrl.text,
     );
     if (formKey.currentState!.validate()) {
-      var res = await ResponsitoryServices.insertLocation(locate);
+      await ResponsitoryServices.insertLocation(locate);
       Get.snackbar(
         "Save Success",
         "",
