@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationsListController;
 use App\Http\Controllers\UserActiveController;
+use App\Http\Controllers\ImageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,9 @@ use App\Http\Controllers\UserActiveController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+
+Route::post("/image",[ImageController::class,"uploadFile"]);
 # User ROUTE
 Route::get("/user",[UserController::class,"getUser"]);
 Route::post("/user",[UserController::class,"createUser"]);
