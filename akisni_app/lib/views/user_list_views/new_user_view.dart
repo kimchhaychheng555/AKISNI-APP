@@ -1,4 +1,3 @@
-import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/components/select_opction_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_user_controller.dart';
@@ -29,7 +28,6 @@ class NewUserView extends GetResponsiveView<MainController> {
           text: "new_user".tr.toUpperCase(),
         ),
       ),
-      drawer: const DrawerComponent(),
       body: LoadingOverlayComponent(
         isLoading: controller.isLoading.value,
         child: Padding(

@@ -73,10 +73,6 @@ class DrawerComponent extends StatelessWidget {
                 onClick: () => controller.onManagePressed(),
               ),
               MenuItemComponent(
-                title: 'Permission',
-                onClick: () => controller.onPermissionPressed(),
-              ),
-              MenuItemComponent(
                 title: 'User',
                 onClick: () => controller.onUserPressed(),
               ),

@@ -60,11 +60,11 @@ class AppService {
   }
 
   static void onTrackUser() async {
-    while (true) {
-      // var controller = Get.find<MainController>();
-      // userTrack = await ResponsitoryServices.getTrackUser();
-      // controller.trackUserList(userTrack);
-      // await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
-    }
+    // while (true) {
+    //   // var controller = Get.find<MainController>();
+    //   // userTrack = await ResponsitoryServices.getTrackUser();
+    //   // controller.trackUserList(userTrack);
+    //   await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
+    // }
   }
 }

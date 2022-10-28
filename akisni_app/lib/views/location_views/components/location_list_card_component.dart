@@ -3,8 +3,10 @@ import 'package:akisni_app/components/card_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skeletons/skeletons.dart';
 
 import '../../../components/text_component.dart';
 
@@ -64,19 +66,20 @@ class LocationListCardComponent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextComponent(
-                      text: '${'location'.tr} : ${location.location}',
+                      text: '${'location'.tr} : ${location.location ?? ""}',
                       color: BluePrimary,
                     ),
                     TextComponent(
-                      text: '${'power'.tr} : ${location.power}',
+                      text: '${'power'.tr} : ${location.power ?? ""}',
                       color: BluePrimary,
                     ),
                     TextComponent(
-                      text: '${'install_date'.tr} : ${location.installDate}',
+                      text:
+                          '${'install_date'.tr} : ${location.installDate ?? ""}',
                       color: BluePrimary,
                     ),
                     TextComponent(
-                      text: '${'company'.tr} : ${location.company}',
+                      text: '${'company'.tr} : ${location.company ?? ""}',
                       color: BluePrimary,
                     ),
                     const SizedBox(
@@ -99,11 +102,18 @@ class LocationListCardComponent extends StatelessWidget {
                 width: 5,
               ),
               Expanded(
-                flex: 1,
-                child: Image.asset(
-                  "assets/images/Rectangle 242.png",
+                child: SizedBox(
+                  height: 120,
+                  child: CachedNetworkImage(
+                    imageUrl: "$BASE_URL/images/${location.image}",
+                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) => Image.asset(
+                        "assets/images/placeholder-image.jpg",
+                        fit: BoxFit.cover),
+                    placeholder: (context, url) => const SkeletonAvatar(),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ],

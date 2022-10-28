@@ -1,8 +1,16 @@
+import 'dart:io';
+
 import 'package:akisni_app/constants/constant.dart';
 import 'package:get/get.dart';
 
 class AppProvider extends GetConnect {
   Future<Response> ping() => get('${API_STRING_URL}ping');
+
+  Future<Response> upload(String path, String name) => post(
+      '${API_STRING_URL}image',
+      FormData({
+        'image': MultipartFile(File(path), filename: name),
+      }));
 
   // USER
   Future<Response> getUser() => get('${API_STRING_URL}user');

@@ -1,7 +1,7 @@
 Map<String, String> get khTranslate {
   return {
     "AKISNI_DANGKOR": "អគ្គិសនីដង្កោ",
-    "home": "ទំព័រ",
+    "home": "ទំព័រដើម",
     "please_input_text": "សូមបញ្ចូល",
     "incorrect_username_password": "គណនី ឬ លេខសំងាត់មិនត្រូវត្រឹម",
     "no_internet": "ប្រព័ន្ធមិនដំណើរការ",

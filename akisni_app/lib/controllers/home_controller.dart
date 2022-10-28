@@ -109,4 +109,8 @@ class HomeController extends GetxController {
       ),
     );
   }
+
+  void setCurrentLocation() async {
+    currentPosition(await Geolocator.getCurrentPosition());
+  }
 }

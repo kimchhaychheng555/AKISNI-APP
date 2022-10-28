@@ -50,8 +50,6 @@ class MainController extends GetxController {
 
   void onManagePressed() => Get.offNamed(ManageView.routeName);
 
-  void onPermissionPressed() {}
-
   void onUserPressed() => Get.offNamed(UserListView.routeName);
 
   void onTrackLocationPressed() {}

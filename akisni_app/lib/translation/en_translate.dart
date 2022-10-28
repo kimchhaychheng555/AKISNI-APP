@@ -1,7 +1,7 @@
 Map<String, String> get enTranslate {
   return {
     "AKISNI_DANGKOR": "AKISNI DANGKOR",
-    "home": "home",
+    "home": "Home",
     "please_input_text": "Please Input Text",
     "incorrect_username_password": "Incorrect Username Password",
     "no_internet": "No Internet",

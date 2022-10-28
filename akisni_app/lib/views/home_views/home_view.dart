@@ -27,6 +27,11 @@ class HomeView extends GetResponsiveView<MainController> {
           title: TextHeaderComponent(
             text: "home".tr.toUpperCase(),
           ),
+          actions: [
+            IconButton(
+                onPressed: () => controller.setCurrentLocation(),
+                icon: const Icon(Icons.radio_button_checked_outlined))
+          ],
         ),
         drawer: const DrawerComponent(),
         body: LoadingOverlayComponent(

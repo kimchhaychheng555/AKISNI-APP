@@ -12,6 +12,7 @@ class LocationListModel extends CoreModel {
   final String? power;
   final String? type;
   final String? location;
+  final String? image;
   final double? latitude;
   final double? longitude;
 
@@ -24,6 +25,7 @@ class LocationListModel extends CoreModel {
     this.installDate,
     this.power,
     this.location,
+    this.image,
     this.latitude,
     this.longitude,
   });

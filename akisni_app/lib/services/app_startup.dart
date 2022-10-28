@@ -40,7 +40,7 @@ class AppStartup extends GetConnect {
       user = UserModel(id: Uuid.NAMESPACE_NIL);
     }
 
-    if (user.id != Uuid.NAMESPACE_NIL) {
+    if ((user.id ?? Uuid.NAMESPACE_NIL) != Uuid.NAMESPACE_NIL) {
       var checkLogin = await ResponsitoryServices.checkLogin(
         username: user.username,
         password: user.password,

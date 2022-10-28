@@ -11,7 +11,6 @@ class UserModel extends CoreModel {
   final String? password;
   final String? role;
   final String? profile;
-  final bool? active;
   final double? lastLatitude;
   final double? lastLongitude;
 
@@ -23,7 +22,6 @@ class UserModel extends CoreModel {
     this.password,
     this.role,
     this.profile,
-    this.active,
     this.lastLatitude,
     this.lastLongitude,
   });

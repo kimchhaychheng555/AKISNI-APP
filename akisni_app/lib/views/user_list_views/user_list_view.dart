@@ -47,7 +47,6 @@ class UserListView extends GetResponsiveView<MainController> {
                   itemBuilder: ((BuildContext context, int index) {
                     final users = controller.users[index];
                     return UserListItem(
-                      isActive: users.active!,
                       userName: users.username ?? '',
                       fullName: users.fullName ?? '',
                       phoneNumber: users.phoneNumber ?? '',

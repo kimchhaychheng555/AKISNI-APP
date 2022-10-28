@@ -1,7 +1,11 @@
+import 'package:path/path.dart' as p;
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_provider.dart';
+import 'package:akisni_app/services/app_services.dart';
+import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class ResponsitoryServices {
   static Future<List<UserModel>> getUser() async {
@@ -36,6 +40,7 @@ class ResponsitoryServices {
     var resp = await provider.loginUser(body);
 
     if (resp.statusCode == 200) {
+      AppService.loginUser = UserModel.fromJson(resp.body[0]);
       return true;
     }
 
@@ -56,7 +61,7 @@ class ResponsitoryServices {
   static Future<List<LocationListModel>> getLocation() async {
     AppProvider provider = AppProvider();
     List<LocationListModel> locationList = [];
-    var resp = await provider.getActiveUser();
+    var resp = await provider.getLocationList();
     if (resp.statusCode == 200) {
       List<dynamic> data = resp.body ?? [];
       locationList = data.map((u) => LocationListModel.fromJson(u)).toList();
@@ -64,15 +69,18 @@ class ResponsitoryServices {
     return locationList;
   }
 
-  static Future<dynamic> insertLocation(LocationListModel locate) async {
+  static Future<Response> insertLocation(LocationListModel locate) async {
     AppProvider provider = AppProvider();
-    List<LocationListModel> locationList = [];
-    var resp = await provider.getLocationList();
-    if (resp.statusCode == 200) {
-      List<dynamic> data = resp.body ?? [];
-      locationList = data.map((u) => LocationListModel.fromJson(u)).toList();
-    }
+    var json = locate.toJson();
+    var resp = await provider.createLocationList(locate.toJson());
+    return resp;
+  }
 
-    return locationList;
+  static Future<Response> upload({required String path, String? name}) async {
+    AppProvider provider = AppProvider();
+    final extension = p.extension(path);
+    var rename = "${name ?? const Uuid().v4().toString()}$extension";
+    var resp = await provider.upload(path, rename);
+    return resp;
   }
 }

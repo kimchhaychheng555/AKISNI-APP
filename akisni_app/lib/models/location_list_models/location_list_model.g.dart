@@ -16,6 +16,7 @@ LocationListModel _$LocationListModelFromJson(Map<String, dynamic> json) =>
       installDate: json['installDate'] as String?,
       power: json['power'] as String?,
       location: json['location'] as String?,
+      image: json['image'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
     );
@@ -30,6 +31,7 @@ Map<String, dynamic> _$LocationListModelToJson(LocationListModel instance) =>
       'power': instance.power,
       'type': instance.type,
       'location': instance.location,
+      'image': instance.image,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
     };

@@ -1,5 +1,6 @@
 import 'package:akisni_app/components/date_time_picker_component.dart';
 import 'package:akisni_app/components/drawer_component.dart';
+import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/manage_controller.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,52 @@ class ManageView extends GetResponsiveView<MainController> {
                           isTextArea: true,
                           textInputType: TextInputType.number,
                           placeholder: 'location'.tr,
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey.shade100,
+                          ),
+                          child: InkWell(
+                            onTap: () => controller.onUploadImage(),
+                            child: controller.tempImageStr.isNotEmpty
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.file(
+                                      controller.getImageFile,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : Container(
+                                    margin: const EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: Colors.black38,
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.cloud_upload,
+                                          color: Colors.black38,
+                                          size: 50,
+                                        ),
+                                        TextComponent(
+                                          text: "upload".tr,
+                                          color: Colors.black38,
+                                          fontSize: 18,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                          ),
                         ),
                       ],
                     ),
