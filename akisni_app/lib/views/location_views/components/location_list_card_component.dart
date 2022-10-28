@@ -118,7 +118,7 @@ class LocationListCardComponent extends StatelessWidget {
                 child: SizedBox(
                   height: 120,
                   child: CachedNetworkImage(
-                    imageUrl: "$BASE_URL/images/${location.image}",
+                    imageUrl: "$BASE_URL/public/images/${location.image}",
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) => Image.asset(
                         "assets/images/placeholder-image.jpg",

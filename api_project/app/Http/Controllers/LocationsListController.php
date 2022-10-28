@@ -21,15 +21,16 @@ class LocationsListController extends Controller
         if($res === null){
             return response()->json('', 404);
         }else{
-            $res->fullName = $request->input('fullName');
-            $res->phoneNumber = $request->input('phoneNumber');
-            $res->username = $request->input('username');
-            $res->password = $request->input('password');
-            $res->role = $request->input('role');
-            $res->profile = $request->input('profile');
-            $res->active = $request->input('active');
-            $res->lastLatitude = $request->input('lastLatitude');
-            $res->lastLongitude = $request->input('lastLongitude');
+            $location->title = $request->input('title');
+            $location->company = $request->input('company');
+            $location->name = $request->input('name');
+            $location->installDate = $request->input('installDate');
+            $location->power = $request->input('power');
+            $location->type = $request->input('type');
+            $location->location = $request->input('location');
+            $location->image = $request->input('image');
+            $location->latitude = $request->input('latitude');
+            $location->longitude = $request->input('longitude');
             $res->save();
             return response()->json($res, 200);
         }
@@ -44,20 +45,35 @@ class LocationsListController extends Controller
         if($res->count() == 0){
             $location = new LocationsListModel();
             $location->id = $request->input('id');
-            $location->fullName = $request->input('fullName');
-            $location->phoneNumber = $request->input('phoneNumber');
-            $location->username = $request->input('username');
-            $location->password = $request->input('password');
-            $location->role = $request->input('role');
-            $location->profile = $request->input('profile');
-            $location->active = $request->input('active');
-            $location->lastLatitude = $request->input('lastLatitude');
-            $location->lastLongitude = $request->input('lastLongitude');
+            $location->title = $request->input('title');
+            $location->company = $request->input('company');
+            $location->name = $request->input('name');
+            $location->installDate = $request->input('installDate');
+            $location->power = $request->input('power');
+            $location->type = $request->input('type');
+            $location->location = $request->input('location');
+            $location->image = $request->input('image');
+            $location->latitude = $request->input('latitude');
+            $location->longitude = $request->input('longitude');
             $location->save();
             return response()->json($location, 201);
         }else{
             return response()->json(array('message'=>'Duplicate'), 409);
         }
 
+    }
+
+    public function delete(Request $request){
+
+        $res = LocationsListModel::where('id', $request->id)
+                        ->get();
+    
+        if($res->count() > 0){
+            $data = LocationsListModel::find($request->id);
+            $data->delete();
+            return response()->json($data, 200);
+        }else{
+            return response()->json(array('message'=>'Not Found'), 404);
+        }
     }
 }

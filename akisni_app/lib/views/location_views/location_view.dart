@@ -1,5 +1,4 @@
 import 'package:akisni_app/components/drawer_component.dart';
-import 'package:akisni_app/components/input_text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
@@ -31,30 +30,14 @@ class LocationView extends GetResponsiveView<MainController> {
           drawer: const DrawerComponent(),
           body: LoadingOverlayComponent(
             isLoading: controller.isLoading.value,
-            child: Padding(
-              padding: EdgeInsets.all(DEFAULT_PADDING),
-              child: Column(
-                children: [
-                  const InputTextComponent(
-                    isSearch: true,
-                    placeholder: 'Search',
-                  ),
-                  SizedBox(
-                    height: SPACING_10,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: controller.listLocations.length,
-                      itemBuilder: ((BuildContext context, int index) {
-                        final locations = controller.listLocations[index];
-                        return LocationListCardComponent(
-                          location: locations,
-                        );
-                      }),
-                    ),
-                  ),
-                ],
-              ),
+            child: ListView.builder(
+              itemCount: controller.listLocations.length,
+              itemBuilder: ((BuildContext context, int index) {
+                final locations = controller.listLocations[index];
+                return LocationListCardComponent(
+                  location: locations,
+                );
+              }),
             ),
           )),
     );

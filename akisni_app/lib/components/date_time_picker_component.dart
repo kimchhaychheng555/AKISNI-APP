@@ -6,10 +6,12 @@ import '../constants/constant.dart';
 
 class DateTimePickerComponent extends StatelessWidget {
   final String? label;
+  final String? initialValue;
   final void Function(String?)? onSelectonChange;
   const DateTimePickerComponent({
     super.key,
     this.label,
+    this.initialValue,
     this.onSelectonChange,
   });
 
@@ -38,7 +40,7 @@ class DateTimePickerComponent extends StatelessWidget {
                 borderSide: BorderSide(color: GraySeconday, width: 0.0),
               ),
             ),
-            initialValue: DateTime.now().toString(),
+            initialValue: initialValue,
             firstDate: DateTime(2000),
             style: const TextStyle(
               fontSize: 12,

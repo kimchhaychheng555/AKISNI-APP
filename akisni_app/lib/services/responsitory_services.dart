@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/models/user_active_models/user_active_model.dart';
@@ -91,11 +92,18 @@ class ResponsitoryServices {
     return userActiveList;
   }
 
-  static Future<Response> upload({required String path, String? name}) async {
+  static Future<Response> upload(
+      {String? path, String? name, Uint8List? rawFile}) async {
     AppProvider provider = AppProvider();
-    final extension = p.extension(path);
-    var rename = "${name ?? const Uuid().v4().toString()}$extension";
-    var resp = await provider.upload(path, rename);
-    return resp;
+
+    if (kIsWeb) {
+      var resp = await provider.upload(name: name, uint8list: rawFile);
+      return resp;
+    } else {
+      final extension = p.extension(path!);
+      var rename = "${name ?? const Uuid().v4().toString()}$extension";
+      var resp = await provider.upload(path: path, name: rename);
+      return resp;
+    }
   }
 }

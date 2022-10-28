@@ -20,8 +20,9 @@ class LocationsListModel extends Model
         'power',
         'type',
         'location',
+        'image',
         'latitude',
-        'longitude',
+        'longitude'
     ];
 
     use HasFactory;

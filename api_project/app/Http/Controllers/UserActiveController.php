@@ -62,4 +62,19 @@ class UserActiveController extends Controller
         }
 
     }
+
+    
+    public function delete(Request $request){
+
+        $res = UserActiveModel::where('id', $request->id)
+                                    ->get();
+
+        if($res->count() > 0){
+            $data = UserActiveModel::find($request->id);
+            $data->delete();
+            return response()->json($data, 200);
+        }else{
+            return response()->json(array('message'=>'Not Found'), 404);
+        }
+    }
 }

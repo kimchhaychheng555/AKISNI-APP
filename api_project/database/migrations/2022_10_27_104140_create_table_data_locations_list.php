@@ -22,6 +22,7 @@ class CreateTableDataLocationsList extends Migration
             $table->string('power')->nullable();
             $table->string('type')->nullable();
             $table->string('location')->nullable();
+            $table->string('image')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
             $table->timestamps();

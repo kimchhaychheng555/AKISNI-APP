@@ -4,6 +4,7 @@ import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/manage_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/card_component.dart';
@@ -72,6 +73,7 @@ class ManageView extends GetResponsiveView<MainController> {
                         ),
                         DateTimePickerComponent(
                           label: "install_date".tr,
+                          initialValue: controller.installDate.value,
                           onSelectonChange: (date) =>
                               controller.onSelectChangeDate(date),
                         ),
@@ -85,6 +87,7 @@ class ManageView extends GetResponsiveView<MainController> {
                         ),
                         InputTextComponent(
                           controller: controller.latitudeCtrl,
+                          textInputType: TextInputType.number,
                           placeholder: 'latitude'.tr,
                         ),
                         InputTextComponent(
@@ -95,7 +98,6 @@ class ManageView extends GetResponsiveView<MainController> {
                         InputTextComponent(
                           controller: controller.locationCtrl,
                           isTextArea: true,
-                          textInputType: TextInputType.number,
                           placeholder: 'location'.tr,
                         ),
                         const SizedBox(height: 10),
@@ -115,11 +117,16 @@ class ManageView extends GetResponsiveView<MainController> {
                                         ? CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl:
-                                                "$BASE_URL/images/${controller.tempImageStr.value}")
-                                        : Image.file(
-                                            controller.getImageFile,
-                                            fit: BoxFit.cover,
-                                          ),
+                                                "$BASE_URL/public/images/${controller.tempImageStr.value}")
+                                        : kIsWeb
+                                            ? Image.memory(
+                                                controller.unit8List.value!,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.file(
+                                                controller.getImageFile,
+                                                fit: BoxFit.cover,
+                                              ),
                                   )
                                 : Container(
                                     margin: const EdgeInsets.all(15),

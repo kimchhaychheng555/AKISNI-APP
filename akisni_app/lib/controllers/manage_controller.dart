@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -27,6 +28,7 @@ class ManageController extends GetxController {
   var locationCtrl = TextEditingController();
   // End
   var tempImageStr = "".obs;
+  var unit8List = Rxn<Uint8List>();
 
   void onSelectChangeDate(String? value) {
     installDate(value);
@@ -60,8 +62,12 @@ class ManageController extends GetxController {
   void onSave() async {
     isLoading(true);
 
-    var uploadImageResp =
-        await ResponsitoryServices.upload(path: tempImageStr.value);
+    var uploadImageResp = kIsWeb
+        ? await ResponsitoryServices.upload(
+            rawFile: unit8List.value,
+            name: tempImageStr.value,
+          )
+        : await ResponsitoryServices.upload(path: tempImageStr.value);
 
     if (uploadImageResp.statusCode == 200) {
       var locate = LocationListModel(
@@ -126,11 +132,20 @@ class ManageController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      tempImageStr(file.path);
+      if (kIsWeb) {
+        unit8List(file.bytes!);
+        tempImageStr(file.name);
+      } else {
+        tempImageStr(file.path);
+      }
     } else {}
   }
 
   File get getImageFile {
-    return File(tempImageStr.value);
+    if (kIsWeb) {
+      return File.fromRawPath(unit8List.value!);
+    } else {
+      return File(tempImageStr.value);
+    }
   }
 }

@@ -7,7 +7,7 @@ use App\Models\UserModel;
 class PingController extends Controller
 { 
 
-   public function ping(){
+   public function ping() {
         return ["result"=>"OK"];
    }
  

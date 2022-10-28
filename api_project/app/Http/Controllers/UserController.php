@@ -21,7 +21,7 @@ class UserController extends Controller
                         ->get();
 
         if($res->count() > 0){
-            return response()->json('', 200);
+            return response()->json($res, 200);
         }else{
             return response()->json('', 404);
         }
@@ -51,7 +51,7 @@ class UserController extends Controller
     public function createUser(Request $request){
 
         $res = UserModel::where('id', $request->input('id'))
-                        ->orWhere('username', $request->input('username'))
+                        ->where('username', $request->input('username'))
                         ->get();
     
         if($res->count() == 0){
@@ -69,6 +69,21 @@ class UserController extends Controller
             return response()->json($user, 201);
         }else{
             return response()->json(array('message'=>'Username duplicate'), 409);
+        }
+
+    }
+
+    public function deleteUser(Request $request){
+
+        $res = UserModel::where('id', $request->id)
+                                    ->get();
+
+        if($res->count() > 0){
+            $data = UserModel::find($request->id);
+            $data->delete();
+            return response()->json($data, 200);
+        }else{
+            return response()->json(array('message'=>'Not Found'), 404);
         }
 
     }
