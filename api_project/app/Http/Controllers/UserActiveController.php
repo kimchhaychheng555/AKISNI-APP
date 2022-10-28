@@ -42,7 +42,7 @@ class UserActiveController extends Controller
         $res = UserActiveModel::where('id', $request->input('id'))
                         ->get();
     
-        if($res->count() > 0){
+        if($res->count() == 0){
             $userActive = new UserActiveModel();
             $userActive->id = $request->input('id');
             $userActive->user_id = $request->input('user_id');

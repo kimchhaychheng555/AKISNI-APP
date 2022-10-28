@@ -41,7 +41,7 @@ class LocationsListController extends Controller
         $res = LocationsListModel::where('id', $request->input('id'))
                         ->get();
     
-        if($res->count() > 0){
+        if($res->count() == 0){
             $location = new LocationsListModel();
             $location->id = $request->input('id');
             $location->fullName = $request->input('fullName');

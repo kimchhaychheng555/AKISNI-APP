@@ -51,10 +51,10 @@ class UserController extends Controller
     public function createUser(Request $request){
 
         $res = UserModel::where('id', $request->input('id'))
-                        ->where('username', $request->input('username'))
+                        ->orWhere('username', $request->input('username'))
                         ->get();
     
-        if($res->count() > 0){
+        if($res->count() == 0){
             $user = new UserModel();
             $user->id = $request->input('id');
             $user->fullName = $request->input('fullName');
