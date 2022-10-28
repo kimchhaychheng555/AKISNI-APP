@@ -9,8 +9,8 @@ class ResponsitoryServices {
     List<UserModel> userList = [];
     var resp = await provider.getUser();
     if (resp.statusCode == 200) {
-      var dataUser = resp.body;
-      userList = dataUser.map((u) => UserModel.fromJson(u)).toList();
+      List<dynamic> data = resp.body ?? [];
+      userList = data.map((u) => UserModel.fromJson(u)).toList();
     }
     return userList;
   }
@@ -20,7 +20,7 @@ class ResponsitoryServices {
     UserModel user = UserModel();
     var resp = await provider.getUserFindOne(id);
     if (resp.statusCode == 200) {
-      var dataUser = resp.body;
+      var dataUser = resp.body ?? [];
       user = UserModel.fromJson(dataUser);
     }
     return user;
@@ -47,8 +47,8 @@ class ResponsitoryServices {
     List<UserActiveModel> userActiveList = [];
     var resp = await provider.getActiveUser();
     if (resp.statusCode == 200) {
-      var dataUser = resp.body;
-      userActiveList = dataUser.map((u) => UserModel.fromJson(u)).toList();
+      List<dynamic> data = resp.body ?? [];
+      userActiveList = data.map((u) => UserActiveModel.fromJson(u)).toList();
     }
     return userActiveList;
   }
@@ -58,8 +58,8 @@ class ResponsitoryServices {
     List<LocationListModel> locationList = [];
     var resp = await provider.getActiveUser();
     if (resp.statusCode == 200) {
-      var dataLocation = resp.body;
-      locationList = dataLocation.map((u) => UserModel.fromJson(u)).toList();
+      List<dynamic> data = resp.body ?? [];
+      locationList = data.map((u) => LocationListModel.fromJson(u)).toList();
     }
     return locationList;
   }
@@ -69,8 +69,8 @@ class ResponsitoryServices {
     List<LocationListModel> locationList = [];
     var resp = await provider.getLocationList();
     if (resp.statusCode == 200) {
-      var dataLocation = resp.body;
-      locationList = dataLocation.map((u) => UserModel.fromJson(u)).toList();
+      List<dynamic> data = resp.body ?? [];
+      locationList = data.map((u) => LocationListModel.fromJson(u)).toList();
     }
 
     return locationList;

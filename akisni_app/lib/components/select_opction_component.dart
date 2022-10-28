@@ -28,11 +28,6 @@ class SelectOpctionComponent<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const inputStyle = TextStyle(
-      color: Colors.black,
-      fontSize: 12,
-    );
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

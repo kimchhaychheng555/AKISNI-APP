@@ -1,9 +1,8 @@
 import 'package:akisni_app/constants/constant.dart';
-import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
-import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/services/app_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,9 +35,13 @@ class AppService {
   }
 
   static onStartUp() async {
-    await AppStartup.checkInternet();
-    await AppStartup.languageStartup();
-    await AppStartup.userStartup();
+    try {
+      await AppStartup.checkInternet();
+      await AppStartup.languageStartup();
+      await AppStartup.userStartup();
+    } catch (e) {
+      AppStorage.storage.remove('user');
+    }
   }
 
   static Future<void> onChangeLanguage({String lang = ""}) async {
@@ -58,10 +61,10 @@ class AppService {
 
   static void onTrackUser() async {
     while (true) {
-      var controller = Get.find<MainController>();
-      userTrack = await ResponsitoryServices.getTrackUser();
-      controller.trackUserList(userTrack);
-      await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
+      // var controller = Get.find<MainController>();
+      // userTrack = await ResponsitoryServices.getTrackUser();
+      // controller.trackUserList(userTrack);
+      // await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
     }
   }
 }
