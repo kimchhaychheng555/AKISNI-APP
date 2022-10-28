@@ -35,7 +35,7 @@ class AppService {
   }
 
   static onStartUp() async {
-    await AppStartup.mongDbCreate();
+    await AppStartup.checkInternet();
     await AppStartup.languageStartup();
     await AppStartup.userStartup();
   }

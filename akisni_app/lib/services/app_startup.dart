@@ -1,22 +1,24 @@
 import 'dart:convert';
 
-import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
+import 'package:akisni_app/services/app_provider.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:get/get.dart';
-import 'package:mongo_dart/mongo_dart.dart';
+import 'package:uuid/uuid.dart';
 
-class AppStartup {
-  static Future<void> mongDbCreate() async {
+class AppStartup extends GetConnect {
+  static Future<void> checkInternet() async {
     var success = false;
-    ResponsitoryServices.mongoDb = await Db.create(CONNECTION_STR_MONOGO_DB);
 
-    await ResponsitoryServices.mongoDb.open().then((_) {
+    var provider = UserProvider();
+    var resp = await provider.ping();
+
+    if (resp.statusCode == 200) {
       success = true;
-    });
+    }
 
     AppService.isHasNetwork = success;
   }

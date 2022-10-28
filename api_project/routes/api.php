@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationsListController;
 use App\Http\Controllers\UserActiveController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PingController;
 
 
 /*
@@ -24,6 +25,8 @@ use App\Http\Controllers\ImageController;
 // });
 
 
+Route::get("/ping",[PingController::class,"ping"]);
+
 Route::post("/image",[ImageController::class,"uploadFile"]);
 # User ROUTE
 Route::get("/user",[UserController::class,"getUser"]);
@@ -36,8 +39,10 @@ Route::post("/user/login",[UserController::class,"login"]);
 Route::get("/locations",[LocationsListController::class,"get"]);
 Route::get("/locations/{id}",[LocationsListController::class,"findOne"]);
 Route::post("/locations",[LocationsListController::class,"create"]);
+Route::post("/locations/update",[LocationsListController::class,"update"]);
 
 # Location List
 Route::get("/userActive",[UserActiveController::class,"get"]);
 Route::get("/userActive/{id}",[UserActiveController::class,"findOne"]);
 Route::post("/userActive",[UserActiveController::class,"create"]);
+Route::post("/userActive/update",[UserActiveController::class,"update"]);

@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 const String APP_TITLE = "AKISNI_DANGKOR";
-const String CONNECTION_STR_MONOGO_DB =
-    "mongodb+srv://admin:S0nFHLdtmTM4SVPD@cluster0.89d88no.mongodb.net/MobileApp?retryWrites=true&w=majority";
+const String API_STRING_URL = "http://143.198.218.47/api/";
 const String GOOGLE_API_KEY = "AIzaSyCAnJNq2PnO9stzYVa1Wha2rxGmJiULqgo";
 
 // DEFAULT

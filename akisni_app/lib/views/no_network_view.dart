@@ -12,8 +12,12 @@ class NoNetWorkView extends GetResponsiveView<MainController> {
   Widget build(BuildContext context) {
     return Material(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextComponent(text: "no_internet".tr),
+          TextComponent(
+            text: "no_internet".tr,
+            color: Colors.black,
+          ),
         ],
       ),
     );
