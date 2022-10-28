@@ -13,7 +13,7 @@ class AppStartup extends GetConnect {
   static Future<void> checkInternet() async {
     var success = false;
 
-    var provider = UserProvider();
+    var provider = AppProvider();
     var resp = await provider.ping();
 
     if (resp.statusCode == 200) {

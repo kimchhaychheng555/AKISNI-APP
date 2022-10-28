@@ -13,15 +13,15 @@ class LocationsListModel extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'fullName',
-        'phoneNumber',
-        'username',
-        'password',
-        'role',
-        'profile',
-        'active',
-        'lastLatitude',
-        'lastLongitude',
+        'title',
+        'company',
+        'name',
+        'installDate',
+        'power',
+        'type',
+        'location',
+        'latitude',
+        'longitude',
     ];
 
     use HasFactory;

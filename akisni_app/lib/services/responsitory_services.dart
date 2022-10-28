@@ -1,32 +1,29 @@
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
+import 'package:akisni_app/services/app_provider.dart';
 
 class ResponsitoryServices {
   static Future<List<UserModel>> getUser() async {
-    // await mongoDb.open();
-    // var collection = mongoDb.collection(USER_COLLECTION);
-    // var dataUser = await collection.find().toList();
-    // List<UserModel> userList =
-    //     dataUser.map((u) => UserModel.fromJson(u)).toList();
-
-    // await mongoDb.close();
-    // return userList;
-    return [];
+    AppProvider provider = AppProvider();
+    List<UserModel> userList = [];
+    var resp = await provider.getUser();
+    if (resp.statusCode == 200) {
+      var dataUser = resp.body;
+      userList = dataUser.map((u) => UserModel.fromJson(u)).toList();
+    }
+    return userList;
   }
 
   static Future<UserModel> findUserById(String id) async {
-    //await mongoDb.open();
-    // var collection = mongoDb.collection(USER_COLLECTION);
-    // var dataUser = await collection.findOne(where.eq("id", id));
-    // UserModel user;
-    // if (dataUser == null) {
-    //   user = UserModel.fromJson(dataUser!);
-    // } else {
-    //   user = UserModel(id: Uuid.NAMESPACE_NIL);
-    // }
-
-    // await mongoDb.close();
-    return UserModel();
+    AppProvider provider = AppProvider();
+    UserModel user = UserModel();
+    var resp = await provider.getUserFindOne(id);
+    if (resp.statusCode == 200) {
+      var dataUser = resp.body;
+      user = UserModel.fromJson(dataUser);
+    }
+    return user;
   }
 
   static Future<bool> checkLogin({
@@ -34,53 +31,48 @@ class ResponsitoryServices {
     String? password,
     String? phoneNumber,
   }) async {
-    // await mongoDb.open();
-    // var collection = mongoDb.collection(USER_COLLECTION);
-    // var user =
-    //     await collection.findOne({'username': username, 'password': password});
+    AppProvider provider = AppProvider();
+    var body = {"username": username, "password": password};
+    var resp = await provider.loginUser(body);
 
-    // await mongoDb.close();
+    if (resp.statusCode == 200) {
+      return true;
+    }
 
-    // if (user != null) {
-    //   AppService.loginUser = UserModel.fromJson(user);
-    // }
-
-    return true;
+    return false;
   }
 
-  static Future<List<UserModel>> getTrackUser() async {
-    // var trackDb = await Db.create(CONNECTION_STR_MONOGO_DB);
-    // await trackDb.open();
-    // var collection = trackDb.collection(TRACK_USER_COLLECTION);
-    // var dataUser = await collection.find().toList();
-    // List<UserModel> userList =
-    //     dataUser.map((e) => UserModel.fromJson(e)).toList();
-    // await trackDb.close();
-    // return userList;
-    return [];
+  static Future<List<UserActiveModel>> getTrackUser() async {
+    AppProvider provider = AppProvider();
+    List<UserActiveModel> userActiveList = [];
+    var resp = await provider.getActiveUser();
+    if (resp.statusCode == 200) {
+      var dataUser = resp.body;
+      userActiveList = dataUser.map((u) => UserModel.fromJson(u)).toList();
+    }
+    return userActiveList;
   }
 
   static Future<List<LocationListModel>> getLocation() async {
-    // List<LocationListModel> tempList = <LocationListModel>[];
-    // await mongoDb.open();
-    // var collection = mongoDb.collection(LOCATION_COLLECTION);
-    // var dataLocation = await collection.find().toList();
-
-    // tempList.addAll(
-    //     dataLocation.map((e) => LocationListModel.fromJson(e)).toList());
-
-    // await mongoDb.close();
-
-    return [];
+    AppProvider provider = AppProvider();
+    List<LocationListModel> locationList = [];
+    var resp = await provider.getActiveUser();
+    if (resp.statusCode == 200) {
+      var dataLocation = resp.body;
+      locationList = dataLocation.map((u) => UserModel.fromJson(u)).toList();
+    }
+    return locationList;
   }
 
   static Future<dynamic> insertLocation(LocationListModel locate) async {
-    // await mongoDb.open();
-    // var collection = mongoDb.collection(LOCATION_COLLECTION);
+    AppProvider provider = AppProvider();
+    List<LocationListModel> locationList = [];
+    var resp = await provider.getLocationList();
+    if (resp.statusCode == 200) {
+      var dataLocation = resp.body;
+      locationList = dataLocation.map((u) => UserModel.fromJson(u)).toList();
+    }
 
-    // var json = locate.toJson();
-    // var dataLocation = await collection.insertOne(json);
-    // await mongoDb.close();
-    return "ok";
+    return locationList;
   }
 }

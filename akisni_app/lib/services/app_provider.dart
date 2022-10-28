@@ -1,7 +1,7 @@
 import 'package:akisni_app/constants/constant.dart';
 import 'package:get/get.dart';
 
-class UserProvider extends GetConnect {
+class AppProvider extends GetConnect {
   Future<Response> ping() => get('${API_STRING_URL}ping');
 
   // USER
@@ -14,6 +14,9 @@ class UserProvider extends GetConnect {
 
   Future<Response> updateUser(Map<String, dynamic> body) =>
       post('${API_STRING_URL}user/update', body);
+
+  Future<Response> loginUser(Map<String, dynamic> body) =>
+      post('${API_STRING_URL}user/login', body);
 
   // ACTIVE USER
   Future<Response> getActiveUser() => get('${API_STRING_URL}userActive');

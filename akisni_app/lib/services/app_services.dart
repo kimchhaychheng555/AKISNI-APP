@@ -1,5 +1,6 @@
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
+import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
@@ -10,7 +11,7 @@ class AppService {
   static bool isHasNetwork = true;
   static String currentLanguage = "en";
   static UserModel loginUser = UserModel();
-  static List<UserModel> userTrack = [];
+  static List<UserActiveModel> userTrack = [];
 
   static String get getFont {
     switch (currentLanguage) {

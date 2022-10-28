@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_model.dart';
+part of 'user_active_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
-      id: json['id'] as String?,
+UserActiveModel _$UserActiveModelFromJson(Map<String, dynamic> json) =>
+    UserActiveModel(
       fullName: json['fullName'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       username: json['username'] as String?,
@@ -19,8 +19,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       lastLongitude: (json['lastLongitude'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
-      'id': instance.id,
+Map<String, dynamic> _$UserActiveModelToJson(UserActiveModel instance) =>
+    <String, dynamic>{
       'fullName': instance.fullName,
       'phoneNumber': instance.phoneNumber,
       'username': instance.username,

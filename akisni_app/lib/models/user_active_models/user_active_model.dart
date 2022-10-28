@@ -1,10 +1,9 @@
 import 'package:akisni_app/models/core_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'user_model.g.dart';
+part 'user_active_model.g.dart';
 
 @JsonSerializable()
-class UserModel extends CoreModel {
-  final String? id;
+class UserActiveModel extends CoreModel {
   final String? fullName;
   final String? phoneNumber;
   final String? username;
@@ -15,8 +14,7 @@ class UserModel extends CoreModel {
   final double? lastLatitude;
   final double? lastLongitude;
 
-  UserModel({
-    this.id,
+  UserActiveModel({
     this.fullName,
     this.phoneNumber,
     this.username,
@@ -28,8 +26,8 @@ class UserModel extends CoreModel {
     this.lastLongitude,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory UserActiveModel.fromJson(Map<String, dynamic> json) =>
+      _$UserActiveModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserActiveModelToJson(this);
 }

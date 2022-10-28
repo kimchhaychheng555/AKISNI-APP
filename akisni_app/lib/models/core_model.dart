@@ -1,15 +1,9 @@
 class CoreModel {
-  final String? createBy;
-  final DateTime? createAt;
-  final String? deleteBy;
-  final DateTime? deleteAt;
-  final bool? isDelete;
+  final DateTime? created_at;
+  final DateTime? updated_at;
 
   CoreModel({
-    this.createBy,
-    this.createAt,
-    this.deleteBy,
-    this.deleteAt,
-    this.isDelete,
+    this.created_at,
+    this.updated_at,
   });
 }

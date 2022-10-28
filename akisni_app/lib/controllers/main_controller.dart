@@ -1,4 +1,4 @@
-import 'package:akisni_app/models/user_models/user_model.dart';
+import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
@@ -15,7 +15,7 @@ class MainController extends GetxController {
   var isLoading = false.obs;
   var isDbLoad = false.obs;
   var isLogin = false.obs;
-  RxList<UserModel> trackUserList = (<UserModel>[]).obs;
+  RxList<UserActiveModel> trackUserList = (<UserActiveModel>[]).obs;
 
   @override
   void onInit() async {
