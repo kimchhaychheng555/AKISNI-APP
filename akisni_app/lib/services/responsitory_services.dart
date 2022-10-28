@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class ResponsitoryServices {
+  // USER ================================
   static Future<List<UserModel>> getUser() async {
     AppProvider provider = AppProvider();
     List<UserModel> userList = [];
@@ -47,16 +48,9 @@ class ResponsitoryServices {
     return false;
   }
 
-  static Future<List<UserActiveModel>> getTrackUser() async {
-    AppProvider provider = AppProvider();
-    List<UserActiveModel> userActiveList = [];
-    var resp = await provider.getActiveUser();
-    if (resp.statusCode == 200) {
-      List<dynamic> data = resp.body ?? [];
-      userActiveList = data.map((u) => UserActiveModel.fromJson(u)).toList();
-    }
-    return userActiveList;
-  }
+  //  END USER ===============================
+
+  // LOCATION ===================================
 
   static Future<List<LocationListModel>> getLocation() async {
     AppProvider provider = AppProvider();
@@ -74,6 +68,27 @@ class ResponsitoryServices {
     var json = locate.toJson();
     var resp = await provider.createLocationList(locate.toJson());
     return resp;
+  }
+
+  static Future<Response> deleteLocation(String? value) async {
+    AppProvider provider = AppProvider();
+    if (value != null) {
+      var resp = provider.deleteLocationList(value);
+      return resp;
+    }
+    return const Response(statusCode: 404);
+  }
+  // END LOCATION ===================================
+
+  static Future<List<UserActiveModel>> getTrackUser() async {
+    AppProvider provider = AppProvider();
+    List<UserActiveModel> userActiveList = [];
+    var resp = await provider.getActiveUser();
+    if (resp.statusCode == 200) {
+      List<dynamic> data = resp.body ?? [];
+      userActiveList = data.map((u) => UserActiveModel.fromJson(u)).toList();
+    }
+    return userActiveList;
   }
 
   static Future<Response> upload({required String path, String? name}) async {

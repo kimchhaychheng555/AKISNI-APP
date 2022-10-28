@@ -1,8 +1,10 @@
 import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/card_component.dart';
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +23,7 @@ class LocationListCardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mainController = Get.find<MainController>();
+    var locationController = Get.find<LocationController>();
     return CardComponent(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -38,16 +41,26 @@ class LocationListCardComponent extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.edit,
-                    color: BluePrimary,
+                  IconButton(
+                    onPressed: () {
+                      Get.toNamed(ManageView.routeName, arguments: location);
+                    },
+                    icon: Icon(
+                      Icons.edit,
+                      color: BluePrimary,
+                    ),
                   ),
                   const SizedBox(
                     width: 5,
                   ),
-                  Icon(
-                    Icons.delete,
-                    color: RedPrimary,
+                  IconButton(
+                    onPressed: () {
+                      locationController.onDeletePressed(location.id);
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: RedPrimary,
+                    ),
                   ),
                 ],
               )

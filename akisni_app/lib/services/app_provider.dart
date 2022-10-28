@@ -26,6 +26,8 @@ class AppProvider extends GetConnect {
   Future<Response> loginUser(Map<String, dynamic> body) =>
       post('${API_STRING_URL}user/login', body);
 
+  Future<Response> deleteUser(String id) => delete('${API_STRING_URL}user/$id');
+
   // ACTIVE USER
   Future<Response> getActiveUser() => get('${API_STRING_URL}userActive');
   Future<Response> getActiveUserFindOne(String id) =>
@@ -37,6 +39,9 @@ class AppProvider extends GetConnect {
   Future<Response> updateActiveUser(Map<String, dynamic> body) =>
       post('${API_STRING_URL}userActive/update', body);
 
+  Future<Response> deleteActiveUser(String id) =>
+      delete('${API_STRING_URL}userActive/$id');
+
   // LOCATION LIST
   Future<Response> getLocationList() => get('${API_STRING_URL}locations');
   Future<Response> getLocationListFindOne(String id) =>
@@ -47,4 +52,7 @@ class AppProvider extends GetConnect {
 
   Future<Response> updateLocationList(Map<String, dynamic> body) =>
       post('${API_STRING_URL}locations/update', body);
+
+  Future<Response> deleteLocationList(String id) =>
+      delete('${API_STRING_URL}locations/$id');
 }

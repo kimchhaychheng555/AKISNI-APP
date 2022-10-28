@@ -11,18 +11,20 @@ import '../views/location_views/location_view.dart';
 
 class ManageController extends GetxController {
   var isLoading = false.obs;
+  var isNetworkImage = false.obs;
+  var locationID = "".obs;
 
   final formKey = GlobalKey<FormState>();
   // Var Location Temp
-  var installDate = ''.obs;
-  var nameCtrl = TextEditingController();
+  var dkCtrl = TextEditingController();
   var powerCtrl = TextEditingController();
   var typeCtrl = TextEditingController();
-  var locationCtrl = TextEditingController();
+  var installDate = ''.obs;
   var customerNameCtrl = TextEditingController();
   var companyNameCtrl = TextEditingController();
   var latitudeCtrl = TextEditingController();
   var longtitudeCtrl = TextEditingController();
+  var locationCtrl = TextEditingController();
   // End
   var tempImageStr = "".obs;
 
@@ -31,6 +33,29 @@ class ManageController extends GetxController {
   }
 
   final List<String> listTypes = ['LV', 'CG', 'LD'];
+
+  @override
+  void onInit() {
+    var location = Get.arguments;
+
+    if (location != null) {
+      isNetworkImage(true);
+      LocationListModel temp = location;
+      locationID(temp.id);
+      installDate(temp.installDate);
+      dkCtrl.text = temp.title ?? "";
+      powerCtrl.text = temp.power ?? "";
+      typeCtrl.text = temp.type ?? "";
+      customerNameCtrl.text = temp.name ?? "";
+      companyNameCtrl.text = temp.company ?? "";
+      latitudeCtrl.text = (temp.latitude ?? "").toString();
+      longtitudeCtrl.text = (temp.longitude ?? "").toString();
+      locationCtrl.text = temp.location ?? "";
+      tempImageStr(temp.image);
+    }
+
+    super.onInit();
+  }
 
   void onSave() async {
     isLoading(true);
@@ -41,14 +66,16 @@ class ManageController extends GetxController {
     if (uploadImageResp.statusCode == 200) {
       var locate = LocationListModel(
         id: const Uuid().v4(),
-        company: companyNameCtrl.text,
+        title: dkCtrl.text,
+        power: powerCtrl.text,
+        type: typeCtrl.text,
         installDate: installDate.value,
-        location: locationCtrl.text,
+        name: customerNameCtrl.text,
+        company: companyNameCtrl.text,
         latitude: double.tryParse(latitudeCtrl.text),
         longitude: double.tryParse(longtitudeCtrl.text),
+        location: locationCtrl.text,
         image: uploadImageResp.body,
-        name: nameCtrl.text,
-        power: powerCtrl.text,
       );
       if (formKey.currentState!.validate()) {
         var resp = await ResponsitoryServices.insertLocation(locate);
@@ -90,6 +117,7 @@ class ManageController extends GetxController {
   }
 
   void onUploadImage() async {
+    isNetworkImage(false);
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png'],

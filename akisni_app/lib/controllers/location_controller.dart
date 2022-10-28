@@ -9,14 +9,20 @@ class LocationController extends GetxController {
 
   @override
   void onInit() async {
-    isLoading(true);
-    await _onGetData();
-    isLoading(false);
+    _onGetData();
     super.onInit();
   }
 
   Future<void> _onGetData() async {
+    isLoading(true);
     var locations = await ResponsitoryServices.getLocation();
     listLocations.assignAll(locations);
+    isLoading(false);
+  }
+
+  void onDeletePressed(String? value) async {
+    var resp = await ResponsitoryServices.deleteLocation(value);
+    if (resp.statusCode == 200) {}
+    _onGetData();
   }
 }

@@ -3,12 +3,12 @@ import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/manage_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/card_component.dart';
 import '../../components/input_text_component.dart';
 import '../../components/loading_overlay_component.dart';
-import '../../components/select_opction_component.dart';
 import '../../components/text_header_component.dart';
 import '../../constants/constant.dart';
 
@@ -53,7 +53,7 @@ class ManageView extends GetResponsiveView<MainController> {
                     child: Column(
                       children: [
                         InputTextComponent(
-                          controller: controller.nameCtrl,
+                          controller: controller.dkCtrl,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'please_enter_DK'.tr;
@@ -66,15 +66,10 @@ class ManageView extends GetResponsiveView<MainController> {
                           controller: controller.powerCtrl,
                           placeholder: 'power'.tr,
                         ),
-                        SelectOpctionComponent(
-                            placeholder: 'type'.tr,
-                            items: controller.listTypes.map((e) {
-                              return DropdownMenuItem<String>(
-                                value: e,
-                                child: Text(e.toString()),
-                              );
-                            }).toList(),
-                            onChanged: (value) {}),
+                        InputTextComponent(
+                          controller: controller.typeCtrl,
+                          placeholder: 'type'.tr,
+                        ),
                         DateTimePickerComponent(
                           label: "install_date".tr,
                           onSelectonChange: (date) =>
@@ -98,6 +93,7 @@ class ManageView extends GetResponsiveView<MainController> {
                           placeholder: 'longtitude'.tr,
                         ),
                         InputTextComponent(
+                          controller: controller.locationCtrl,
                           isTextArea: true,
                           textInputType: TextInputType.number,
                           placeholder: 'location'.tr,
@@ -115,10 +111,15 @@ class ManageView extends GetResponsiveView<MainController> {
                             child: controller.tempImageStr.isNotEmpty
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.file(
-                                      controller.getImageFile,
-                                      fit: BoxFit.cover,
-                                    ),
+                                    child: controller.isNetworkImage.value
+                                        ? CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl:
+                                                "$BASE_URL/images/${controller.tempImageStr.value}")
+                                        : Image.file(
+                                            controller.getImageFile,
+                                            fit: BoxFit.cover,
+                                          ),
                                   )
                                 : Container(
                                     margin: const EdgeInsets.all(15),
