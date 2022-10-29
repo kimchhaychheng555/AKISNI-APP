@@ -21,5 +21,6 @@ Map<String, String> get khTranslate {
     "new_user": "អ្នកប្រើប្រាស់ថ្មី",
     "phone_number": "លេខទូរស័ព្ទ",
     "customer_name": "ឈ្មោះអតិថិជន",
+    "direction": "ដាក់ទីតាំង",
   };
 }

@@ -1,14 +1,13 @@
 import 'package:akisni_app/components/button_component.dart';
+import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/card_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../../../components/text_component.dart';
 
@@ -96,14 +95,14 @@ class LocationListCardComponent extends StatelessWidget {
                       color: BluePrimary,
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 15,
                     ),
                     ButtonComponent(
                       titleButton: 'direction'.tr,
                       onClick: () => mainController.onDirectionPressed(
                           location.latitude.toString(),
                           location.longitude.toString()),
-                      height: 30,
+                      height: 40,
                       width: 120,
                       isSurfix: true,
                       surfix: Icons.directions,
@@ -117,14 +116,7 @@ class LocationListCardComponent extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   height: 120,
-                  child: CachedNetworkImage(
-                    imageUrl: "$BASE_URL/public/images/${location.image}",
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) => Image.asset(
-                        "assets/images/placeholder-image.jpg",
-                        fit: BoxFit.cover),
-                    placeholder: (context, url) => const SkeletonAvatar(),
-                  ),
+                  child: CacheNetworkImageComponent(imageUrl: location.image),
                 ),
               ),
             ],

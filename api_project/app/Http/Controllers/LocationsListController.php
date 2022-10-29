@@ -21,16 +21,16 @@ class LocationsListController extends Controller
         if($res === null){
             return response()->json('', 404);
         }else{
-            $location->title = $request->input('title');
-            $location->company = $request->input('company');
-            $location->name = $request->input('name');
-            $location->installDate = $request->input('installDate');
-            $location->power = $request->input('power');
-            $location->type = $request->input('type');
-            $location->location = $request->input('location');
-            $location->image = $request->input('image');
-            $location->latitude = $request->input('latitude');
-            $location->longitude = $request->input('longitude');
+            $res->title = $request->input('title');
+            $res->company = $request->input('company');
+            $res->name = $request->input('name');
+            $res->installDate = $request->input('installDate');
+            $res->power = $request->input('power');
+            $res->type = $request->input('type');
+            $res->location = $request->input('location');
+            $res->image = $request->input('image');
+            $res->latitude = $request->input('latitude');
+            $res->longitude = $request->input('longitude');
             $res->save();
             return response()->json($res, 200);
         }

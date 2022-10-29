@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -13,7 +15,7 @@ import '../views/location_views/location_view.dart';
 class ManageController extends GetxController {
   var isLoading = false.obs;
   var isNetworkImage = false.obs;
-  var locationID = "".obs;
+  var locationID = Rxn<String>();
 
   final formKey = GlobalKey<FormState>();
   // Var Location Temp
@@ -71,7 +73,7 @@ class ManageController extends GetxController {
 
     if (uploadImageResp.statusCode == 200) {
       var locate = LocationListModel(
-        id: const Uuid().v4(),
+        id: locationID.value ?? const Uuid().v4(),
         title: dkCtrl.text,
         power: powerCtrl.text,
         type: typeCtrl.text,
@@ -84,41 +86,28 @@ class ManageController extends GetxController {
         image: uploadImageResp.body,
       );
       if (formKey.currentState!.validate()) {
-        var resp = await ResponsitoryServices.insertLocation(locate);
-
-        if (resp.statusCode == 201 || resp.statusCode == 200) {
-          Get.snackbar(
-            "Save Success",
-            "",
-            icon: const Icon(
-              Icons.check_circle,
-              color: Colors.green,
-              size: 24,
-            ),
-            borderRadius: 4,
-            snackPosition: SnackPosition.BOTTOM,
-            colorText: Colors.white,
-            backgroundColor: Colors.green.shade200,
-          );
-          Get.offNamed(LocationView.routeName);
+        if (locationID.value != null) {
+          var resp = await ResponsitoryServices.updateLocation(locate);
+          if (resp.statusCode == 201 || resp.statusCode == 200) {
+            AppAlert.successAlert(title: "update_successfully".tr);
+            Get.offNamed(LocationView.routeName);
+          } else {
+            AppAlert.errorAlert(title: "save_error".tr);
+          }
         } else {
-          Get.snackbar(
-            "Can't Save",
-            "",
-            icon: const Icon(
-              Icons.check_circle,
-              color: Colors.red,
-              size: 24,
-            ),
-            borderRadius: 4,
-            snackPosition: SnackPosition.BOTTOM,
-            colorText: Colors.white,
-            backgroundColor: Colors.green.shade200,
-          );
+          var resp = await ResponsitoryServices.insertLocation(locate);
+          if (resp.statusCode == 201 || resp.statusCode == 200) {
+            AppAlert.successAlert(title: "save_successfully".tr);
+            Get.offNamed(LocationView.routeName);
+          } else {
+            AppAlert.errorAlert(title: "save_error".tr);
+          }
         }
       }
     }
 
+    var locationListCtrl = Get.find<LocationController>();
+    locationListCtrl.onInit();
     isLoading(false);
   }
 

@@ -44,6 +44,7 @@ class ButtonComponent extends StatelessWidget {
                     titleButton ?? "Button",
                     style: const TextStyle(),
                   ),
+                  const SizedBox(width: 10),
                   Icon(
                     surfix,
                     size: 20,

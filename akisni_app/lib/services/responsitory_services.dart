@@ -66,8 +66,13 @@ class ResponsitoryServices {
 
   static Future<Response> insertLocation(LocationListModel locate) async {
     AppProvider provider = AppProvider();
-    var json = locate.toJson();
     var resp = await provider.createLocationList(locate.toJson());
+    return resp;
+  }
+
+  static Future<Response> updateLocation(LocationListModel locate) async {
+    AppProvider provider = AppProvider();
+    var resp = await provider.updateLocationList(locate.toJson());
     return resp;
   }
 

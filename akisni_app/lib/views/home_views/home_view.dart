@@ -1,3 +1,4 @@
+import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/components/loading_overlay_component.dart';
 import 'package:akisni_app/components/text_component.dart';
@@ -121,7 +122,18 @@ class HomeView extends GetResponsiveView<MainController> {
                                   ),
                                 ],
                               ),
-                              Image.asset('assets/images/Rectangle 242.png')
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  color: Colors.red,
+                                  height: 120,
+                                  width: 150,
+                                  child: CacheNetworkImageComponent(
+                                    imageUrl: controller
+                                        .currentMarkerActive.value?.image,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ],

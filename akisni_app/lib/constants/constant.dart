@@ -28,6 +28,14 @@ Color ActiveColor = HexColor("#1EAD3E");
 Color DeActiveColor = HexColor("#C63030");
 Color GrayQuaternary = HexColor("#f6f6f6");
 
+// COLOR ALERT
+// ============
+final Color infoColor = HexColor("#1f78d1");
+final Color warningColor = HexColor("#fc9403");
+final Color errorColor = HexColor("#db3b21");
+final Color successColor = HexColor("#1aaa55");
+// ============
+
 // Font Constant
 const String EN_FONT = "MavenPro";
 const String KH_FONT = "KhAngWritehand";

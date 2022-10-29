@@ -21,5 +21,6 @@ Map<String, String> get enTranslate {
     "new_user": "New User",
     "phone_number": "Phone Number",
     "customer_name": "Customer Name",
+    "direction": "Direction",
   };
 }
