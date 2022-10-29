@@ -12,7 +12,7 @@ class ImageController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]); 
         $myimage = $request->filename; 
-        $result = $request->image->move("public/images", $myimage);
+        $result = $request->image->move("images", $myimage);
         return $myimage;
      }
 }

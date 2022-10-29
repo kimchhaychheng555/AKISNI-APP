@@ -104,6 +104,8 @@ class ManageController extends GetxController {
           }
         }
       }
+    } else {
+      AppAlert.errorAlert(title: "save_error".tr);
     }
 
     var locationListCtrl = Get.find<LocationController>();

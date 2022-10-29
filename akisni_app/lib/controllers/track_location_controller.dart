@@ -34,7 +34,6 @@ class TrackLocationController extends GetxController {
     while (true) {
       _onLoadMarker();
       _onUserMarker();
-      _onRemoveInactiveUser();
       await Future.delayed(const Duration(seconds: 1));
     }
   }
@@ -52,21 +51,12 @@ class TrackLocationController extends GetxController {
         Marker(
           infoWindow: InfoWindow(title: marker.title),
           onTap: () => currentMarkerActive(marker),
-          markerId: MarkerId("location-${marker.id ?? 0}"),
+          markerId: MarkerId("${marker.id ?? 0}"),
           position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
           icon: await MarkerIcon.pictureAsset(
               assetPath: "assets/images/tower.png", height: 150, width: 150),
         ),
       );
-    }
-  }
-
-  void _onRemoveInactiveUser() {
-    for (var element in listMark) {
-      print(element.markerId.toString().contains('user'));
-      if (element.markerId.value.contains('user')) {
-        listMark.removeWhere((x) => x.markerId == element.markerId);
-      }
     }
   }
 
@@ -91,7 +81,7 @@ class TrackLocationController extends GetxController {
           Marker(
             infoWindow: InfoWindow(title: marker.fullName),
             onTap: () => currentUserActive(marker),
-            markerId: MarkerId("user-${marker.id ?? 0}"),
+            markerId: MarkerId("${marker.id ?? 0}"),
             position:
                 LatLng(marker.lastLatitude ?? 0, marker.lastLongitude ?? 0),
             icon: await MarkerIcon.pictureAsset(
