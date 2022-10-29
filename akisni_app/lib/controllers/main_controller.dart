@@ -1,4 +1,5 @@
 import 'package:akisni_app/models/user_active_models/user_active_model.dart';
+import 'package:akisni_app/services/app_provider.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
@@ -10,8 +11,10 @@ import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:uuid/uuid.dart';
 
-class MainController extends GetxController {
+class MainController extends FullLifeCycleController {
+  AppProvider appProvider = AppProvider();
   var isLoading = false.obs;
   var isDbLoad = false.obs;
   var isLogin = false.obs;
@@ -23,8 +26,9 @@ class MainController extends GetxController {
     await AppService.onStartUp();
     isDbLoad(true);
     isLoading(false);
-
+    appProvider.createActiveUser(AppService.loginUser.toJson());
     super.onInit();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   Widget get afterLoading {
@@ -57,5 +61,26 @@ class MainController extends GetxController {
   void onLogoutPreseed() async {
     Get.offAllNamed(LoginView.routeName);
     await AppStorage.storage.remove("user");
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    if ((AppService.loginUser.id ?? Uuid.NAMESPACE_NIL) != Uuid.NAMESPACE_NIL) {
+      AppProvider appProvider = AppProvider();
+      if (state == AppLifecycleState.paused) {
+        await appProvider.deleteActiveUser(AppService.loginUser.id!);
+      } else if (state == AppLifecycleState.detached) {
+        await appProvider.deleteActiveUser(AppService.loginUser.id!);
+      } else if (state == AppLifecycleState.resumed) {
+        await appProvider.createActiveUser(AppService.loginUser.toJson());
+      }
+    }
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    WidgetsBinding.instance.removeObserver(this);
   }
 }

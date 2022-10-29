@@ -103,7 +103,7 @@ class LocationListCardComponent extends StatelessWidget {
                           location.latitude.toString(),
                           location.longitude.toString()),
                       height: 40,
-                      width: 120,
+                      width: 125,
                       isSurfix: true,
                       surfix: Icons.directions,
                     )
