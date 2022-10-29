@@ -1,9 +1,9 @@
-import 'package:akisni_app/models/core_model.dart';
+// ignore_for_file: non_constant_identifier_names
 import 'package:json_annotation/json_annotation.dart';
 part 'location_list_model.g.dart';
 
 @JsonSerializable()
-class LocationListModel extends CoreModel {
+class LocationListModel {
   final String? id;
   final String? title;
   final String? company;
@@ -15,6 +15,8 @@ class LocationListModel extends CoreModel {
   final String? image;
   final double? latitude;
   final double? longitude;
+  final DateTime? created_at;
+  final DateTime? updated_at;
 
   LocationListModel({
     this.id,
@@ -28,6 +30,8 @@ class LocationListModel extends CoreModel {
     this.image,
     this.latitude,
     this.longitude,
+    this.created_at,
+    this.updated_at,
   });
 
   factory LocationListModel.fromJson(Map<String, dynamic> json) =>

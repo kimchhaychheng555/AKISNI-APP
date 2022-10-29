@@ -39,7 +39,7 @@ class UserActiveController extends Controller
 
     public function create(Request $request){
 
-        $userActive = UserActiveModel::where('id', $request->input('id'))
+        $userActive = UserActiveModel::where('user_id', $request->input('id'))
                         ->get();
     
         if($userActive->count() == 0){
@@ -56,7 +56,7 @@ class UserActiveController extends Controller
             $userActive->lastLatitude = $request->input('lastLatitude');
             $userActive->lastLongitude = $request->input('lastLongitude');
             $userActive->save();
-            return response()->json($user, 201);
+            return response()->json($userActive, 201);
         }else{
             return response()->json(array('message'=>'Duplicate'), 409);
         }
@@ -66,11 +66,12 @@ class UserActiveController extends Controller
     
     public function delete(Request $request){
 
-        $res = UserActiveModel::where('id', $request->id)
+        $res = UserActiveModel::where('user_id', $request->id)
                                     ->get();
 
+ 
         if($res->count() > 0){
-            $data = UserActiveModel::find($request->id);
+            $data = UserActiveModel::find($res[0]->id);
             $data->delete();
             return response()->json($data, 200);
         }else{

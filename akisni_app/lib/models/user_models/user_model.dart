@@ -1,18 +1,21 @@
-import 'package:akisni_app/models/core_model.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:json_annotation/json_annotation.dart';
 part 'user_model.g.dart';
 
 @JsonSerializable()
-class UserModel extends CoreModel {
-  final String? id;
-  final String? fullName;
-  final String? phoneNumber;
-  final String? username;
-  final String? password;
-  final String? role;
-  final String? profile;
-  final double? lastLatitude;
-  final double? lastLongitude;
+class UserModel {
+  String? id;
+  String? fullName;
+  String? phoneNumber;
+  String? username;
+  String? password;
+  String? role;
+  String? profile;
+  double? lastLatitude;
+  double? lastLongitude;
+  DateTime? created_at;
+  DateTime? updated_at;
 
   UserModel({
     this.id,
@@ -24,6 +27,8 @@ class UserModel extends CoreModel {
     this.profile,
     this.lastLatitude,
     this.lastLongitude,
+    this.created_at,
+    this.updated_at,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

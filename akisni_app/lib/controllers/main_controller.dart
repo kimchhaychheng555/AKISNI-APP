@@ -2,13 +2,16 @@ import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/services/app_provider.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
 import 'package:akisni_app/views/location_views/location_view.dart';
 import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:akisni_app/views/no_network_view.dart';
+import 'package:akisni_app/views/track_locations_views/track_location.dart';
 import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
@@ -23,12 +26,36 @@ class MainController extends FullLifeCycleController {
   @override
   void onInit() async {
     isLoading(true);
+    await _checkLocationPermission();
     await AppService.onStartUp();
     isDbLoad(true);
     isLoading(false);
-    appProvider.createActiveUser(AppService.loginUser.toJson());
+    ResponsitoryServices.insertActiveUser(AppService.loginUser);
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  Future<void> _checkLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
   }
 
   Widget get afterLoading {
@@ -56,7 +83,7 @@ class MainController extends FullLifeCycleController {
 
   void onUserPressed() => Get.offNamed(UserListView.routeName);
 
-  void onTrackLocationPressed() {}
+  void onTrackLocationPressed() => Get.offNamed(TrackLocationView.routeName);
 
   void onLogoutPreseed() async {
     Get.offAllNamed(LoginView.routeName);
@@ -73,7 +100,7 @@ class MainController extends FullLifeCycleController {
       } else if (state == AppLifecycleState.detached) {
         await appProvider.deleteActiveUser(AppService.loginUser.id!);
       } else if (state == AppLifecycleState.resumed) {
-        await appProvider.createActiveUser(AppService.loginUser.toJson());
+        ResponsitoryServices.insertActiveUser(AppService.loginUser);
       }
     }
   }

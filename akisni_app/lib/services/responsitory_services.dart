@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/models/user_active_models/user_active_model.dart';
@@ -43,6 +44,9 @@ class ResponsitoryServices {
 
     if (resp.statusCode == 200) {
       AppService.loginUser = UserModel.fromJson(resp.body[0]);
+      var position = await Geolocator.getCurrentPosition();
+      AppService.loginUser.lastLatitude = position.latitude;
+      AppService.loginUser.lastLongitude = position.longitude;
       return true;
     }
 
@@ -110,5 +114,22 @@ class ResponsitoryServices {
       var resp = await provider.upload(path: path, name: rename);
       return resp;
     }
+  }
+
+  static void insertActiveUser(UserModel user) {
+    AppProvider provider = AppProvider();
+    var tempUserActive = UserActiveModel(
+      user_id: user.id,
+      fullName: user.fullName,
+      phoneNumber: user.phoneNumber,
+      username: user.username,
+      password: user.password,
+      role: user.role,
+      profile: user.profile,
+      lastLatitude: user.lastLatitude,
+      lastLongitude: user.lastLongitude,
+    );
+
+    provider.createActiveUser(tempUserActive.toJson());
   }
 }

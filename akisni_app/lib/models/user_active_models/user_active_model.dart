@@ -1,12 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:akisni_app/models/core_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user_active_model.g.dart';
 
 @JsonSerializable()
-class UserActiveModel extends CoreModel {
-  final String? id;
+class UserActiveModel {
+  final int? id;
   final String? user_id;
   final String? fullName;
   final String? phoneNumber;
@@ -17,6 +16,8 @@ class UserActiveModel extends CoreModel {
   final String? active;
   final double? lastLatitude;
   final double? lastLongitude;
+  final DateTime? created_at;
+  final DateTime? updated_at;
 
   UserActiveModel({
     this.id,
@@ -30,6 +31,8 @@ class UserActiveModel extends CoreModel {
     this.active,
     this.lastLatitude,
     this.lastLongitude,
+    this.created_at,
+    this.updated_at,
   });
 
   factory UserActiveModel.fromJson(Map<String, dynamic> json) =>

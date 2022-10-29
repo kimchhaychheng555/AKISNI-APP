@@ -19,6 +19,12 @@ LocationListModel _$LocationListModelFromJson(Map<String, dynamic> json) =>
       image: json['image'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      created_at: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$LocationListModelToJson(LocationListModel instance) =>
@@ -34,4 +40,6 @@ Map<String, dynamic> _$LocationListModelToJson(LocationListModel instance) =>
       'image': instance.image,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'created_at': instance.created_at?.toIso8601String(),
+      'updated_at': instance.updated_at?.toIso8601String(),
     };

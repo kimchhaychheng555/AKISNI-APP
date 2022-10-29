@@ -8,7 +8,7 @@ part of 'user_active_model.dart';
 
 UserActiveModel _$UserActiveModelFromJson(Map<String, dynamic> json) =>
     UserActiveModel(
-      id: json['id'] as String?,
+      id: json['id'] as int?,
       user_id: json['user_id'] as String?,
       fullName: json['fullName'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
@@ -19,6 +19,12 @@ UserActiveModel _$UserActiveModelFromJson(Map<String, dynamic> json) =>
       active: json['active'] as String?,
       lastLatitude: (json['lastLatitude'] as num?)?.toDouble(),
       lastLongitude: (json['lastLongitude'] as num?)?.toDouble(),
+      created_at: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updated_at: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$UserActiveModelToJson(UserActiveModel instance) =>
@@ -34,4 +40,6 @@ Map<String, dynamic> _$UserActiveModelToJson(UserActiveModel instance) =>
       'active': instance.active,
       'lastLatitude': instance.lastLatitude,
       'lastLongitude': instance.lastLongitude,
+      'created_at': instance.created_at?.toIso8601String(),
+      'updated_at': instance.updated_at?.toIso8601String(),
     };
