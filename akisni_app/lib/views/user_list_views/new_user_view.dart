@@ -40,17 +40,13 @@ class NewUserView extends GetResponsiveView<MainController> {
                   isHasTitle: true,
                   child: Column(
                     children: [
-                      // SelectOpctionComponenet(
-                      //   dataValue: controller.list,
-                      //   dropdownValue: 'select_user_type'.tr,
-                      // ),
 
                       InputTextComponent(
                         controller: controller.userNameCtrl,
                         placeholder: 'user_name'.tr,
                       ),
                       SelectOpctionComponent(
-                          placeholder: 'rule'.tr,
+                          placeholder: 'select_user_type'.tr,
                           items: controller.list.map((e) {
                             return DropdownMenuItem<String>(
                               value: e,

@@ -4,6 +4,7 @@ import 'package:akisni_app/views/location_views/location_view.dart';
 import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/main_views.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
+import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:akisni_app/views/no_network_view.dart';
 import 'package:akisni_app/views/track_locations_views/track_location.dart';
 import 'package:akisni_app/views/user_list_views/new_user_view.dart';
@@ -52,6 +53,11 @@ class AppRoute {
         GetPage(
           name: ManageView.routeName,
           page: () => ManageView(),
+          binding: AppBindings(),
+        ),
+        GetPage(
+          name: NewManageView.routeName,
+          page: () => NewManageView(),
           binding: AppBindings(),
         ),
         GetPage(

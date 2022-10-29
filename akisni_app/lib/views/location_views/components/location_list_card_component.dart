@@ -5,7 +5,7 @@ import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
-import 'package:akisni_app/views/manage_views/manage_view.dart';
+import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,10 +13,12 @@ import '../../../components/text_component.dart';
 
 class LocationListCardComponent extends StatelessWidget {
   final LocationListModel location;
+  final isManage;
 
   const LocationListCardComponent({
     super.key,
     required this.location,
+    this.isManage = false,
   });
 
   @override
@@ -33,33 +35,36 @@ class LocationListCardComponent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextComponent(
-                text: location.name ?? "",
+                text: location.name ?? "No Title",
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 color: RedPrimary,
               ),
-              Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(ManageView.routeName, arguments: location);
-                    },
-                    child: Icon(
-                      Icons.edit,
-                      color: BluePrimary,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      locationController.onDeletePressed(location.id);
-                    },
-                    child: Icon(
-                      Icons.delete,
-                      color: RedPrimary,
-                    ),
-                  ),
-                ],
-              )
+              isManage == true
+                  ? Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(NewManageView.routeName,
+                                arguments: location);
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            color: BluePrimary,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            locationController.onDeletePressed(location.id);
+                          },
+                          child: Icon(
+                            Icons.delete,
+                            color: RedPrimary,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container()
             ],
           ),
           const SizedBox(
@@ -100,7 +105,7 @@ class LocationListCardComponent extends StatelessWidget {
                           location.latitude.toString(),
                           location.longitude.toString()),
                       height: 40,
-                      width: 125,
+                      width: 135,
                       isSurfix: true,
                       surfix: Icons.directions,
                     )
