@@ -61,26 +61,32 @@ class DrawerComponent extends StatelessWidget {
                     )),
               ),
               MenuItemComponent(
+                icons: Icons.home,
                 title: 'home'.tr,
                 onClick: () => controller.onHomePressed(),
               ),
               MenuItemComponent(
+                icons: Icons.vertical_split,
                 title: 'Locator List',
                 onClick: () => controller.onLocatorListPressed(),
               ),
               MenuItemComponent(
+                icons: Icons.add_circle,
                 title: 'Manage',
                 onClick: () => controller.onManagePressed(),
               ),
               MenuItemComponent(
+                icons: Icons.people,
                 title: 'User',
                 onClick: () => controller.onUserPressed(),
               ),
               MenuItemComponent(
+                icons: Icons.mode_of_travel,
                 title: 'Track Location',
                 onClick: () => controller.onTrackLocationPressed(),
               ),
               MenuItemComponent(
+                icons: Icons.logout,
                 title: 'Logout',
                 onClick: () => controller.onLogoutPreseed(),
               ),

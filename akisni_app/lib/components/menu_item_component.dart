@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class MenuItemComponent extends StatelessWidget {
   final String title;
+  final IconData icons;
   final Function()? onClick;
   const MenuItemComponent({
     super.key,
+    required this.icons,
     required this.title,
     this.onClick,
   });
@@ -13,6 +15,10 @@ class MenuItemComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Icon(
+        icons,
+        color: Colors.white,
+      ),
       dense: true,
       minVerticalPadding: 0,
       title: TextComponent(

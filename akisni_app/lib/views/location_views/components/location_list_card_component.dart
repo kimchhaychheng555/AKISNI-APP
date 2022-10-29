@@ -40,23 +40,20 @@ class LocationListCardComponent extends StatelessWidget {
               ),
               Row(
                 children: [
-                  IconButton(
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       Get.toNamed(ManageView.routeName, arguments: location);
                     },
-                    icon: Icon(
+                    child: Icon(
                       Icons.edit,
                       color: BluePrimary,
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  IconButton(
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       locationController.onDeletePressed(location.id);
                     },
-                    icon: Icon(
+                    child: Icon(
                       Icons.delete,
                       color: RedPrimary,
                     ),
