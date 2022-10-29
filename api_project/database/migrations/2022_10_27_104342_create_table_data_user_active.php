@@ -22,7 +22,7 @@ class CreateTableDataUserActive extends Migration
             $table->string('password')->nullable();
             $table->string('role')->nullable();
             $table->string('profile')->nullable();
-            $table->string('active')->nullable();
+            $table->boolean('active')->nullable()->default(0);
             $table->double('lastLatitude')->nullable();
             $table->double('lastLongitude')->nullable();
             $table->timestamps();
