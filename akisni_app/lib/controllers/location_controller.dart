@@ -1,4 +1,5 @@
 import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:get/get.dart';
 
 import '../models/location_list_models/location_list_model.dart';
@@ -18,6 +19,10 @@ class LocationController extends GetxController {
     var locations = await ResponsitoryServices.getLocation();
     listLocations.assignAll(locations);
     isLoading(false);
+  }
+
+  void onEditPressed(LocationListModel location) {
+    Get.toNamed(NewManageView.routeName, arguments: location);
   }
 
   void onDeletePressed(String? value) async {

@@ -9,10 +9,17 @@ import 'package:uuid/uuid.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
+  GoogleMapController? mapController;
   var currentPosition = Rxn<Position>();
-  var currentCamera = Rxn<CameraPosition>();
   RxList<Marker> listLocation = (<Marker>[]).obs;
   final GlobalKey currentMarkerKey = GlobalKey();
+
+  var currentCamera = const CameraPosition(
+    bearing: 0.0,
+    target: LatLng(11.556124986846767, 104.92695081979036),
+    tilt: 0.0,
+    zoom: 16.373828887939453,
+  ).obs;
 
   var currentMarkerActive = Rxn<LocationListModel>();
 
@@ -21,61 +28,12 @@ class HomeController extends GetxController {
     isLoading(true);
     await _determinePosition();
     isLoading(false);
-
-    await _onCurrentMarker();
     await _onLoadMarker();
     super.onInit();
   }
 
-  void onMapPressed() {
-    currentMarkerActive(LocationListModel(id: Uuid.NAMESPACE_NIL));
-    update();
-  }
-
-  Future<void> _onLoadMarker() async {
-    var locations = await ResponsitoryServices.getLocation();
-
-    for (var marker in locations) {
-      _addLocationList(
-        Marker(
-          infoWindow: InfoWindow(title: marker.title),
-          onTap: () => currentMarkerActive(marker),
-          markerId: MarkerId("${marker.id ?? 0}"),
-          position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
-          icon: await MarkerIcon.pictureAsset(
-              assetPath: "assets/images/tower.png", height: 150, width: 150),
-        ),
-      );
-    }
-  }
-
-  Future<void> _onCurrentMarker() async {
-    _addLocationList(
-      Marker(
-        markerId: const MarkerId("0"),
-        position: LatLng(
-            currentPosition.value!.latitude, currentPosition.value!.longitude),
-        icon: await MarkerIcon.pictureAsset(
-            assetPath: "assets/images/location.png", height: 60, width: 60),
-      ),
-    );
-  }
-
-  void _addLocationList(Marker marker) async {
-    var exist =
-        listLocation.where((x) => x.markerId == marker.markerId).toList();
-    if (exist.isEmpty) {
-      listLocation.add(marker);
-    } else {
-      listLocation.removeWhere((x) => x.markerId == marker.markerId);
-      listLocation.add(marker);
-    }
-    update();
-  }
-
   Future<void> _determinePosition() async {
     currentPosition(await Geolocator.getCurrentPosition());
-
     currentCamera(
       CameraPosition(
         bearing: 0.0,
@@ -89,13 +47,39 @@ class HomeController extends GetxController {
     );
   }
 
-  void setCurrentLocation() async {
-    currentPosition(await Geolocator.getCurrentPosition());
+  void onMapPressed() {
+    currentMarkerActive(LocationListModel(id: Uuid.NAMESPACE_NIL));
+    update();
   }
 
-  void onExitApp() {
-    print("=============================");
-    print("===== CLOSE APP =====");
-    print("=============================");
+  Future<void> _onLoadMarker() async {
+    var locations = await ResponsitoryServices.getLocation();
+
+    for (var marker in locations) {
+      if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
+        _addLocationList(
+          Marker(
+            infoWindow: InfoWindow(title: marker.title),
+            onTap: () => currentMarkerActive(marker),
+            markerId: MarkerId("${marker.id ?? 0}"),
+            position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
+            icon: await MarkerIcon.pictureAsset(
+                assetPath: "assets/images/tower.png", height: 150, width: 150),
+          ),
+        );
+      }
+    }
+  }
+
+  void _addLocationList(Marker marker) async {
+    var exist =
+        listLocation.where((x) => x.markerId == marker.markerId).toList();
+    if (exist.isEmpty) {
+      listLocation.add(marker);
+    } else {
+      listLocation.removeWhere((x) => x.markerId == marker.markerId);
+      listLocation.add(marker);
+    }
+    update();
   }
 }

@@ -28,11 +28,6 @@ class HomeView extends GetResponsiveView<MainController> {
           title: TextHeaderComponent(
             text: "home".tr.toUpperCase(),
           ),
-          actions: [
-            IconButton(
-                onPressed: () => controller.setCurrentLocation(),
-                icon: const Icon(Icons.radio_button_checked_outlined))
-          ],
         ),
         drawer: const DrawerComponent(),
         body: LoadingOverlayComponent(
@@ -41,20 +36,14 @@ class HomeView extends GetResponsiveView<MainController> {
             children: [
               controller.isLoading.value
                   ? LoadingOverlayComponent(
-                      isLoading: controller.isLoading.value,
+                      isLoading: true,
                       child: Container(),
                     )
                   : GoogleMap(
+                      myLocationEnabled: true,
                       tiltGesturesEnabled: true,
                       mapType: MapType.normal,
-                      initialCameraPosition: controller.currentCamera.value ??
-                          const CameraPosition(
-                            bearing: 0.0,
-                            target:
-                                LatLng(11.556124986846767, 104.92695081979036),
-                            tilt: 0.0,
-                            zoom: 16.373828887939453,
-                          ),
+                      initialCameraPosition: controller.currentCamera.value,
                       onTap: (_) => controller.onMapPressed(),
                       markers: controller.listLocation.toSet(),
                     ),

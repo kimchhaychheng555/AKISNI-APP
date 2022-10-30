@@ -25,7 +25,6 @@ class TrackLocationController extends GetxController {
     isLoading(true);
     await _determinePosition();
     isLoading(false);
-    await _onLocationMarker();
     _onLoadMapRefresh();
     super.onInit();
   }
@@ -47,29 +46,19 @@ class TrackLocationController extends GetxController {
     var locations = await ResponsitoryServices.getLocation();
 
     for (var marker in locations) {
-      _addLocationList(
-        Marker(
-          infoWindow: InfoWindow(title: marker.title),
-          onTap: () => currentMarkerActive(marker),
-          markerId: MarkerId("${marker.id ?? 0}"),
-          position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
-          icon: await MarkerIcon.pictureAsset(
-              assetPath: "assets/images/tower.png", height: 150, width: 150),
-        ),
-      );
+      if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
+        _addLocationList(
+          Marker(
+            infoWindow: InfoWindow(title: marker.title),
+            onTap: () => currentMarkerActive(marker),
+            markerId: MarkerId("${marker.id ?? 0}"),
+            position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
+            icon: await MarkerIcon.pictureAsset(
+                assetPath: "assets/images/tower.png", height: 150, width: 150),
+          ),
+        );
+      }
     }
-  }
-
-  Future<void> _onLocationMarker() async {
-    _addLocationList(
-      Marker(
-        markerId: const MarkerId("0"),
-        position: LatLng(
-            currentPosition.value!.latitude, currentPosition.value!.longitude),
-        icon: await MarkerIcon.pictureAsset(
-            assetPath: "assets/images/location.png", height: 60, width: 60),
-      ),
-    );
   }
 
   void _onUserMarker() async {
@@ -77,17 +66,22 @@ class TrackLocationController extends GetxController {
 
     for (var marker in mainCtrl.trackUserList) {
       if (marker.user_id != AppService.loginUser.id) {
-        _addUserList(
-          Marker(
-            infoWindow: InfoWindow(title: marker.fullName),
-            onTap: () => currentUserActive(marker),
-            markerId: MarkerId("${marker.id ?? 0}"),
-            position:
-                LatLng(marker.lastLatitude ?? 0, marker.lastLongitude ?? 0),
-            icon: await MarkerIcon.pictureAsset(
-                assetPath: "assets/images/user.png", height: 150, width: 150),
-          ),
-        );
+        if (marker.active == "active") {
+          _addUserList(
+            Marker(
+              infoWindow: InfoWindow(title: marker.fullName),
+              onTap: () => currentUserActive(marker),
+              markerId: MarkerId("${marker.id ?? 0}"),
+              position:
+                  LatLng(marker.lastLatitude ?? 0, marker.lastLongitude ?? 0),
+              icon: await MarkerIcon.pictureAsset(
+                  assetPath: "assets/images/user.png", height: 150, width: 150),
+            ),
+          );
+        } else {
+          listMark
+              .removeWhere((x) => x.markerId == MarkerId(marker.id.toString()));
+        }
       }
     }
   }

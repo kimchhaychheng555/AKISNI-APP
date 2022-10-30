@@ -28,7 +28,7 @@ Map<String, String> get enTranslate {
     "username": "Username",
     "password": "Password",
     "remember_me": "Remember Me",
-    "search":"Search",
+    "search": "Search",
     "user_list": "User List",
     "select_user_type": "Select User Type",
     "user_information": "User information",
@@ -36,5 +36,6 @@ Map<String, String> get enTranslate {
     "phone_number": "Phone Number",
     "customer_name": "Customer Name",
     "direction": "Direction",
+    "manage_location_list": "Manage Location List",
   };
 }

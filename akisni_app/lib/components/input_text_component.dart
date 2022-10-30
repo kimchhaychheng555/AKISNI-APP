@@ -10,11 +10,13 @@ class InputTextComponent extends StatelessWidget {
   final TextInputType textInputType;
   final bool isTextArea;
   final bool isSearch;
+  final Color? textColor;
   final String? Function(String?)? validator;
   const InputTextComponent({
     super.key,
     this.controller,
     this.placeholder,
+    this.textColor,
     this.validator,
     this.textInputType = TextInputType.text,
     this.isTextArea = false,
@@ -32,7 +34,7 @@ class InputTextComponent extends StatelessWidget {
           isSearch == false
               ? TextComponent(
                   text: placeholder ?? "",
-                  color: BluePrimary,
+                  color: textColor ?? BluePrimary,
                   fontSize: DEFAULT_FONT_SIZE,
                 )
               : Container(),

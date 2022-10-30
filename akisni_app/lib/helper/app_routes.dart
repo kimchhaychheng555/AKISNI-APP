@@ -6,7 +6,7 @@ import 'package:akisni_app/views/main_views.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:akisni_app/views/no_network_view.dart';
-import 'package:akisni_app/views/track_locations_views/track_location.dart';
+import 'package:akisni_app/views/track_locations_views/track_location_view.dart';
 import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:get/get.dart';

@@ -126,10 +126,29 @@ class ResponsitoryServices {
       password: user.password,
       role: user.role,
       profile: user.profile,
+      active: "active",
       lastLatitude: user.lastLatitude,
       lastLongitude: user.lastLongitude,
     );
 
     provider.createActiveUser(tempUserActive.toJson());
+  }
+
+  static void deleteActiveUser(UserModel user) {
+    AppProvider provider = AppProvider();
+    var tempUserActive = UserActiveModel(
+      user_id: user.id,
+      fullName: user.fullName,
+      phoneNumber: user.phoneNumber,
+      username: user.username,
+      password: user.password,
+      role: user.role,
+      profile: user.profile,
+      active: "inactive",
+      lastLatitude: user.lastLatitude,
+      lastLongitude: user.lastLongitude,
+    );
+
+    provider.updateActiveUser(tempUserActive.toJson());
   }
 }

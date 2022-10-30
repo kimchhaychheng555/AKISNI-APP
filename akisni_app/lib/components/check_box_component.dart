@@ -1,4 +1,5 @@
 import 'package:akisni_app/components/text_component.dart';
+import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
 
 class CheckBoxComponent extends StatelessWidget {
@@ -17,10 +18,11 @@ class CheckBoxComponent extends StatelessWidget {
     return Row(
       children: [
         Checkbox(
+          fillColor: const MaterialStatePropertyAll(Colors.white),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4.0),
           ),
-          checkColor: Colors.white,
+          checkColor: BluePrimary,
           value: isChecked,
           onChanged: onChanged,
         ),
@@ -29,7 +31,7 @@ class CheckBoxComponent extends StatelessWidget {
         ),
         TextComponent(
           text: textContent,
-          color: Colors.black,
+          color: Colors.white,
         ),
       ],
     );

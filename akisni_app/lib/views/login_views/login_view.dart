@@ -21,40 +21,52 @@ class LoginView extends GetResponsiveView<MainController> {
       () => Scaffold(
         body: LoadingOverlayComponent(
           isLoading: controller.isLoading.value,
-          child: Padding(
-            padding: EdgeInsets.all(DEFAULT_PADDING),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextHeaderComponent(
-                    text: 'login'.tr,
-                    color: BluePrimary,
-                    fontSize: FONT_SIZE_HEADER,
-                  ),
-                  const SizedBox(height: 20),
-                  InputTextComponent(
-                    controller: controller.usernameCtrl,
-                    placeholder: "username".tr,
-                  ),
-                  InputTextComponent(
-                    controller: controller.passwordCtrl,
-                    placeholder: "password".tr,
-                    isPassword: true,
-                  ),
-                  CheckBoxComponent(
-                    isChecked: controller.isRememberMe.value,
-                    onChanged: (value) {
-                      controller.isRememberMe(value ?? false);
-                    },
-                    textContent: 'remember_me'.tr,
-                  ),
-                  const SizedBox(height: 10),
-                  ButtonComponent(
-                    onClick: () => controller.onLoginPressed(),
-                    titleButton: 'login'.tr,
-                  ),
-                ]),
+          child: Container(
+            color: BluePrimary,
+            child: Padding(
+              padding: EdgeInsets.all(DEFAULT_PADDING),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/logo.png",
+                      height: 130,
+                    ),
+                    const SizedBox(height: 20),
+                    TextHeaderComponent(
+                      text: 'login'.tr,
+                      fontSize: FONT_SIZE_HEADER,
+                    ),
+                    const SizedBox(height: 20),
+                    InputTextComponent(
+                      textColor: Colors.white,
+                      controller: controller.usernameCtrl,
+                      placeholder: "username".tr,
+                    ),
+                    InputTextComponent(
+                      textColor: Colors.white,
+                      controller: controller.passwordCtrl,
+                      placeholder: "password".tr,
+                      isPassword: true,
+                    ),
+                    CheckBoxComponent(
+                      isChecked: controller.isRememberMe.value,
+                      onChanged: (value) {
+                        controller.isRememberMe(value ?? false);
+                      },
+                      textContent: 'remember_me'.tr,
+                    ),
+                    const SizedBox(height: 10),
+                    ButtonComponent(
+                      fontWeight: FontWeight.bold,
+                      textColor: BluePrimary,
+                      buttonColor: Colors.white,
+                      onClick: () => controller.onLoginPressed(),
+                      titleButton: 'login'.tr,
+                    ),
+                  ]),
+            ),
           ),
         ),
       ),

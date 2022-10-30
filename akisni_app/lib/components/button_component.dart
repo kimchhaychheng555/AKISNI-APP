@@ -1,3 +1,4 @@
+import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +9,14 @@ class ButtonComponent extends StatelessWidget {
   final double? height;
   final bool isSurfix;
   final IconData? surfix;
+  final Color? buttonColor, textColor;
+  final FontWeight? fontWeight;
   const ButtonComponent({
     super.key,
     this.onClick,
+    this.fontWeight,
+    this.textColor,
+    this.buttonColor,
     this.height,
     this.isSurfix = false,
     this.width,
@@ -25,7 +31,7 @@ class ButtonComponent extends StatelessWidget {
       width: width ?? double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: BluePrimary,
+          backgroundColor: buttonColor ?? BluePrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(32.0),
           ),
@@ -34,15 +40,17 @@ class ButtonComponent extends StatelessWidget {
           onClick!();
         },
         child: isSurfix == false
-            ? Text(
-                titleButton ?? "Button",
-                style: const TextStyle(),
+            ? TextComponent(
+                color: textColor,
+                text: titleButton ?? "Button",
+                fontWeight: fontWeight,
               )
             : Row(
                 children: [
-                  Text(
-                    titleButton ?? "Button",
-                    style: const TextStyle(),
+                  TextComponent(
+                    color: textColor,
+                    text: titleButton ?? "Button",
+                    fontWeight: fontWeight,
                   ),
                   const SizedBox(width: 10),
                   Icon(

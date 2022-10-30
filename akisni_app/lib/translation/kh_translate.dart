@@ -36,5 +36,6 @@ Map<String, String> get khTranslate {
     "phone_number": "លេខទូរស័ព្ទ",
     "customer_name": "ឈ្មោះអតិថិជន",
     "direction": "ដាក់ទីតាំង",
+    "manage_location_list": "គ្រប់គ្រងទីតាំង",
   };
 }

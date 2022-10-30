@@ -40,6 +40,7 @@ class TrackLocationView extends GetResponsiveView<MainController> {
                       child: Container(),
                     )
                   : GoogleMap(
+                      myLocationEnabled: true,
                       tiltGesturesEnabled: true,
                       mapType: MapType.normal,
                       initialCameraPosition: controller.currentCamera.value ??

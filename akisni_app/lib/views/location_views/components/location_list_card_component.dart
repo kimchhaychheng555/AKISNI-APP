@@ -5,7 +5,6 @@ import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
-import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +34,7 @@ class LocationListCardComponent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextComponent(
-                text: location.name ?? "No Title",
+                text: location.title ?? "No Title",
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 color: RedPrimary,
@@ -43,21 +42,20 @@ class LocationListCardComponent extends StatelessWidget {
               isManage == true
                   ? Row(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Get.toNamed(NewManageView.routeName,
-                                arguments: location);
-                          },
-                          child: Icon(
+                        IconButton(
+                          splashRadius: 20,
+                          onPressed: () =>
+                              locationController.onEditPressed(location),
+                          icon: Icon(
                             Icons.edit,
                             color: BluePrimary,
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            locationController.onDeletePressed(location.id);
-                          },
-                          child: Icon(
+                        IconButton(
+                          splashRadius: 20,
+                          onPressed: () =>
+                              locationController.onDeletePressed(location.id),
+                          icon: Icon(
                             Icons.delete,
                             color: RedPrimary,
                           ),

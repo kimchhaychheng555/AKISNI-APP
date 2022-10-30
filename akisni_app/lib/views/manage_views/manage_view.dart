@@ -23,7 +23,7 @@ class ManageView extends GetResponsiveView<MainController> {
           automaticallyImplyLeading: true,
           backgroundColor: BluePrimary,
           title: TextHeaderComponent(
-            text: "location_list".tr.toUpperCase(),
+            text: "manage_location_list".tr.toUpperCase(),
           ),
         ),
         drawer: const DrawerComponent(),
