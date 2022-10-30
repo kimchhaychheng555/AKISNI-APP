@@ -12,7 +12,7 @@ import '../../../components/text_component.dart';
 
 class LocationListCardComponent extends StatelessWidget {
   final LocationListModel location;
-  final isManage;
+  final bool isManage;
 
   const LocationListCardComponent({
     super.key,

@@ -1,5 +1,4 @@
 import 'package:akisni_app/components/date_time_picker_component.dart';
-import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_manage_controller.dart';
