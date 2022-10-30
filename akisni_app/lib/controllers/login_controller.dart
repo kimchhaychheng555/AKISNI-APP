@@ -22,7 +22,7 @@ class LoginController extends GetxController {
       if (isRememberMe.value) {
         AppStorage.saveLogin();
       }
-      Get.toNamed(HomeView.routeName);
+      Get.offAllNamed(HomeView.routeName);
     } else {
       Fluttertoast.showToast(
         msg: "incorrect_username_password".tr,

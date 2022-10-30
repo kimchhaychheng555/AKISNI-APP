@@ -106,7 +106,7 @@ class LocationListCardComponent extends StatelessWidget {
                       width: 135,
                       isSurfix: true,
                       surfix: Icons.directions,
-                    )
+                    ),
                   ],
                 ),
               ),

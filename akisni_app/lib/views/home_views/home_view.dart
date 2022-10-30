@@ -113,8 +113,7 @@ class HomeView extends GetResponsiveView<MainController> {
                               ),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  color: Colors.red,
+                                child: SizedBox(
                                   height: 120,
                                   width: 150,
                                   child: CacheNetworkImageComponent(

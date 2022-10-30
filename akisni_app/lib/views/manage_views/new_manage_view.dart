@@ -16,7 +16,7 @@ import '../../constants/constant.dart';
 class NewManageView extends GetResponsiveView<MainController> {
   NewManageView({super.key});
 
-  static String routeName = "/newmanage";
+  static String routeName = "/new-manage";
 
   @override
   Widget builder() {
@@ -40,7 +40,6 @@ class NewManageView extends GetResponsiveView<MainController> {
             text: "new_location".tr.toUpperCase(),
           ),
         ),
-        drawer: const DrawerComponent(),
         body: Obx(
           () => LoadingOverlayComponent(
             isLoading: controller.isLoading.value,
