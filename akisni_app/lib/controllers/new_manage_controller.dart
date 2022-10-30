@@ -36,8 +36,6 @@ class NewManageController extends GetxController {
     installDate(value);
   }
 
-  final List<String> listTypes = ['LV', 'CG', 'LD'];
-
   @override
   void onInit() {
     var location = Get.arguments;
@@ -64,14 +62,10 @@ class NewManageController extends GetxController {
   void onSave() async {
     isLoading(true);
 
-    var uploadImageResp = kIsWeb
-        ? await ResponsitoryServices.upload(
-            rawFile: unit8List.value,
-            name: tempImageStr.value,
-          )
-        : await ResponsitoryServices.upload(path: tempImageStr.value);
-
-    if (uploadImageResp.statusCode == 200) {
+    if (formKey.currentState!.validate()) {
+      print("=================================");
+      print(tempImageStr.value);
+      print("=================================");
       var locate = LocationListModel(
         id: locationID.value ?? const Uuid().v4(),
         title: dkCtrl.text,
@@ -83,29 +77,26 @@ class NewManageController extends GetxController {
         latitude: double.tryParse(latitudeCtrl.text),
         longitude: double.tryParse(longtitudeCtrl.text),
         location: locationCtrl.text,
-        image: uploadImageResp.body,
+        image: tempImageStr.value,
       );
-      if (formKey.currentState!.validate()) {
-        if (locationID.value != null) {
-          var resp = await ResponsitoryServices.updateLocation(locate);
-          if (resp.statusCode == 201 || resp.statusCode == 200) {
-            AppAlert.successAlert(title: "update_successfully".tr);
-            Get.offNamed(LocationView.routeName);
-          } else {
-            AppAlert.errorAlert(title: "save_error".tr);
-          }
+
+      if (locationID.value != null) {
+        var resp = await ResponsitoryServices.updateLocation(locate);
+        if (resp.statusCode == 201 || resp.statusCode == 200) {
+          AppAlert.successAlert(title: "update_successfully".tr);
+          Get.offNamed(LocationView.routeName);
         } else {
-          var resp = await ResponsitoryServices.insertLocation(locate);
-          if (resp.statusCode == 201 || resp.statusCode == 200) {
-            AppAlert.successAlert(title: "save_successfully".tr);
-            Get.offNamed(LocationView.routeName);
-          } else {
-            AppAlert.errorAlert(title: "save_error".tr);
-          }
+          AppAlert.errorAlert(title: "save_error".tr);
+        }
+      } else {
+        var resp = await ResponsitoryServices.insertLocation(locate);
+        if (resp.statusCode == 201 || resp.statusCode == 200) {
+          AppAlert.successAlert(title: "save_successfully".tr);
+          Get.offNamed(LocationView.routeName);
+        } else {
+          AppAlert.errorAlert(title: "save_error".tr);
         }
       }
-    } else {
-      AppAlert.errorAlert(title: "save_error".tr);
     }
 
     var locationListCtrl = Get.find<LocationController>();
@@ -129,7 +120,21 @@ class NewManageController extends GetxController {
       } else {
         tempImageStr(file.path);
       }
-    } else {}
+    }
+
+    var uploadImageResp = kIsWeb
+        ? await ResponsitoryServices.upload(
+            rawFile: unit8List.value,
+            name: tempImageStr.value,
+          )
+        : await ResponsitoryServices.upload(path: tempImageStr.value);
+
+    if (uploadImageResp.statusCode == 200) {
+      isNetworkImage(false);
+      tempImageStr(uploadImageResp.body);
+    } else {
+      tempImageStr("");
+    }
   }
 
   File get getImageFile {

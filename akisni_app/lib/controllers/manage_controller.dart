@@ -14,12 +14,16 @@ class ManageController extends GetxController {
   }
 
   void onAddNewLocationList() => Get.toNamed(NewManageView.routeName);
+
   Future<void> _onGetData() async {
     isLoading(true);
     var locations = await ResponsitoryServices.getLocation();
     listLocations.assignAll(locations);
     isLoading(false);
   }
+
+  void onEditPressed(LocationListModel location) =>
+      Get.toNamed(NewManageView.routeName, arguments: location);
 
   void onDeletePressed(String? value) async {
     var resp = await ResponsitoryServices.deleteLocation(value);

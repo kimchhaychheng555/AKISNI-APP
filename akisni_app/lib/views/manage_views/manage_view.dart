@@ -1,12 +1,12 @@
 import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/manage_controller.dart';
+import 'package:akisni_app/views/manage_views/components/manage_list_card_component.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/loading_overlay_component.dart';
 import '../../components/text_header_component.dart';
 import '../../constants/constant.dart';
-import '../location_views/components/location_list_card_component.dart';
 
 class ManageView extends GetResponsiveView<MainController> {
   ManageView({super.key});
@@ -29,18 +29,14 @@ class ManageView extends GetResponsiveView<MainController> {
         drawer: const DrawerComponent(),
         body: LoadingOverlayComponent(
           isLoading: controller.isLoading.value,
-          child: Padding(
-            padding: EdgeInsets.all(DEFAULT_PADDING),
-            child: ListView.builder(
-              itemCount: controller.listLocations.length,
-              itemBuilder: ((BuildContext context, int index) {
-                final locations = controller.listLocations[index];
-                return LocationListCardComponent(
-                  isManage: true,
-                  location: locations,
-                );
-              }),
-            ),
+          child: ListView.builder(
+            itemCount: controller.listLocations.length,
+            itemBuilder: ((BuildContext context, int index) {
+              final locations = controller.listLocations[index];
+              return ManageListCardComponent(
+                location: locations,
+              );
+            }),
           ),
         ),
         floatingActionButton: FloatingActionButton(
