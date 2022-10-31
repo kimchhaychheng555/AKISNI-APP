@@ -2,7 +2,6 @@ import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/card_component.dart';
 import 'package:akisni_app/constants/constant.dart';
-import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ class LocationListCardComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mainController = Get.find<MainController>();
-    var locationController = Get.find<LocationController>();
     return CardComponent(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

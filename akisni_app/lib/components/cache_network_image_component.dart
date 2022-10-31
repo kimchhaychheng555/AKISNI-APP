@@ -5,9 +5,11 @@ import 'package:skeletons/skeletons.dart';
 
 class CacheNetworkImageComponent extends StatelessWidget {
   final String? imageUrl;
+  final Widget? errorWidget;
   const CacheNetworkImageComponent({
     super.key,
     this.imageUrl,
+    this.errorWidget,
   });
 
   @override
@@ -16,6 +18,7 @@ class CacheNetworkImageComponent extends StatelessWidget {
       imageUrl: "$BASE_URL/public/images/$imageUrl",
       fit: BoxFit.cover,
       errorWidget: (context, url, error) =>
+          errorWidget ??
           Image.asset("assets/images/placeholder-image.jpg", fit: BoxFit.cover),
       placeholder: (context, url) => const SkeletonAvatar(),
     );

@@ -8,6 +8,9 @@ const String API_STRING_URL = "http://143.198.218.47/api/";
 const String BASE_URL = "http://143.198.218.47";
 const String GOOGLE_API_KEY = "AIzaSyCAnJNq2PnO9stzYVa1Wha2rxGmJiULqgo";
 
+// DEFAULT ROLE
+List<String> ROLE_LIST = ["Admin", "Moderator", "User"];
+
 // DEFAULT
 int DEFAULT_TRACK_SERVICE_DURATION = 1; // Second
 double DEFAULT_FONT_SIZE = 16;

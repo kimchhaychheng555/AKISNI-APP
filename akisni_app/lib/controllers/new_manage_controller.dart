@@ -1,20 +1,15 @@
-import 'dart:io';
-
-import 'package:akisni_app/controllers/location_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-import '../views/location_views/location_view.dart';
-
 class NewManageController extends GetxController {
   var isLoading = false.obs;
-  var isNetworkImage = false.obs;
   var locationID = Rxn<String>();
 
   final formKey = GlobalKey<FormState>();
@@ -30,6 +25,7 @@ class NewManageController extends GetxController {
   var locationCtrl = TextEditingController();
   // End
   var tempImageStr = "".obs;
+  var imagePath = "".obs;
   var unit8List = Rxn<Uint8List>();
 
   void onSelectChangeDate(String? value) {
@@ -41,7 +37,6 @@ class NewManageController extends GetxController {
     var location = Get.arguments;
 
     if (location != null) {
-      isNetworkImage(true);
       LocationListModel temp = location;
       locationID(temp.id);
       installDate(temp.installDate);
@@ -63,9 +58,6 @@ class NewManageController extends GetxController {
     isLoading(true);
 
     if (formKey.currentState!.validate()) {
-      print("=================================");
-      print(tempImageStr.value);
-      print("=================================");
       var locate = LocationListModel(
         id: locationID.value ?? const Uuid().v4(),
         title: dkCtrl.text,
@@ -84,7 +76,7 @@ class NewManageController extends GetxController {
         var resp = await ResponsitoryServices.updateLocation(locate);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
           AppAlert.successAlert(title: "update_successfully".tr);
-          Get.offNamed(LocationView.routeName);
+          Get.offAllNamed(ManageView.routeName);
         } else {
           AppAlert.errorAlert(title: "save_error".tr);
         }
@@ -92,20 +84,18 @@ class NewManageController extends GetxController {
         var resp = await ResponsitoryServices.insertLocation(locate);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
           AppAlert.successAlert(title: "save_successfully".tr);
-          Get.offNamed(LocationView.routeName);
+          Get.offAllNamed(ManageView.routeName);
         } else {
           AppAlert.errorAlert(title: "save_error".tr);
         }
       }
     }
 
-    var locationListCtrl = Get.find<LocationController>();
-    locationListCtrl.onInit();
+    onInit();
     isLoading(false);
   }
 
   void onUploadImage() async {
-    isNetworkImage(false);
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png'],
@@ -118,30 +108,22 @@ class NewManageController extends GetxController {
         unit8List(file.bytes!);
         tempImageStr(file.name);
       } else {
-        tempImageStr(file.path);
+        imagePath(file.path);
       }
-    }
 
-    var uploadImageResp = kIsWeb
-        ? await ResponsitoryServices.upload(
-            rawFile: unit8List.value,
-            name: tempImageStr.value,
-          )
-        : await ResponsitoryServices.upload(path: tempImageStr.value);
+      var uploadImageResp = kIsWeb
+          ? await ResponsitoryServices.upload(
+              rawFile: unit8List.value,
+              name: tempImageStr.value,
+            )
+          : await ResponsitoryServices.upload(path: imagePath.value);
 
-    if (uploadImageResp.statusCode == 200) {
-      isNetworkImage(false);
-      tempImageStr(uploadImageResp.body);
-    } else {
-      tempImageStr("");
-    }
-  }
-
-  File get getImageFile {
-    if (kIsWeb) {
-      return File.fromRawPath(unit8List.value!);
-    } else {
-      return File(tempImageStr.value);
+      if (uploadImageResp.statusCode == 200) {
+        tempImageStr(uploadImageResp.body);
+      } else {
+        tempImageStr("");
+      }
+      update();
     }
   }
 }
