@@ -49,10 +49,11 @@ class ButtonComponent extends StatelessWidget {
                 children: [
                   TextComponent(
                     color: textColor,
+                    fontSize: 14,
                     text: titleButton ?? "Button",
                     fontWeight: fontWeight,
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 5),
                   Icon(
                     surfix,
                     size: 20,

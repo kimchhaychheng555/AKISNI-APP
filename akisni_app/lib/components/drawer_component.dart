@@ -90,6 +90,41 @@ class DrawerComponent extends StatelessWidget {
                 title: 'Logout',
                 onClick: () => controller.onLogoutPreseed(),
               ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/197505.png',
+                            width: 25,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const TextComponent(text: 'Khmer'),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/en_flage.png',
+                            width: 25,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const TextComponent(text: 'English'),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),

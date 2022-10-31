@@ -7,7 +7,9 @@ import 'package:get/get.dart';
 
 import '../../../components/card_component.dart';
 
-class UserListItem extends StatelessWidget {
+enum Menu { itemOne, itemTwo, itemThree, itemFour }
+
+class UserListItem extends StatefulWidget {
   final String fullName;
   final String phoneNumber;
   final String profile;
@@ -23,19 +25,28 @@ class UserListItem extends StatelessWidget {
   });
 
   @override
+  State<UserListItem> createState() => _UserListItemState();
+}
+
+class _UserListItemState extends State<UserListItem> {
+  final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
+  final String _selectedMenu = '';
+  @override
   Widget build(BuildContext context) {
     return CardComponent(
       child: Row(
         children: [
           SizedBox(
-            width: 80,
-            height: 80,
+            width: 70,
+            height: 70,
             child: CircleAvatar(
               radius: 10.0,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(50.0),
                 child: Image.asset(
-                  profile.isEmpty ? 'assets/images/profile_2.jpg' : profile,
+                  widget.profile.isEmpty
+                      ? 'assets/images/profile_2.jpg'
+                      : widget.profile,
                 ),
               ),
             ),
@@ -44,42 +55,57 @@ class UserListItem extends StatelessWidget {
             width: SPACING_10,
           ),
           Expanded(
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: const [],
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: const [],
+                    ),
+                    Badge(
+                      badgeColor: widget.isActive ? ActiveColor : DeActiveColor,
+                      badgeContent: const Text(''),
+                      child: TextComponent(
+                        text: widget.fullName,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFFC63030),
+                      ),
+                    ),
+                    TextComponent(
+                      text: '${'phone_number'.tr} : ${widget.phoneNumber}',
+                      color: const Color(0xFF3B65AF),
+                    ),
+                    TextComponent(
+                      text: '${'user_name'.tr} : ${widget.userName}',
+                      color: const Color(0xFF3B65AF),
+                    ),
+                    SizedBox(
+                      height: SPACING_10,
+                    ),
+                    widget.isActive == true
+                        ? const ButtonComponent(
+                            isSurfix: true,
+                            surfix: Icons.directions,
+                            titleButton: 'direction',
+                            height: 30,
+                            width: 120,
+                          )
+                        : Container()
+                  ],
                 ),
-                Badge(
-                  badgeColor: isActive ? ActiveColor : DeActiveColor,
-                  badgeContent: const Text(''),
-                  child: TextComponent(
-                    text: fullName,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFFC63030),
+                Expanded(
+                  child: InkWell(
+                    onTap: () => _key.currentState?.showButtonMenu(),
+                    child: const Icon(Icons.more_vert),
                   ),
                 ),
-                TextComponent(
-                  text: '${'phone_number'.tr} : $phoneNumber',
-                  color: const Color(0xFF3B65AF),
-                ),
-                TextComponent(
-                  text: '${'user_name'.tr} : $userName',
-                  color: const Color(0xFF3B65AF),
-                ),
-                SizedBox(
-                  height: SPACING_10,
-                ),
-                isActive == true
-                    ? const ButtonComponent(
-                        isSurfix: true,
-                        surfix: Icons.directions,
-                        titleButton: 'direction',
-                        height: 30,
-                        width: 120,
-                      )
-                    : Container()
+                const SizedBox(
+                  width: 10,
+                )
               ],
             ),
           ),
@@ -139,6 +165,18 @@ class UserListItem extends StatelessWidget {
       //     ),
       //   ],
       // ),
+    );
+  }
+
+  void _showPopupMenu() async {
+    await showMenu(
+      context: context,
+      position: const RelativeRect.fromLTRB(100, 100, 100, 100),
+      items: [
+        const PopupMenuItem<String>(value: 'Edit', child: Text('Edit')),
+        const PopupMenuItem<String>(value: 'Delete', child: Text('Delete')),
+      ],
+      elevation: 8.0,
     );
   }
 }
