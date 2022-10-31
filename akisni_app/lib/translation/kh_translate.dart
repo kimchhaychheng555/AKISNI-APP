@@ -8,6 +8,7 @@ Map<String, String> get khTranslate {
     "please_input_text": "សូមបញ្ចូល",
     "please_select_item": "សូមជ្រើសរើស",
     "type": "ប្រភេទ",
+    "fullname": "ឈ្មោះ​ពេញ",
     "latitude": "រយៈទទឹង",
     "track_location": "តាមដានទីតាំង",
     "user_information": "ព័ត៌មានអ្នកប្រើប្រាស់",

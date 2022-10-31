@@ -4,6 +4,7 @@ Map<String, String> get enTranslate {
     "home": "Home",
     "please_input_text": "Please Input Text",
     "please_enter_DK": "Please enter DK",
+    "fullname": "Full name",
     "please_select_item": "Please Select Item",
     "update_successfully": "Update Successfully",
     "save_successfully": "Save Successfully",

@@ -80,7 +80,7 @@ class _UserListItemState extends State<UserListItem> {
                       color: const Color(0xFF3B65AF),
                     ),
                     TextComponent(
-                      text: '${'user_name'.tr} : ${widget.userName}',
+                      text: '${'username'.tr} : ${widget.userName}',
                       color: const Color(0xFF3B65AF),
                     ),
                     SizedBox(

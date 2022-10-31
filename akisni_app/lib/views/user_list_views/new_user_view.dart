@@ -100,11 +100,11 @@ class NewUserView extends GetResponsiveView<MainController> {
                       ),
                       InputTextComponent(
                         controller: controller.fullNameCtrl,
-                        placeholder: 'full_name'.tr,
+                        placeholder: 'fullname'.tr,
                       ),
                       InputTextComponent(
                         controller: controller.userNameCtrl,
-                        placeholder: 'user_name'.tr,
+                        placeholder: 'username'.tr,
                       ),
                       InputTextComponent(
                         placeholder: 'password'.tr,
