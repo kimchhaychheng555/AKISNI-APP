@@ -40,7 +40,6 @@ class NewUserView extends GetResponsiveView<MainController> {
                   isHasTitle: true,
                   child: Column(
                     children: [
-
                       InputTextComponent(
                         controller: controller.userNameCtrl,
                         placeholder: 'user_name'.tr,

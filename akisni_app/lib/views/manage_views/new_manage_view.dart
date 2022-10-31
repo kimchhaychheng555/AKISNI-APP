@@ -1,9 +1,8 @@
+import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/date_time_picker_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_manage_controller.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/card_component.dart';
@@ -108,50 +107,37 @@ class NewManageView extends GetResponsiveView<MainController> {
                           ),
                           child: InkWell(
                             onTap: () => controller.onUploadImage(),
-                            child: controller.tempImageStr.isNotEmpty
-                                ? ClipRRect(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: CacheNetworkImageComponent(
+                                imageUrl: controller.tempImageStr.value,
+                                errorWidget: Container(
+                                  margin: const EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: controller.isNetworkImage.value
-                                        ? CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl:
-                                                "$BASE_URL/public/images/${controller.tempImageStr.value}")
-                                        : kIsWeb
-                                            ? Image.memory(
-                                                controller.unit8List.value!,
-                                                fit: BoxFit.cover,
-                                              )
-                                            : Image.file(
-                                                controller.getImageFile,
-                                                fit: BoxFit.cover,
-                                              ),
-                                  )
-                                : Container(
-                                    margin: const EdgeInsets.all(15),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: Colors.black38,
-                                        style: BorderStyle.solid,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.cloud_upload,
-                                          color: Colors.black38,
-                                          size: 50,
-                                        ),
-                                        TextComponent(
-                                          text: "upload".tr,
-                                          color: Colors.black38,
-                                          fontSize: 18,
-                                        ),
-                                      ],
+                                    border: Border.all(
+                                      color: Colors.black38,
+                                      style: BorderStyle.solid,
                                     ),
                                   ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.cloud_upload,
+                                        color: Colors.black38,
+                                        size: 50,
+                                      ),
+                                      TextComponent(
+                                        text: "upload".tr,
+                                        color: Colors.black38,
+                                        fontSize: 18,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],

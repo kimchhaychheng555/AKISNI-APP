@@ -1,7 +1,9 @@
+import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/menu_item_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,14 +31,13 @@ class DrawerComponent extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: 60,
-                              height: 60,
-                              child: CircleAvatar(
-                                radius: 20.0,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  child: Image.asset('assets/images/icon.png'),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(50.0),
+                              child: SizedBox(
+                                width: 60,
+                                height: 60,
+                                child: CacheNetworkImageComponent(
+                                  imageUrl: AppService.loginUser.profile,
                                 ),
                               ),
                             ),
@@ -44,13 +45,14 @@ class DrawerComponent extends StatelessWidget {
                               width: 10,
                             ),
                             Column(
-                              children: const [
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 TextComponent(
-                                  text: 'Chay',
+                                  text: AppService.loginUser.fullName ?? "",
                                   fontSize: 18,
                                 ),
                                 TextComponent(
-                                  text: 'admin',
+                                  text: AppService.loginUser.role ?? "user".tr,
                                   fontSize: 14,
                                 )
                               ],

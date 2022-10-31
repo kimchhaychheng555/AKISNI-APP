@@ -127,10 +127,4 @@ class TrackLocationController extends GetxController {
   void setCurrentLocation() async {
     currentPosition(await Geolocator.getCurrentPosition());
   }
-
-  void onExitApp() {
-    print("=============================");
-    print("===== CLOSE APP =====");
-    print("=============================");
-  }
 }

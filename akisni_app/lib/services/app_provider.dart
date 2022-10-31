@@ -29,12 +29,14 @@ class AppProvider extends GetConnect {
       var extension = p.extension(name ?? "");
       extension = extension.replaceAll(".", "");
 
-      return post(
+      var response = await post(
         '${API_STRING_URL}image/$name',
         FormData({
           'image': MultipartFile(File(path!), filename: name ?? ""),
         }),
       );
+
+      return Response(statusCode: response.statusCode, body: name);
     }
   }
 

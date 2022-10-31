@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 const String APP_TITLE = "AKISNI_DANGKOR";
-const String API_STRING_URL = "http://143.198.218.47:8000/api/";
-const String BASE_URL = "http://143.198.218.47:8000";
+const String API_STRING_URL = "http://143.198.218.47/api/";
+const String BASE_URL = "http://143.198.218.47";
 const String GOOGLE_API_KEY = "AIzaSyCAnJNq2PnO9stzYVa1Wha2rxGmJiULqgo";
+
+// DEFAULT ROLE
+List<String> ROLE_LIST = ["Admin", "Moderator", "User"];
 
 // DEFAULT
 int DEFAULT_TRACK_SERVICE_DURATION = 1; // Second
