@@ -1,11 +1,10 @@
 import 'package:akisni_app/components/cache_network_image_component.dart';
-import 'package:akisni_app/components/drawer_component.dart';
 import 'package:akisni_app/components/loading_overlay_component.dart';
 import 'package:akisni_app/components/text_component.dart';
-import 'package:akisni_app/components/text_header_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/home_controller.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
+import 'package:akisni_app/views/main_view_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,16 +19,10 @@ class HomeView extends GetResponsiveView<MainController> {
   Widget builder() {
     var controller = Get.find<HomeController>();
     var mainController = Get.find<MainController>();
+
     return Obx(
-      () => Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: BluePrimary,
-          title: TextHeaderComponent(
-            text: "home".tr.toUpperCase(),
-          ),
-        ),
-        drawer: const DrawerComponent(),
+      () => MainViewLayout(
+        title: "home".tr.toUpperCase(),
         body: LoadingOverlayComponent(
           child: Stack(
             alignment: Alignment.center,
