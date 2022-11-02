@@ -31,7 +31,7 @@ class HomeController extends GetxController {
     isLoading(true);
     await _determinePosition();
     isLoading(false);
-    await _onLoadMarker();
+    await _onLoadMarker("");
     super.onInit();
   }
 
@@ -56,33 +56,58 @@ class HomeController extends GetxController {
   }
 
   void onSearch(String? value) {
-    var temps = listLocationTemp
-        .where((l) => l.title?.toLowerCase() == value?.toLowerCase())
-        .toList();
-
-    if (temps.isNotEmpty) {
-      currentMarkerActive(temps.first);
+    if (value?.toLowerCase() == "lv" || value?.toLowerCase() == "mv") {
+      _onLoadMarker(value);
     } else {
-      AppAlert.errorAlert(title: "no_this_name".tr);
+      var temps = listLocationTemp
+          .where((l) => l.title?.toLowerCase() == value?.toLowerCase())
+          .toList();
+
+      if (temps.isNotEmpty) {
+        currentMarkerActive(temps.first);
+      } else {
+        AppAlert.errorAlert(title: "no_this_name".tr);
+      }
     }
   }
 
-  Future<void> _onLoadMarker() async {
+  Future<void> _onLoadMarker(String? type) async {
+    listLocation([]);
+    type = (type ?? "") == "" ? "" : type;
     var locations = await ResponsitoryServices.getLocation();
     listLocationTemp(locations);
 
     for (var marker in locations) {
       if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
-        _addLocationList(
-          Marker(
-            infoWindow: InfoWindow(title: marker.title),
-            onTap: () => currentMarkerActive(marker),
-            markerId: MarkerId("${marker.id ?? 0}"),
-            position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
-            icon: await MarkerIcon.pictureAsset(
-                assetPath: "assets/images/tower.png", height: 150, width: 150),
-          ),
-        );
+        if ((type ?? "") != "") {
+          if (marker.type?.toLowerCase() == type) {
+            _addLocationList(
+              Marker(
+                infoWindow: InfoWindow(title: marker.title),
+                onTap: () => currentMarkerActive(marker),
+                markerId: MarkerId("${marker.id ?? 0}"),
+                position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
+                icon: await MarkerIcon.pictureAsset(
+                    assetPath: "assets/images/tower.png",
+                    height: 100,
+                    width: 100),
+              ),
+            );
+          }
+        } else {
+          _addLocationList(
+            Marker(
+              infoWindow: InfoWindow(title: marker.title),
+              onTap: () => currentMarkerActive(marker),
+              markerId: MarkerId("${marker.id ?? 0}"),
+              position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
+              icon: await MarkerIcon.pictureAsset(
+                  assetPath: "assets/images/tower.png",
+                  height: 100,
+                  width: 100),
+            ),
+          );
+        }
       }
     }
   }
