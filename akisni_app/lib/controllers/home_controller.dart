@@ -1,4 +1,5 @@
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -61,6 +62,8 @@ class HomeController extends GetxController {
 
     if (temps.isNotEmpty) {
       currentMarkerActive(temps.first);
+    } else {
+      AppAlert.errorAlert(title: "no_this_name".tr);
     }
   }
 
