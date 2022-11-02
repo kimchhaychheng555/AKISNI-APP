@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 const String APP_TITLE = "AKISNI_DANGKOR";
-const String API_STRING_URL = "http://143.198.218.47:8080:/api/";
-const String BASE_URL = "http://143.198.218.47:8080";
+const String API_STRING_URL = "https://api.chhaylow.site/api/";
+const String BASE_URL = "https://api.chhaylow.site";
 const String GOOGLE_API_KEY = "AIzaSyCAnJNq2PnO9stzYVa1Wha2rxGmJiULqgo";
 
 // DEFAULT ROLE
