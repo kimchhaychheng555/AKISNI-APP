@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeController extends GetxController {
+  RxList<LocationListModel> listLocationTemp = (<LocationListModel>[]).obs;
+
   var isLoading = false.obs;
   GoogleMapController? mapController;
   var currentPosition = Rxn<Position>();
@@ -52,8 +54,19 @@ class HomeController extends GetxController {
     update();
   }
 
+  void onSearch(String? value) {
+    var temps = listLocationTemp
+        .where((l) => l.title?.toLowerCase() == value?.toLowerCase())
+        .toList();
+
+    if (temps.isNotEmpty) {
+      currentMarkerActive(temps.first);
+    }
+  }
+
   Future<void> _onLoadMarker() async {
     var locations = await ResponsitoryServices.getLocation();
+    listLocationTemp(locations);
 
     for (var marker in locations) {
       if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {

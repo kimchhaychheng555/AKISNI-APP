@@ -22,6 +22,7 @@ class HomeView extends GetResponsiveView<MainController> {
 
     return Obx(
       () => MainViewLayout(
+        onSearch: (value) => controller.onSearch(value),
         title: "home".tr.toUpperCase(),
         body: LoadingOverlayComponent(
           child: Stack(

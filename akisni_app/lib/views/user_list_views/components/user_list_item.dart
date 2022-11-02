@@ -30,7 +30,6 @@ class UserListItem extends StatefulWidget {
 
 class _UserListItemState extends State<UserListItem> {
   final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
-  final String _selectedMenu = '';
   @override
   Widget build(BuildContext context) {
     return CardComponent(
@@ -165,18 +164,6 @@ class _UserListItemState extends State<UserListItem> {
       //     ),
       //   ],
       // ),
-    );
-  }
-
-  void _showPopupMenu() async {
-    await showMenu(
-      context: context,
-      position: const RelativeRect.fromLTRB(100, 100, 100, 100),
-      items: [
-        const PopupMenuItem<String>(value: 'Edit', child: Text('Edit')),
-        const PopupMenuItem<String>(value: 'Delete', child: Text('Delete')),
-      ],
-      elevation: 8.0,
     );
   }
 }

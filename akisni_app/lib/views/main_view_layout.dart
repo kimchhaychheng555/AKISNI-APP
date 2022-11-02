@@ -7,9 +7,11 @@ import 'package:get/get.dart';
 class MainViewLayout extends StatefulWidget {
   final Widget body;
   final String? title;
+  final Function(String?) onSearch;
   const MainViewLayout({
     super.key,
     required this.body,
+    required this.onSearch,
     this.title,
   });
 
@@ -19,6 +21,7 @@ class MainViewLayout extends StatefulWidget {
 
 class _MainViewLayoutState extends State<MainViewLayout> {
   var isSearch = false;
+  var textCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,7 @@ class _MainViewLayoutState extends State<MainViewLayout> {
             onPressed: () {
               setState(() {
                 isSearch = !isSearch;
+                textCtrl.text = "";
               });
             },
             splashRadius: 25,
@@ -50,15 +54,24 @@ class _MainViewLayoutState extends State<MainViewLayout> {
 
   Widget _searchTextComponent() {
     return TextField(
+      controller: textCtrl,
       cursorColor: GraySeconday,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
+        suffixIcon: IconButton(
+          splashRadius: 25,
+          icon: Icon(
+            Icons.search_rounded,
+            color: GraySeconday,
+          ),
+          onPressed: () => widget.onSearch(textCtrl.text),
+        ),
         isCollapsed: true,
         hintStyle: TextStyle(
           fontSize: DEFAULT_FONT_SIZE,
           color: GraySeconday,
         ),
-        fillColor: BluePrimary,
+        fillColor: Colors.transparent,
         contentPadding:
             EdgeInsets.symmetric(vertical: DEFAULT_PADDING, horizontal: 5),
         filled: true,
