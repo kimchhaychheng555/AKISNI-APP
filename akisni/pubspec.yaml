@@ -82,8 +82,6 @@ flutter_icons:
   ios: true
   image_path: "assets/images/icon.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
-  web: false
-  windows: false
 # The following section is specific to Flutter packages.
 flutter:
 
