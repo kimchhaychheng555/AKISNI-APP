@@ -9,6 +9,7 @@ class UserListController extends GetxController {
 
   final List<UserModel> users = [
     UserModel(
+        isActive: true,
         fullName: 'Chanthou',
         username: 'chanthou',
         phoneNumber: '090 20 38 49',
@@ -19,6 +20,7 @@ class UserListController extends GetxController {
         phoneNumber: '090 20 38 49',
         profile: 'assets/images/profile_2.jpg'),
     UserModel(
+        isActive: true,
         fullName: 'Rathana',
         username: 'rathana',
         phoneNumber: '090 20 38 49',
