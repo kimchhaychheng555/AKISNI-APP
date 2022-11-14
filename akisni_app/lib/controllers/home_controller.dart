@@ -2,7 +2,7 @@ import 'package:akisni_app/models/location_list_models/location_list_model.dart'
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:custom_marker/marker_icon.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

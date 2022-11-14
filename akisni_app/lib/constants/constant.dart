@@ -6,7 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 const String APP_TITLE = "AKISNI_DANGKOR";
 const String API_STRING_URL = "https://api.chhaylow.site/api/";
 const String BASE_URL = "https://api.chhaylow.site";
-const String GOOGLE_API_KEY = "AIzaSyCAnJNq2PnO9stzYVa1Wha2rxGmJiULqgo";
+const String GOOGLE_API_KEY = "AIzaSyASvUrYVHxGZKVlNPpwWQXbKQYoBbwum5g";
 
 // DEFAULT ROLE
 List<String> ROLE_LIST = ["Admin", "Moderator", "User"];
