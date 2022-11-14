@@ -11,6 +11,7 @@ class UserModel {
   String? username;
   String? password;
   String? role;
+  bool? isActive;
   String? profile;
   double? lastLatitude;
   double? lastLongitude;
@@ -25,6 +26,7 @@ class UserModel {
     this.password,
     this.role,
     this.profile,
+    this.isActive,
     this.lastLatitude,
     this.lastLongitude,
     this.created_at,

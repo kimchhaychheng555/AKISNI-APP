@@ -97,8 +97,8 @@ class ManageListCardComponent extends StatelessWidget {
                       onClick: () => mainController.onDirectionPressed(
                           location.latitude.toString(),
                           location.longitude.toString()),
-                      height: 40,
-                      width: 135,
+                      height: 30,
+                      width: 120,
                       isSurfix: true,
                       surfix: Icons.directions,
                     ),

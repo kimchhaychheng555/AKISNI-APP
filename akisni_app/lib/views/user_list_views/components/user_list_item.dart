@@ -1,11 +1,8 @@
 import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../components/card_component.dart';
 
 enum Menu { itemOne, itemTwo, itemThree, itemFour }
 
@@ -32,7 +29,22 @@ class _UserListItemState extends State<UserListItem> {
   final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return CardComponent(
+    return Container(
+      padding: const EdgeInsets.only(top: 1, bottom: 15, left: 10),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          left: BorderSide(
+              color: widget.isActive == true ? BluePrimary : RedPrimary,
+              width: 5),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(240, 143, 40, 40).withOpacity(0.5),
+          ),
+        ],
+      ),
       child: Row(
         children: [
           SizedBox(
@@ -54,116 +66,65 @@ class _UserListItemState extends State<UserListItem> {
             width: SPACING_10,
           ),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    TextComponent(
+                      text: widget.fullName,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFFC63030),
+                    ),
                     Row(
-                      children: const [],
+                      children: [
+                        IconButton(
+                          splashRadius: 20,
+                          onPressed: (() {}),
+                          icon: Icon(
+                            Icons.edit,
+                            color: BluePrimary,
+                          ),
+                        ),
+                        IconButton(
+                          splashRadius: 20,
+                          onPressed: (() {}),
+                          icon: Icon(
+                            Icons.delete,
+                            color: RedPrimary,
+                          ),
+                        ),
+                      ],
                     ),
-                    Badge(
-                      badgeColor: widget.isActive ? ActiveColor : DeActiveColor,
-                      badgeContent: const Text(''),
-                      child: TextComponent(
-                        text: widget.fullName,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFFC63030),
-                      ),
-                    ),
-                    TextComponent(
-                      text: '${'phone_number'.tr} : ${widget.phoneNumber}',
-                      color: const Color(0xFF3B65AF),
-                    ),
-                    TextComponent(
-                      text: '${'username'.tr} : ${widget.userName}',
-                      color: const Color(0xFF3B65AF),
-                    ),
-                    SizedBox(
-                      height: SPACING_10,
-                    ),
-                    widget.isActive == true
-                        ? const ButtonComponent(
-                            isSurfix: true,
-                            surfix: Icons.directions,
-                            titleButton: 'direction',
-                            height: 30,
-                            width: 120,
-                          )
-                        : Container()
                   ],
                 ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () => _key.currentState?.showButtonMenu(),
-                    child: const Icon(Icons.more_vert),
-                  ),
+                TextComponent(
+                  text: '${'phone_number'.tr} : ${widget.phoneNumber}',
+                  color: const Color(0xFF3B65AF),
                 ),
-                const SizedBox(
-                  width: 10,
-                )
+                TextComponent(
+                  text: '${'username'.tr} : ${widget.userName}',
+                  color: const Color(0xFF3B65AF),
+                ),
+                SizedBox(
+                  height: SPACING_10,
+                ),
+                widget.isActive == true
+                    ? const ButtonComponent(
+                        isSurfix: true,
+                        surfix: Icons.directions,
+                        titleButton: 'direction',
+                        height: 30,
+                        width: 120,
+                      )
+                    : Container()
               ],
             ),
           ),
         ],
       ),
-      // child: Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: [
-      //     Expanded(
-      //       flex: 1,
-      //       child: SizedBox(
-      //         width: 80,
-      //         height: 80,
-      //         child: CircleAvatar(
-      //           radius: 10.0,
-      //           child: ClipRRect(
-      //             borderRadius: BorderRadius.circular(50.0),
-      //             child: Image.asset(
-      //               profile.isEmpty ? 'assets/images/profile_2.jpg' : profile,
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //     Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Row(
-      //           children: const [],
-      //         ),
-      //         Badge(
-      //           badgeColor: isActive ? ActiveColor : DeActiveColor,
-      //           badgeContent: const Text(''),
-      //           child: TextComponent(
-      //             text: fullName,
-      //             fontSize: 18,
-      //             fontWeight: FontWeight.w500,
-      //             color: const Color(0xFFC63030),
-      //           ),
-      //         ),
-      //         TextComponent(
-      //           text: '${'phone_number'.tr} : $phoneNumber',
-      //           color: const Color(0xFF3B65AF),
-      //         ),
-      //         TextComponent(
-      //           text: '${'user_name'.tr} : $userName',
-      //           color: const Color(0xFF3B65AF),
-      //         ),
-      //         isActive == true
-      //             ? const ButtonComponent(
-      //                 titleButton: 'direction',
-      //                 width: 120,
-      //               )
-      //             : Container()
-      //       ],
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
