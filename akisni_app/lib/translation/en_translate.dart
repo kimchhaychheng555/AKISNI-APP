@@ -42,5 +42,6 @@ Map<String, String> get enTranslate {
     "customer_name": "Customer Name",
     "direction": "Direction",
     "manage_location_list": "Manage Location List",
+    "all": "All",
   };
 }

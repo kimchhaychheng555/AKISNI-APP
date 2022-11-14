@@ -1,8 +1,7 @@
+import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/select_opction_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_user_controller.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,57 +20,78 @@ class NewUserView extends GetResponsiveView<MainController> {
   @override
   Widget builder() {
     var controller = Get.find<NewUserController>();
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: true,
-        backgroundColor: BluePrimary,
-        actions: const [Icon(Icons.check)],
-        title: TextHeaderComponent(
-          text: "new_user".tr.toUpperCase(),
+    return Form(
+      key: controller.formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: true,
+          backgroundColor: BluePrimary,
+          actions: [
+            IconButton(
+              onPressed: () {
+                controller.onSave();
+              },
+              icon: const Icon(Icons.check),
+            )
+          ],
+          title: TextHeaderComponent(
+            text: "user_list".tr.toUpperCase(),
+          ),
         ),
-      ),
-      body: LoadingOverlayComponent(
-        isLoading: controller.isLoading.value,
-        child: Padding(
-          padding: EdgeInsets.all(DEFAULT_PADDING),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CardComponent(
-                  title: 'user_information'.tr,
-                  isHasTitle: true,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10),
-                      Container(
-                        width: double.infinity,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey.shade100,
+        body: Obx(
+          () => LoadingOverlayComponent(
+            isLoading: controller.isLoading.value,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(DEFAULT_PADDING),
+              child: Column(
+                children: [
+                  CardComponent(
+                    title: 'general_information'.tr,
+                    isHasTitle: true,
+                    child: Column(
+                      children: [
+                        InputTextComponent(
+                          controller: controller.userNameCtrl,
+                          placeholder: 'username'.tr,
                         ),
-                        child: InkWell(
-                          onTap: () => controller.onUploadImage(),
-                          child: controller.tempImageStr.isNotEmpty
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: controller.isNetworkImage.value
-                                      ? CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl:
-                                              "$BASE_URL/public/images/${controller.tempImageStr.value}")
-                                      : kIsWeb
-                                          ? Image.memory(
-                                              controller.unit8List.value!,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Image.file(
-                                              controller.getImageFile,
-                                              fit: BoxFit.cover,
-                                            ),
-                                )
-                              : Container(
+                        InputTextComponent(
+                          controller: controller.passWordCtrl,
+                          placeholder: 'password'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.fullNameCtrl,
+                          placeholder: 'fullname'.tr,
+                        ),
+                        InputTextComponent(
+                          controller: controller.phoneNumberCtrl,
+                          placeholder: 'phone_number'.tr,
+                        ),
+                        SelectOpctionComponent<String>(
+                          placeholder: 'select_user_type'.tr,
+                          items: controller.roleList.map((e) {
+                            return DropdownMenuItem<String>(
+                              value: e,
+                              child: Text(e.toString()),
+                            );
+                          }).toList(),
+                          onChanged: (value) => controller.onChangeRole(value),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey.shade100,
+                          ),
+                          child: InkWell(
+                            onTap: () => controller.onUploadImage(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: CacheNetworkImageComponent(
+                                imageUrl: controller.tempImageStr.value,
+                                errorWidget: Container(
                                   margin: const EdgeInsets.all(15),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -96,37 +116,15 @@ class NewUserView extends GetResponsiveView<MainController> {
                                     ],
                                   ),
                                 ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      InputTextComponent(
-                        controller: controller.fullNameCtrl,
-                        placeholder: 'fullname'.tr,
-                      ),
-                      InputTextComponent(
-                        controller: controller.userNameCtrl,
-                        placeholder: 'username'.tr,
-                      ),
-                      InputTextComponent(
-                        placeholder: 'password'.tr,
-                        controller: controller.passWordCtrl,
-                      ),
-                      SelectOpctionComponent(
-                          placeholder: 'select_user_type'.tr,
-                          items: controller.list.map((e) {
-                            return DropdownMenuItem<String>(
-                              value: e,
-                              child: Text(e.toString()),
-                            );
-                          }).toList(),
-                          onChanged: (value) {}),
-                      InputTextComponent(
-                        controller: controller.phoneNumberCtrl,
-                        placeholder: 'phone_number'.tr,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

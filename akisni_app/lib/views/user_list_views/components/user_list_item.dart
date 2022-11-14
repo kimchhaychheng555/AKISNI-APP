@@ -1,32 +1,26 @@
-import 'package:akisni_app/components/button_component.dart';
+import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum Menu { itemOne, itemTwo, itemThree, itemFour }
-
-class UserListItem extends StatefulWidget {
+class UserListItem extends StatelessWidget {
   final String fullName;
   final String phoneNumber;
   final String profile;
-  final bool isActive;
   final String userName;
+  final Function()? onEditPressed;
+  final Function()? onDeletePressed;
   const UserListItem({
     super.key,
     required this.fullName,
     required this.phoneNumber,
     required this.profile,
-    this.isActive = true,
     required this.userName,
+    this.onDeletePressed,
+    this.onEditPressed,
   });
 
-  @override
-  State<UserListItem> createState() => _UserListItemState();
-}
-
-class _UserListItemState extends State<UserListItem> {
-  final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,11 +28,6 @@ class _UserListItemState extends State<UserListItem> {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(
-          left: BorderSide(
-              color: widget.isActive == true ? BluePrimary : RedPrimary,
-              width: 5),
-        ),
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(240, 143, 40, 40).withOpacity(0.5),
@@ -50,15 +39,10 @@ class _UserListItemState extends State<UserListItem> {
           SizedBox(
             width: 70,
             height: 70,
-            child: CircleAvatar(
-              radius: 10.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50.0),
-                child: Image.asset(
-                  widget.profile.isEmpty
-                      ? 'assets/images/profile_2.jpg'
-                      : widget.profile,
-                ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50.0),
+              child: CacheNetworkImageComponent(
+                imageUrl: profile,
               ),
             ),
           ),
@@ -73,7 +57,7 @@ class _UserListItemState extends State<UserListItem> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextComponent(
-                      text: widget.fullName,
+                      text: fullName,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xFFC63030),
@@ -82,7 +66,7 @@ class _UserListItemState extends State<UserListItem> {
                       children: [
                         IconButton(
                           splashRadius: 20,
-                          onPressed: (() {}),
+                          onPressed: onEditPressed,
                           icon: Icon(
                             Icons.edit,
                             color: BluePrimary,
@@ -90,7 +74,7 @@ class _UserListItemState extends State<UserListItem> {
                         ),
                         IconButton(
                           splashRadius: 20,
-                          onPressed: (() {}),
+                          onPressed: onDeletePressed,
                           icon: Icon(
                             Icons.delete,
                             color: RedPrimary,
@@ -101,25 +85,16 @@ class _UserListItemState extends State<UserListItem> {
                   ],
                 ),
                 TextComponent(
-                  text: '${'phone_number'.tr} : ${widget.phoneNumber}',
-                  color: const Color(0xFF3B65AF),
+                  text: '${'phone_number'.tr} : $phoneNumber',
+                  color: BluePrimary,
                 ),
                 TextComponent(
-                  text: '${'username'.tr} : ${widget.userName}',
-                  color: const Color(0xFF3B65AF),
+                  text: '${'username'.tr} : $userName',
+                  color: BluePrimary,
                 ),
                 SizedBox(
                   height: SPACING_10,
                 ),
-                widget.isActive == true
-                    ? const ButtonComponent(
-                        isSurfix: true,
-                        surfix: Icons.directions,
-                        titleButton: 'direction',
-                        height: 30,
-                        width: 120,
-                      )
-                    : Container()
               ],
             ),
           ),

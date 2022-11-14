@@ -1,5 +1,4 @@
 import 'package:akisni_app/components/drawer_component.dart';
-import 'package:akisni_app/components/input_text_component.dart';
 import 'package:akisni_app/components/loading_overlay_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/user_list_controller.dart';
@@ -19,53 +18,38 @@ class UserListView extends GetResponsiveView<MainController> {
   Widget builder() {
     var controller = Get.find<UserListController>();
 
-    return Scaffold(
-      drawer: const DrawerComponent(),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: BluePrimary,
-        title: TextHeaderComponent(
-          text: "user_list".tr.toUpperCase(),
-        ),
-      ),
-      body: LoadingOverlayComponent(
-        isLoading: controller.isLoading.value,
-        child: Padding(
-          padding: EdgeInsets.all(DEFAULT_PADDING),
-          child: Column(
-            children: [
-              InputTextComponent(
-                isSearch: true,
-                placeholder: 'search'.tr,
-              ),
-              SizedBox(
-                height: SPACING_10,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: controller.users.length,
-                  itemBuilder: ((BuildContext context, int index) {
-                    final users = controller.users[index];
-                    return UserListItem(
-                      isActive: users.isActive ?? false,
-                      userName: users.username ?? '',
-                      fullName: users.fullName ?? '',
-                      phoneNumber: users.phoneNumber ?? '',
-                      profile: users.profile ?? '',
-                    );
-                  }),
-                ),
-              ),
-            ],
+    return Obx(
+      () => Scaffold(
+        drawer: const DrawerComponent(),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: BluePrimary,
+          title: TextHeaderComponent(
+            text: "user_list".tr.toUpperCase(),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.onAddNewUserPress();
-        },
-        backgroundColor: BluePrimary,
-        child: const Icon(Icons.add),
+        body: LoadingOverlayComponent(
+          isLoading: controller.isLoading.value,
+          child: ListView.builder(
+            itemCount: controller.listUsers.length,
+            itemBuilder: ((BuildContext context, int index) {
+              final user = controller.listUsers[index];
+              return UserListItem(
+                onEditPressed: () => controller.onEditPressed(user),
+                onDeletePressed: () => controller.onDeletePressed(user.id),
+                userName: user.username ?? '',
+                fullName: user.fullName ?? '',
+                phoneNumber: user.phoneNumber ?? '',
+                profile: user.profile ?? '',
+              );
+            }),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => controller.onAddNewUserPress(),
+          backgroundColor: BluePrimary,
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

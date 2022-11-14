@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
@@ -152,5 +154,20 @@ class ResponsitoryServices {
     );
 
     provider.updateActiveUser(tempUserActive.toJson());
+  }
+
+  // ================================
+
+  static Future<Response> insertUser(UserModel user) async {
+    AppProvider provider = AppProvider();
+    var resp = await provider.createUser(user.toJson());
+    return resp;
+  }
+
+  static Future<Response> updateUser(UserModel user) async {
+    print(jsonEncode(user));
+    AppProvider provider = AppProvider();
+    var resp = await provider.updateUser(user.toJson());
+    return resp;
   }
 }
