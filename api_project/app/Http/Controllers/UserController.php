@@ -39,6 +39,7 @@ class UserController extends Controller
             $res->username = $request->input('username');
             $res->password = $request->input('password');
             $res->profile = $request->input('profile');
+            $res->role = $request->input('role');
             $res->active = $request->input('active');
             $res->lastLatitude = $request->input('lastLatitude');
             $res->lastLongitude = $request->input('lastLongitude');

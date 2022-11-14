@@ -69,6 +69,7 @@ class NewUserView extends GetResponsiveView<MainController> {
                         ),
                         SelectOpctionComponent<String>(
                           placeholder: 'select_user_type'.tr,
+                          value: controller.role.value,
                           items: controller.roleList.map((e) {
                             return DropdownMenuItem<String>(
                               value: e,

@@ -19,7 +19,7 @@ class NewUserController extends GetxController {
   var userNameCtrl = TextEditingController();
   var passWordCtrl = TextEditingController();
   var phoneNumberCtrl = TextEditingController();
-  var role = "".obs;
+  var role = Rxn<String>();
   // End
   var tempImageStr = "".obs;
   var imagePath = "".obs;
