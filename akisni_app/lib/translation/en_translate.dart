@@ -43,5 +43,9 @@ Map<String, String> get enTranslate {
     "direction": "Direction",
     "manage_location_list": "Manage Location List",
     "all": "All",
+    "locator_list": "Locator List",
+    "manage": "Manage",
+    "user": "User",
+    "logout": "Logout",
   };
 }

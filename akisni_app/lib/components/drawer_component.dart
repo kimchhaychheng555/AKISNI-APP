@@ -69,27 +69,32 @@ class DrawerComponent extends StatelessWidget {
               ),
               MenuItemComponent(
                 icons: Icons.vertical_split,
-                title: 'Locator List',
+                title: 'locator_list'.tr,
                 onClick: () => controller.onLocatorListPressed(),
               ),
-              MenuItemComponent(
-                icons: Icons.add_circle,
-                title: 'Manage',
-                onClick: () => controller.onManagePressed(),
-              ),
-              MenuItemComponent(
-                icons: Icons.people,
-                title: 'User',
-                onClick: () => controller.onUserPressed(),
-              ),
-              MenuItemComponent(
-                icons: Icons.mode_of_travel,
-                title: 'Track Location',
-                onClick: () => controller.onTrackLocationPressed(),
-              ),
+              if (AppService.loginUser.role?.toLowerCase() == "admin" ||
+                  AppService.loginUser.role?.toLowerCase() == "moderator")
+                MenuItemComponent(
+                  icons: Icons.add_circle,
+                  title: 'manage'.tr,
+                  onClick: () => controller.onManagePressed(),
+                ),
+              if (AppService.loginUser.role?.toLowerCase() == "admin")
+                MenuItemComponent(
+                  icons: Icons.people,
+                  title: 'user'.tr,
+                  onClick: () => controller.onUserPressed(),
+                ),
+              if (AppService.loginUser.role?.toLowerCase() == "admin" ||
+                  AppService.loginUser.role?.toLowerCase() == "moderator")
+                MenuItemComponent(
+                  icons: Icons.mode_of_travel,
+                  title: 'track_location'.tr,
+                  onClick: () => controller.onTrackLocationPressed(),
+                ),
               MenuItemComponent(
                 icons: Icons.logout,
-                title: 'Logout',
+                title: 'logout'.tr,
                 onClick: () => controller.onLogoutPreseed(),
               ),
               Padding(
@@ -132,7 +137,7 @@ class DrawerComponent extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

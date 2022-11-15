@@ -39,6 +39,13 @@ final Color errorColor = HexColor("#db3b21");
 final Color successColor = HexColor("#1aaa55");
 // ============
 
+// Color Role
+
+final Color adminColor = HexColor("#ffa500");
+final Color moderatorColor = HexColor("#990000");
+final Color userColor = HexColor("#065535");
+// =============
+
 // Font Constant
 const String EN_FONT = "MavenPro";
 const String KH_FONT = "KhAngWritehand";

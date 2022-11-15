@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserListItem extends StatelessWidget {
+  final String? role;
   final String fullName;
   final String phoneNumber;
   final String profile;
@@ -13,6 +14,7 @@ class UserListItem extends StatelessWidget {
   final Function()? onDeletePressed;
   const UserListItem({
     super.key,
+    this.role,
     required this.fullName,
     required this.phoneNumber,
     required this.profile,
@@ -23,11 +25,26 @@ class UserListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color roleColor = Colors.white;
+    if (role?.toLowerCase() == "admin") {
+      roleColor = adminColor;
+    } else if (role?.toLowerCase() == "moderator") {
+      roleColor = moderatorColor;
+    } else if (role?.toLowerCase() == "user") {
+      roleColor = userColor;
+    }
+
     return Container(
       padding: const EdgeInsets.only(top: 1, bottom: 15, left: 10),
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border(
+          bottom: BorderSide(
+            color: roleColor,
+            width: 3,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(240, 143, 40, 40).withOpacity(0.5),

@@ -43,5 +43,9 @@ Map<String, String> get khTranslate {
     "direction": "ដាក់ទីតាំង",
     "manage_location_list": "គ្រប់គ្រងទីតាំង",
     "all": "ទាំងអស់",
+    "locator_list": "បញ្ជីទីតាំង",
+    "manage": "គ្រប់គ្រងទីតាំង",
+    "user": "អ្នកប្រើប្រាស់",
+    "logout": "ចាកចេញ",
   };
 }

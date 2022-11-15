@@ -52,11 +52,19 @@ class LocationListCardComponent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextComponent(
+                      text: '${'power'.tr} : ${location.power ?? ""}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
+                      text: '${'type'.tr} : ${location.type ?? ""}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
                       text: '${'location'.tr} : ${location.location ?? ""}',
                       color: BluePrimary,
                     ),
                     TextComponent(
-                      text: '${'power'.tr} : ${location.power ?? ""}',
+                      text: '${'company'.tr} : ${location.company ?? ""}',
                       color: BluePrimary,
                     ),
                     TextComponent(

@@ -167,4 +167,10 @@ class ResponsitoryServices {
     var resp = await provider.updateUser(user.toJson());
     return resp;
   }
+
+  static Future<Response> deleteUser(String id) async {
+    AppProvider provider = AppProvider();
+    var resp = await provider.deleteUser(id);
+    return resp;
+  }
 }
