@@ -1,4 +1,4 @@
-import 'package:akisni_app/controllers/main_controller.dart';
+import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/models/user_active_models/user_active_model.dart';
 import 'package:akisni_app/services/app_services.dart';
@@ -20,20 +20,23 @@ class TrackLocationController extends GetxController {
   var currentMarkerActive = Rxn<LocationListModel>();
   var currentUserActive = Rxn<UserActiveModel>();
 
+  RxList<UserActiveModel> userActiveList = (<UserActiveModel>[]).obs;
+
   @override
   void onInit() async {
     isLoading(true);
     await _determinePosition();
     isLoading(false);
     _onLoadMapRefresh();
+    _onLoadMarker();
     super.onInit();
   }
 
   void _onLoadMapRefresh() async {
     while (true) {
-      _onLoadMarker();
+      userActiveList(await ResponsitoryServices.getTrackUser());
       _onUserMarker();
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
     }
   }
 
@@ -54,7 +57,7 @@ class TrackLocationController extends GetxController {
             markerId: MarkerId("${marker.id ?? 0}"),
             position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
             icon: await MarkerIcon.pictureAsset(
-                assetPath: "assets/images/tower.png", height: 150, width: 150),
+                assetPath: "assets/images/tower.png", height: 80, width: 80),
           ),
         );
       }
@@ -62,9 +65,7 @@ class TrackLocationController extends GetxController {
   }
 
   void _onUserMarker() async {
-    var mainCtrl = Get.find<MainController>();
-
-    for (var marker in mainCtrl.trackUserList) {
+    for (var marker in userActiveList) {
       if (marker.user_id != AppService.loginUser.id) {
         if (marker.active == "active") {
           _addUserList(
@@ -75,7 +76,7 @@ class TrackLocationController extends GetxController {
               position:
                   LatLng(marker.lastLatitude ?? 0, marker.lastLongitude ?? 0),
               icon: await MarkerIcon.pictureAsset(
-                  assetPath: "assets/images/user.png", height: 150, width: 150),
+                  assetPath: "assets/images/user.png", height: 100, width: 100),
             ),
           );
         } else {

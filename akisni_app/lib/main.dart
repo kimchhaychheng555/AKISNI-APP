@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
-      onInit: () => AppService.onTrackUser(),
       debugShowCheckedModeBanner: false,
       translations: TranslateText(),
       locale: AppService.getLanguage,
