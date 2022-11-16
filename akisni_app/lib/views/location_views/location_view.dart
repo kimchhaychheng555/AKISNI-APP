@@ -18,34 +18,39 @@ class LocationView extends GetResponsiveView<MainController> {
   Widget builder() {
     var controller = Get.find<LocationController>();
     return Obx(
-      () => Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: true,
-            backgroundColor: BluePrimary,
-            title: TextHeaderComponent(
-              text: "location_list".tr.toUpperCase(),
+      () => WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              automaticallyImplyLeading: true,
+              backgroundColor: BluePrimary,
+              title: TextHeaderComponent(
+                text: "location_list".tr.toUpperCase(),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => controller.onFilterActionPressed(),
+                  icon: const Icon(Icons.tune),
+                )
+              ],
             ),
-            actions: [
-              IconButton(
-                onPressed: () => controller.onFilterActionPressed(),
-                icon: const Icon(Icons.tune),
-              )
-            ],
-          ),
-          drawer: const DrawerComponent(),
-          body: LoadingOverlayComponent(
-            isLoading: controller.isLoading.value,
-            child: ListView.builder(
-              itemCount: controller.listLocations.length,
-              itemBuilder: ((BuildContext context, int index) {
-                final locations = controller.listLocations[index];
-                return LocationListCardComponent(
-                  location: locations,
-                );
-              }),
-            ),
-          )),
+            drawer: const DrawerComponent(),
+            body: LoadingOverlayComponent(
+              isLoading: controller.isLoading.value,
+              child: ListView.builder(
+                itemCount: controller.listLocations.length,
+                itemBuilder: ((BuildContext context, int index) {
+                  final locations = controller.listLocations[index];
+                  return LocationListCardComponent(
+                    location: locations,
+                  );
+                }),
+              ),
+            )),
+      ),
     );
   }
 }

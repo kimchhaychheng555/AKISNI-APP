@@ -47,5 +47,7 @@ Map<String, String> get khTranslate {
     "manage": "គ្រប់គ្រងទីតាំង",
     "user": "អ្នកប្រើប្រាស់",
     "logout": "ចាកចេញ",
+    "color_role": "ពណ៌មានតួនាទី",
+    "setting": "កំណត់",
   };
 }

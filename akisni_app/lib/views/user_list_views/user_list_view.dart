@@ -20,67 +20,72 @@ class UserListView extends GetResponsiveView<MainController> {
     var controller = Get.find<UserListController>();
 
     return Obx(
-      () => Scaffold(
-        drawer: const DrawerComponent(),
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: BluePrimary,
-          title: TextHeaderComponent(
-            text: "user_list".tr.toUpperCase(),
-          ),
-          actions: [
-            IconButton(
-              splashRadius: 25,
-              onPressed: () {
-                Get.defaultDialog(
-                  radius: 5,
-                  title: "color_role".tr,
-                  content: Column(
-                    children: [
-                      _roleInfoComponent(
-                        label: "Admin",
-                        color: adminColor,
-                      ),
-                      const SizedBox(height: 10),
-                      _roleInfoComponent(
-                        label: "Moderator",
-                        color: moderatorColor,
-                      ),
-                      const SizedBox(height: 10),
-                      _roleInfoComponent(
-                        label: "User",
-                        color: userColor,
-                      ),
-                    ],
-                  ),
-                );
-              },
-              icon: const Icon(Icons.info_outline_rounded),
+      () => WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Scaffold(
+          drawer: const DrawerComponent(),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: BluePrimary,
+            title: TextHeaderComponent(
+              text: "user_list".tr.toUpperCase(),
             ),
-          ],
-        ),
-        body: LoadingOverlayComponent(
-          isLoading: controller.isLoading.value,
-          child: ListView.builder(
-            itemCount: controller.listUsers.length,
-            itemBuilder: ((BuildContext context, int index) {
-              final user = controller.listUsers[index];
-              return UserListItem(
-                role: user.role,
-                onEditPressed: () => controller.onEditPressed(user),
-                onDeletePressed: () => controller.onDeletePressed(user.id),
-                userName: user.username ?? '',
-                fullName: user.fullName ?? '',
-                phoneNumber: user.phoneNumber ?? '',
-                profile: user.profile ?? '',
-              );
-            }),
+            actions: [
+              IconButton(
+                splashRadius: 25,
+                onPressed: () {
+                  Get.defaultDialog(
+                    radius: 5,
+                    title: "color_role".tr,
+                    content: Column(
+                      children: [
+                        _roleInfoComponent(
+                          label: "Admin",
+                          color: adminColor,
+                        ),
+                        const SizedBox(height: 10),
+                        _roleInfoComponent(
+                          label: "Moderator",
+                          color: moderatorColor,
+                        ),
+                        const SizedBox(height: 10),
+                        _roleInfoComponent(
+                          label: "User",
+                          color: userColor,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.info_outline_rounded),
+              ),
+            ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => controller.onAddNewUserPress(),
-          backgroundColor: BluePrimary,
-          child: const Icon(Icons.add),
+          body: LoadingOverlayComponent(
+            isLoading: controller.isLoading.value,
+            child: ListView.builder(
+              itemCount: controller.listUsers.length,
+              itemBuilder: ((BuildContext context, int index) {
+                final user = controller.listUsers[index];
+                return UserListItem(
+                  role: user.role,
+                  onEditPressed: () => controller.onEditPressed(user),
+                  onDeletePressed: () => controller.onDeletePressed(user.id),
+                  userName: user.username ?? '',
+                  fullName: user.fullName ?? '',
+                  phoneNumber: user.phoneNumber ?? '',
+                  profile: user.profile ?? '',
+                );
+              }),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => controller.onAddNewUserPress(),
+            backgroundColor: BluePrimary,
+            child: const Icon(Icons.add),
+          ),
         ),
       ),
     );

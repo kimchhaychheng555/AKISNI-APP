@@ -6,10 +6,14 @@ import 'package:get/get.dart';
 
 class MainViewLayout extends StatefulWidget {
   final Widget body;
+  final Widget? floatingActionButton;
+  final List<Widget>? actions;
   final String? title;
   final Function(String?) onSearch;
   const MainViewLayout({
     super.key,
+    this.actions,
+    this.floatingActionButton,
     required this.body,
     required this.onSearch,
     this.title,
@@ -45,10 +49,12 @@ class _MainViewLayoutState extends State<MainViewLayout> {
             splashRadius: 25,
             icon: Icon(isSearch ? Icons.close_rounded : Icons.search),
           ),
+          ...widget.actions ?? []
         ],
       ),
       drawer: isSearch ? null : const DrawerComponent(),
       body: widget.body,
+      floatingActionButton: widget.floatingActionButton,
     );
   }
 

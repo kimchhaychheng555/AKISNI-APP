@@ -47,5 +47,7 @@ Map<String, String> get enTranslate {
     "manage": "Manage",
     "user": "User",
     "logout": "Logout",
+    "color_role": "Color Role",
+    "setting": "Setting",
   };
 }

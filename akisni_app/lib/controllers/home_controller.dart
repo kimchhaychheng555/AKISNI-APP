@@ -1,6 +1,6 @@
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
-import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -74,7 +74,7 @@ class HomeController extends GetxController {
   Future<void> _onLoadMarker(String? type) async {
     listLocation([]);
     type = (type ?? "") == "" ? "" : type;
-    var locations = await ResponsitoryServices.getLocation();
+    var locations = AppService.listLocations;
     listLocationTemp(locations);
 
     for (var marker in locations) {
@@ -89,8 +89,8 @@ class HomeController extends GetxController {
                 position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
                 icon: await MarkerIcon.pictureAsset(
                     assetPath: "assets/images/tower.png",
-                    height: 100,
-                    width: 100),
+                    height: 80,
+                    width: 80),
               ),
             );
           }
@@ -102,9 +102,7 @@ class HomeController extends GetxController {
               markerId: MarkerId("${marker.id ?? 0}"),
               position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
               icon: await MarkerIcon.pictureAsset(
-                  assetPath: "assets/images/tower.png",
-                  height: 100,
-                  width: 100),
+                  assetPath: "assets/images/tower.png", height: 80, width: 80),
             ),
           );
         }

@@ -85,13 +85,17 @@ class DrawerComponent extends StatelessWidget {
                   title: 'user'.tr,
                   onClick: () => controller.onUserPressed(),
                 ),
-              if (AppService.loginUser.role?.toLowerCase() == "admin" ||
-                  AppService.loginUser.role?.toLowerCase() == "moderator")
+              if (AppService.loginUser.role?.toLowerCase() == "admin")
                 MenuItemComponent(
                   icons: Icons.mode_of_travel,
                   title: 'track_location'.tr,
                   onClick: () => controller.onTrackLocationPressed(),
                 ),
+              MenuItemComponent(
+                icons: Icons.settings,
+                title: 'setting'.tr,
+                onClick: () => controller.onSettingPressed(),
+              ),
               MenuItemComponent(
                 icons: Icons.logout,
                 title: 'logout'.tr,

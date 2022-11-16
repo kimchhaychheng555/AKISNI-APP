@@ -43,7 +43,7 @@ class TrackLocationController extends GetxController {
   }
 
   void _onLoadMarker() async {
-    var locations = await ResponsitoryServices.getLocation();
+    var locations = AppService.listLocations;
 
     for (var marker in locations) {
       if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {

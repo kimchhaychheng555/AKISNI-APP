@@ -72,10 +72,6 @@ class LocationListCardComponent extends StatelessWidget {
                           '${'install_date'.tr} : ${location.installDate ?? ""}',
                       color: BluePrimary,
                     ),
-                    TextComponent(
-                      text: '${'company'.tr} : ${location.company ?? ""}',
-                      color: BluePrimary,
-                    ),
                     const SizedBox(
                       height: 15,
                     ),

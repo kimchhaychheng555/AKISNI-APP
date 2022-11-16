@@ -9,6 +9,7 @@ import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:akisni_app/views/no_network_view.dart';
 import 'package:akisni_app/views/track_locations_views/track_location_view.dart';
+import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
@@ -84,6 +85,11 @@ class MainController extends FullLifeCycleController {
   void onUserPressed() => Get.offNamed(UserListView.routeName);
 
   void onTrackLocationPressed() => Get.offNamed(TrackLocationView.routeName);
+
+  void onSettingPressed() {
+    Get.back();
+    Get.toNamed(NewUserView.routeName, arguments: AppService.loginUser);
+  }
 
   void onLogoutPreseed() async {
     Get.offAllNamed(LoginView.routeName);

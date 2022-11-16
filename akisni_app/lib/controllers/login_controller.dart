@@ -1,3 +1,4 @@
+import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
@@ -19,6 +20,7 @@ class LoginController extends GetxController {
 
     isLoading(false);
     if (checkLogin) {
+      AppService.listLocations = await ResponsitoryServices.getLocation();
       if (isRememberMe.value) {
         AppStorage.saveLogin();
       }

@@ -2,6 +2,7 @@ import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/select_opction_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_user_controller.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -67,17 +68,19 @@ class NewUserView extends GetResponsiveView<MainController> {
                           controller: controller.phoneNumberCtrl,
                           placeholder: 'phone_number'.tr,
                         ),
-                        SelectOpctionComponent<String>(
-                          placeholder: 'select_user_type'.tr,
-                          value: controller.role.value,
-                          items: controller.roleList.map((e) {
-                            return DropdownMenuItem<String>(
-                              value: e,
-                              child: Text(e.toString()),
-                            );
-                          }).toList(),
-                          onChanged: (value) => controller.onChangeRole(value),
-                        ),
+                        if (AppService.loginUser.role?.toLowerCase() == "admin")
+                          SelectOpctionComponent<String>(
+                            placeholder: 'select_user_type'.tr,
+                            value: controller.role.value,
+                            items: controller.roleList.map((e) {
+                              return DropdownMenuItem<String>(
+                                value: e,
+                                child: Text(e.toString()),
+                              );
+                            }).toList(),
+                            onChanged: (value) =>
+                                controller.onChangeRole(value),
+                          ),
                         const SizedBox(height: 10),
                         Container(
                           width: double.infinity,

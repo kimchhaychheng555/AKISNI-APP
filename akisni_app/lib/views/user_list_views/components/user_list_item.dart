@@ -39,12 +39,6 @@ class UserListItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(
-          bottom: BorderSide(
-            color: roleColor,
-            width: 3,
-          ),
-        ),
         boxShadow: [
           BoxShadow(
             color: const Color.fromARGB(240, 143, 40, 40).withOpacity(0.5),
@@ -77,7 +71,7 @@ class UserListItem extends StatelessWidget {
                       text: fullName,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: const Color(0xFFC63030),
+                      color: roleColor,
                     ),
                     Row(
                       children: [
