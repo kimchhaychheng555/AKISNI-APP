@@ -35,7 +35,7 @@ class TrackLocationController extends GetxController {
   void _onLoadMapRefresh() async {
     while (true) {
       userActiveList(await ResponsitoryServices.getTrackUser());
-      _onUserMarker();
+      await _onUserMarker();
       await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
     }
   }
@@ -64,7 +64,7 @@ class TrackLocationController extends GetxController {
     }
   }
 
-  void _onUserMarker() async {
+  Future<void> _onUserMarker() async {
     for (var marker in userActiveList) {
       if (marker.user_id != AppService.loginUser.id) {
         if (marker.active == "active") {

@@ -20,10 +20,11 @@ class LoginController extends GetxController {
 
     isLoading(false);
     if (checkLogin) {
-      AppService.listLocations = await ResponsitoryServices.getLocation();
       if (isRememberMe.value) {
         AppStorage.saveLogin();
       }
+
+      AppService.listLocations = await ResponsitoryServices.getLocation();
       Get.offAllNamed(HomeView.routeName);
     } else {
       Fluttertoast.showToast(
