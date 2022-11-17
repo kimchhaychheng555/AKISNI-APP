@@ -39,7 +39,7 @@ class UserActiveController extends Controller
 
     public function create(Request $request){
 
-        $userActive = UserActiveModel::where('user_id', $request->input('id'))
+        $userActive = UserActiveModel::where('user_id', $request->input('user_id'))
                         ->get();
     
         if($userActive->count() == 0){

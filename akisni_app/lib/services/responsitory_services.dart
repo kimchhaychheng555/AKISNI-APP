@@ -1,7 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
@@ -134,10 +132,6 @@ class ResponsitoryServices {
       lastLatitude: user.lastLatitude,
       lastLongitude: user.lastLongitude,
     );
-
-    print('=====================');
-    print('======== ${jsonEncode(tempUserActive)}');
-    print('=====================');
 
     provider.createActiveUser(tempUserActive.toJson());
   }
