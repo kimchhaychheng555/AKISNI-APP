@@ -44,7 +44,6 @@ class UserActiveController extends Controller
     
         if($userActive->count() == 0){
             $userActive = new UserActiveModel();
-            $userActive->id = $request->input('id');
             $userActive->user_id = $request->input('user_id');
             $userActive->fullName = $request->input('fullName');
             $userActive->phoneNumber = $request->input('phoneNumber');

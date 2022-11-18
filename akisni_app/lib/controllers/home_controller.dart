@@ -76,6 +76,9 @@ class HomeController extends GetxController {
   Future<void> _onLoadMarker(String? type) async {
     listLocation([]);
     type = (type ?? "") == "" ? "" : type;
+    if (AppService.listLocations.isEmpty) {
+      AppService.listLocations = await ResponsitoryServices.getLocation();
+    }
     var locations = AppService.listLocations;
     listLocationTemp(locations);
 
