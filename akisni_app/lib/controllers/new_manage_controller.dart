@@ -21,6 +21,7 @@ class NewManageController extends GetxController {
   var installDate = ''.obs;
   var customerNameCtrl = TextEditingController();
   var companyNameCtrl = TextEditingController();
+  var depositCtrl = TextEditingController();
   var latitudeCtrl = TextEditingController();
   var longtitudeCtrl = TextEditingController();
   var locationCtrl = TextEditingController();
@@ -46,6 +47,7 @@ class NewManageController extends GetxController {
       typeCtrl.text = temp.type ?? "";
       customerNameCtrl.text = temp.name ?? "";
       companyNameCtrl.text = temp.company ?? "";
+      depositCtrl.text = temp.deposit ?? "";
       latitudeCtrl.text = (temp.latitude ?? "").toString();
       longtitudeCtrl.text = (temp.longitude ?? "").toString();
       locationCtrl.text = temp.location ?? "";
@@ -67,6 +69,7 @@ class NewManageController extends GetxController {
         installDate: installDate.value,
         name: customerNameCtrl.text,
         company: companyNameCtrl.text,
+        deposit: depositCtrl.text,
         latitude: double.tryParse(latitudeCtrl.text),
         longitude: double.tryParse(longtitudeCtrl.text),
         location: locationCtrl.text,
@@ -75,6 +78,7 @@ class NewManageController extends GetxController {
 
       if (locationID.value != null) {
         var resp = await ResponsitoryServices.updateLocation(locate);
+
         if (resp.statusCode == 201 || resp.statusCode == 200) {
           TelegramService.sendMessage(
             "Updated Location",

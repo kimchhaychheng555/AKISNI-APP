@@ -40,6 +40,7 @@ Route::get("/locations",[LocationsListController::class,"get"]);
 Route::get("/locations/{id}",[LocationsListController::class,"findOne"]);
 Route::post("/locations",[LocationsListController::class,"create"]);
 Route::delete("/locations/{id}",[LocationsListController::class,"delete"]);
+Route::post("/locations/update",[LocationsListController::class,"update"]);
 
 # Location List
 Route::get("/userActive",[UserActiveController::class,"get"]);

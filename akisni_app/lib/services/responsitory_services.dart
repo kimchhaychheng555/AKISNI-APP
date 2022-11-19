@@ -1,5 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
@@ -78,6 +80,7 @@ class ResponsitoryServices {
 
   static Future<Response> updateLocation(LocationListModel locate) async {
     AppProvider provider = AppProvider();
+    print(jsonEncode(locate));
     var resp = await provider.updateLocationList(locate.toJson());
     return resp;
   }

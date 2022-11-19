@@ -83,6 +83,10 @@ class NewManageView extends GetResponsiveView<MainController> {
                           placeholder: 'company_name'.tr,
                         ),
                         InputTextComponent(
+                          controller: controller.depositCtrl,
+                          placeholder: 'deposit'.tr,
+                        ),
+                        InputTextComponent(
                           controller: controller.latitudeCtrl,
                           textInputType: TextInputType.number,
                           placeholder: 'latitude'.tr,

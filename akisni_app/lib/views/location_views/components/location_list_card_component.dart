@@ -68,6 +68,10 @@ class LocationListCardComponent extends StatelessWidget {
                       color: BluePrimary,
                     ),
                     TextComponent(
+                      text: '${'deposit'.tr} : ${location.deposit ?? ""}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
                       text:
                           '${'install_date'.tr} : ${location.installDate ?? ""}',
                       color: BluePrimary,

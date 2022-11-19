@@ -49,5 +49,6 @@ Map<String, String> get khTranslate {
     "logout": "ចាកចេញ",
     "color_role": "ពណ៌មានតួនាទី",
     "setting": "កំណត់",
+    "deposit": "ប្រាក់កក់",
   };
 }

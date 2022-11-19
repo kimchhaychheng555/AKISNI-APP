@@ -11,19 +11,20 @@ class TelegramService {
   static String channel = "-1001603600275";
 
   static void sendMessage(String title, LocationListModel? locate) async {
-    var dateStr = DateFormat("yyyy-MM-dd hh:mm a").format(DateTime.now());
+    var dateStr = DateFormat("dd-MM-yyyy hh:mm a").format(DateTime.now());
     var text = '''
 <b><i>User: ${AppService.loginUser.fullName}</i></b>
 <b><i>Date: $dateStr</i></b>
 ———————————————
 <b>$title</b>
 ———————————————
-<b>DK: </b>${locate?.title}
+<b>${locate?.title}</b>
 <b>Power: </b>${locate?.power}
 <b>Type: </b>${locate?.type}
+<b>Deposit: </b>${locate?.deposit}
 <b>Install Date: </b>${locate?.installDate}
 <b>Customer Name: </b>${locate?.name}
-<b>Company Name: </b>${locate?.company}
+<b>Install By: </b>${locate?.company}
 <b>Lat: </b>${locate?.latitude}
 <b>Long: </b>${locate?.longitude}
 ''';

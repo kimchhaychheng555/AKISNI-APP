@@ -20,13 +20,13 @@ Map<String, String> get enTranslate {
     "upload": "Upload",
     "track_location": "Track location",
     "install_date": "Install Date",
-    "company": "Company",
+    "company": "Install By",
     "latitude": "Latitude",
     "longtitude": "Longtitude",
     "location_list": "Location List",
     "new_location": "New Location",
     "general_information": "General Information",
-    "company_name": "Company Name",
+    "company_name": "Install By",
     "location_name": "Location Name",
     "login": "Login",
     "type": "Type",
@@ -49,5 +49,6 @@ Map<String, String> get enTranslate {
     "logout": "Logout",
     "color_role": "Color Role",
     "setting": "Setting",
+    "deposit": "Deposit",
   };
 }

@@ -11,6 +11,7 @@ class LocationListModel {
   final String? installDate;
   final String? power;
   final String? type;
+  final String? deposit;
   final String? location;
   final String? image;
   final double? latitude;
@@ -27,6 +28,7 @@ class LocationListModel {
     this.installDate,
     this.power,
     this.location,
+    this.deposit,
     this.image,
     this.latitude,
     this.longitude,

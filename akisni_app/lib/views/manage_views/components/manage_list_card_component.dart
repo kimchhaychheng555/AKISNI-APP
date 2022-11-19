@@ -86,6 +86,10 @@ class ManageListCardComponent extends StatelessWidget {
                       color: BluePrimary,
                     ),
                     TextComponent(
+                      text: '${'deposit'.tr} : ${location.deposit ?? ""}',
+                      color: BluePrimary,
+                    ),
+                    TextComponent(
                       text: '${'company'.tr} : ${location.company ?? ""}',
                       color: BluePrimary,
                     ),

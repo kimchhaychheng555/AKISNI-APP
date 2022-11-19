@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chhaylow.akisni_app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.chhaylow.akisni_app.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>   
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    
 
    <application
    

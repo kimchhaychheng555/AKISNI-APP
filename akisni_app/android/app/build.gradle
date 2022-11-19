@@ -55,30 +55,31 @@ android {
         targetSdkVersion 31
         versionCode 2
         versionName "1.0.1"
+        multiDexEnabled true
     }
 
-    // buildTypes {
-    //     release {
-    //         // TODO: Add your own signing config for the release build.
-    //         // Signing with the debug keys for now,
-    //         // so `flutter run --release` works.
-    //         signingConfig signingConfigs.debug
-    //     }
-    // }
-
-    signingConfigs {
-       release {
-           keyAlias keystoreProperties['keyAlias']
-           keyPassword keystoreProperties['keyPassword']
-           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-           storePassword keystoreProperties['storePassword']
-       }
-    }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now,
+            // so `flutter run --release` works.
+            signingConfig signingConfigs.debug
         }
     }
+
+    // signingConfigs {
+    //    release {
+    //        keyAlias keystoreProperties['keyAlias']
+    //        keyPassword keystoreProperties['keyPassword']
+    //        storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+    //        storePassword keystoreProperties['storePassword']
+    //    }
+    // }
+    // buildTypes {
+    //     release {
+    //         signingConfig signingConfigs.release
+    //     }
+    // }
 
 
     // signingConfigs {
@@ -92,6 +93,7 @@ android {
     // buildTypes {
     //     release {
     //         signingConfig signingConfigs.release
+        // minifyEnabled 
     //     }
     // }
  
