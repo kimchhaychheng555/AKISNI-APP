@@ -1,5 +1,4 @@
 import 'package:akisni_app/constants/constant.dart';
-import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
 import 'package:akisni_app/services/app_storage.dart';
@@ -12,7 +11,6 @@ class AppService {
   static bool isHasNetwork = true;
   static String currentLanguage = "en";
   static UserModel loginUser = UserModel(id: Uuid.NAMESPACE_NIL);
-  static List<LocationListModel> listLocations = [];
   static List<Marker> listMarkerLocation = [];
   static String get getFont {
     switch (currentLanguage) {

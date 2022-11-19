@@ -2,7 +2,7 @@ import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/tage_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
-import 'package:akisni_app/services/app_services.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/location_list_models/location_list_model.dart';
@@ -21,7 +21,7 @@ class LocationController extends GetxController {
 
   Future<void> _onGetData() async {
     isLoading(true);
-    var locations = AppService.listLocations;
+    var locations = await ResponsitoryServices.getLocation();
     listLocations.assignAll(locations);
     isLoading(false);
   }
@@ -32,7 +32,7 @@ class LocationController extends GetxController {
       _onGetData();
     } else {
       isLoading(true);
-      var locations = AppService.listLocations;
+      var locations = await ResponsitoryServices.getLocation();
       listLocations.assignAll(locations
           .where((x) => (x.type ?? "").contains(filterType.value))
           .toList());

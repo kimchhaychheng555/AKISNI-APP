@@ -48,7 +48,7 @@ class DateTimePickerComponent extends StatelessWidget {
             fieldHintText: label,
             lastDate: DateTime(2100),
             dateHintText: label,
-            onSaved: onSelectonChange,
+            onChanged: onSelectonChange,
           ),
         ],
       ),

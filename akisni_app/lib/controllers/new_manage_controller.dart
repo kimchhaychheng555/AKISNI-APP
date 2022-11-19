@@ -1,6 +1,7 @@
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/services/telegram_service.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -75,6 +76,11 @@ class NewManageController extends GetxController {
       if (locationID.value != null) {
         var resp = await ResponsitoryServices.updateLocation(locate);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
+          TelegramService.sendMessage(
+            "Updated Location",
+            locate,
+          );
+
           AppAlert.successAlert(title: "update_successfully".tr);
           Get.offAllNamed(ManageView.routeName);
         } else {
@@ -83,6 +89,10 @@ class NewManageController extends GetxController {
       } else {
         var resp = await ResponsitoryServices.insertLocation(locate);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
+          TelegramService.sendMessage(
+            "Add Location",
+            locate,
+          );
           AppAlert.successAlert(title: "save_successfully".tr);
           Get.offAllNamed(ManageView.routeName);
         } else {

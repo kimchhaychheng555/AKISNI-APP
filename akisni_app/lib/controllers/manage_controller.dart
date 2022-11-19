@@ -4,7 +4,6 @@ import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
-import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:darq/darq.dart';
@@ -27,7 +26,7 @@ class ManageController extends GetxController {
 
   Future<void> _onGetData() async {
     isLoading(true);
-    var locations = AppService.listLocations;
+    var locations = await ResponsitoryServices.getLocation();
     listLocations.assignAll(locations);
     _assignGroup();
     isLoading(false);
@@ -44,7 +43,7 @@ class ManageController extends GetxController {
 
   void onSearch(String? value) async {
     isLoading(true);
-    var locations = AppService.listLocations;
+    var locations = await ResponsitoryServices.getLocation();
     var temps = locations
         .where((l) => (l.title ?? "").contains(value ?? "".toLowerCase()))
         .toList();
@@ -124,7 +123,7 @@ class ManageController extends GetxController {
       _onGetData();
     } else {
       isLoading(true);
-      var locations = AppService.listLocations;
+      var locations = await ResponsitoryServices.getLocation();
       listLocations.assignAll(
           locations.where((x) => x.type == filterType.value).toList());
       isLoading(false);

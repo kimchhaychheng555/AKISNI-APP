@@ -1,3 +1,4 @@
+import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/services/app_provider.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
@@ -30,6 +31,7 @@ class MainController extends FullLifeCycleController {
     isDbLoad(true);
     isLoading(false);
     ResponsitoryServices.insertActiveUser(AppService.loginUser);
+    _assignLocation();
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
   }
@@ -105,6 +107,13 @@ class MainController extends FullLifeCycleController {
       } else if (state == AppLifecycleState.resumed) {
         ResponsitoryServices.insertActiveUser(AppService.loginUser);
       }
+    }
+  }
+
+  void _assignLocation() async {
+    while (true) {
+      ResponsitoryServices.updateActiveUser(AppService.loginUser);
+      await Future.delayed(Duration(seconds: DEFAULT_TRACK_SERVICE_DURATION));
     }
   }
 

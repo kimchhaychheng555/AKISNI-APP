@@ -1,4 +1,3 @@
-import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/app_storage.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/views/home_views/home_view.dart';
@@ -23,8 +22,6 @@ class LoginController extends GetxController {
       if (isRememberMe.value) {
         AppStorage.saveLogin();
       }
-
-      AppService.listLocations = await ResponsitoryServices.getLocation();
       Get.offAllNamed(HomeView.routeName);
     } else {
       Fluttertoast.showToast(

@@ -136,8 +136,9 @@ class ResponsitoryServices {
     provider.createActiveUser(tempUserActive.toJson());
   }
 
-  static void deleteActiveUser(UserModel user) {
+  static void updateActiveUser(UserModel user) async {
     AppProvider provider = AppProvider();
+    var location = await Geolocator.getCurrentPosition();
     var tempUserActive = UserActiveModel(
       user_id: user.id,
       fullName: user.fullName,
@@ -146,12 +147,16 @@ class ResponsitoryServices {
       password: user.password,
       role: user.role,
       profile: user.profile,
-      active: "inactive",
-      lastLatitude: user.lastLatitude,
-      lastLongitude: user.lastLongitude,
+      active: "active",
+      lastLatitude: location.latitude,
+      lastLongitude: location.longitude,
     );
-
     provider.updateActiveUser(tempUserActive.toJson());
+  }
+
+  static void deleteActiveUser(UserModel user) {
+    AppProvider provider = AppProvider();
+    provider.deleteActiveUser(user.id ?? "");
   }
 
   // ================================
