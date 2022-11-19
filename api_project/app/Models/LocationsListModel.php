@@ -19,6 +19,7 @@ class LocationsListModel extends Model
         'installDate',
         'power',
         'type',
+        'deposit',
         'location',
         'image',
         'latitude',

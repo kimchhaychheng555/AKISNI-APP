@@ -27,6 +27,7 @@ class LocationsListController extends Controller
             $res->installDate = $request->input('installDate');
             $res->power = $request->input('power');
             $res->type = $request->input('type');
+            $res->deposit = $request->input('deposit');
             $res->location = $request->input('location');
             $res->image = $request->input('image');
             $res->latitude = $request->input('latitude');
@@ -51,6 +52,7 @@ class LocationsListController extends Controller
             $location->installDate = $request->input('installDate');
             $location->power = $request->input('power');
             $location->type = $request->input('type');
+            $location->deposit = $request->input('deposit');
             $location->location = $request->input('location');
             $location->image = $request->input('image');
             $location->latitude = $request->input('latitude');

@@ -26,7 +26,7 @@ use App\Http\Controllers\PingController;
 
 
 Route::get("/ping",[PingController::class,"ping"]);
-Route::post("/image/{filename}",[ImageController::class,"uploadFile"]);
+Route::post("/image",[ImageController::class,"uploadFile"]);
 # User ROUTE
 Route::get("/user",[UserController::class,"getUser"]);
 Route::post("/user",[UserController::class,"createUser"]);
@@ -39,12 +39,11 @@ Route::delete("/user/{id}",[UserController::class,"deleteUser"]);
 Route::get("/locations",[LocationsListController::class,"get"]);
 Route::get("/locations/{id}",[LocationsListController::class,"findOne"]);
 Route::post("/locations",[LocationsListController::class,"create"]);
-Route::post("/locations/update",[LocationsListController::class,"update"]);
 Route::delete("/locations/{id}",[LocationsListController::class,"delete"]);
 
 # Location List
 Route::get("/userActive",[UserActiveController::class,"get"]);
 Route::get("/userActive/{id}",[UserActiveController::class,"findOne"]);
 Route::post("/userActive",[UserActiveController::class,"create"]);
-Route::post("/userActive/update",[UserActiveController::class,"update"]);
 Route::delete("/userActive/{id}",[UserActiveController::class,"delete"]);
+Route::post("/userActive/update",[UserActiveController::class,"update"]);

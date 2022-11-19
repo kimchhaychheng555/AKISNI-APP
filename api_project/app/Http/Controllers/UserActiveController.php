@@ -15,35 +15,14 @@ class UserActiveController extends Controller
     } 
 
     public function update(Request $request){
-
-        $res = UserActiveModel::find($request->input('id'));
-    
-        if($res === null){
-            return response()->json('', 404);
-        }else{
-            $res->user_id = $request->input('user_id');
-            $res->fullName = $request->input('fullName');
-            $res->phoneNumber = $request->input('phoneNumber');
-            $res->username = $request->input('username');
-            $res->password = $request->input('password');
-            $res->role = $request->input('role');
-            $res->profile = $request->input('profile');
-            $res->active = $request->input('active');
-            $res->lastLatitude = $request->input('lastLatitude');
-            $res->lastLongitude = $request->input('lastLongitude');
-            $res->save();
-            return response()->json($res, 200);
-        }
-
-    }
-
-    public function create(Request $request){
-
-        $userActive = UserActiveModel::where('user_id', $request->input('user_id'))
+        $res = UserActiveModel::where('user_id', $request->input('user_id'))
                         ->get();
+ 
     
-        if($userActive->count() == 0){
-            $userActive = new UserActiveModel();
+        if($res->count() == 0){
+            return response()->json($res, 404);
+        }else{
+            $userActive = $res->first();
             $userActive->user_id = $request->input('user_id');
             $userActive->fullName = $request->input('fullName');
             $userActive->phoneNumber = $request->input('phoneNumber');
@@ -55,7 +34,31 @@ class UserActiveController extends Controller
             $userActive->lastLatitude = $request->input('lastLatitude');
             $userActive->lastLongitude = $request->input('lastLongitude');
             $userActive->save();
-            return response()->json($userActive, 201);
+            return response()->json($userActive, 200);
+        }
+
+    }
+
+    public function create(Request $request){
+
+        $res = UserActiveModel::where('id', $request->input('id'))
+                        ->get();
+    
+        if($res->count() == 0){
+            $userActive = new UserActiveModel();
+            $userActive->id = $request->input('id');
+            $userActive->user_id = $request->input('user_id');
+            $userActive->fullName = $request->input('fullName');
+            $userActive->phoneNumber = $request->input('phoneNumber');
+            $userActive->username = $request->input('username');
+            $userActive->password = $request->input('password');
+            $userActive->role = $request->input('role');
+            $userActive->profile = $request->input('profile');
+            $userActive->active = $request->input('active');
+            $userActive->lastLatitude = $request->input('lastLatitude');
+            $userActive->lastLongitude = $request->input('lastLongitude');
+            $userActive->save();
+            return response()->json($user, 201);
         }else{
             return response()->json(array('message'=>'Duplicate'), 409);
         }
@@ -66,11 +69,10 @@ class UserActiveController extends Controller
     public function delete(Request $request){
 
         $res = UserActiveModel::where('user_id', $request->id)
-                                    ->get();
+                                    ->get(); 
 
- 
         if($res->count() > 0){
-            $data = UserActiveModel::find($res[0]->id);
+            $data = $res->first();
             $data->delete();
             return response()->json($data, 200);
         }else{
