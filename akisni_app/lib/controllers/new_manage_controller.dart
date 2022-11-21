@@ -2,6 +2,7 @@ import 'package:akisni_app/models/location_list_models/location_list_model.dart'
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/services/telegram_service.dart';
+import 'package:akisni_app/views/manage_views/components/pin_mark_get_location.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,7 @@ class NewManageController extends GetxController {
   var locationID = Rxn<String>();
 
   final formKey = GlobalKey<FormState>();
+  var adminScriptCtrl = TextEditingController();
   // Var Location Temp
   var dkCtrl = TextEditingController();
   var powerCtrl = TextEditingController();
@@ -139,5 +141,39 @@ class NewManageController extends GetxController {
       }
       update();
     }
+  }
+
+  void onGenerateData() async {
+    isLoading(true);
+
+    var split = adminScriptCtrl.text.split('^');
+    if (split.length == 9) {
+      dkCtrl.text = split[0];
+      powerCtrl.text = split[1];
+      typeCtrl.text = split[2];
+      locationCtrl.text = split[3];
+      customerNameCtrl.text = split[4];
+      installDate(split[5]);
+      companyNameCtrl.text = split[6];
+      latitudeCtrl.text = split[7];
+      longtitudeCtrl.text = split[8];
+
+      AppAlert.successAlert(title: "success_generate".tr);
+    } else {
+      AppAlert.errorAlert(title: "wrong_format".tr);
+    }
+
+    isLoading(false);
+  }
+
+  void onSearchMap() {
+    Get.to(
+      () => PinMarkGetLocationWidget(
+        onSubmitMap: (lat, long) {
+          latitudeCtrl.text = "$lat";
+          longtitudeCtrl.text = "$long";
+        },
+      ),
+    );
   }
 }

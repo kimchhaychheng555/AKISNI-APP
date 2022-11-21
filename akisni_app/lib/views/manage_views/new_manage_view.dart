@@ -1,8 +1,10 @@
+import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/date_time_picker_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/new_manage_controller.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../components/card_component.dart';
@@ -45,6 +47,23 @@ class NewManageView extends GetResponsiveView<MainController> {
               padding: EdgeInsets.all(DEFAULT_PADDING),
               child: Column(
                 children: [
+                  if (AppService.loginUser.role?.toLowerCase() == "admin")
+                    CardComponent(
+                      title: 'admin_script'.tr,
+                      isHasTitle: true,
+                      child: Column(
+                        children: [
+                          InputTextComponent(
+                            controller: controller.adminScriptCtrl,
+                            placeholder: 'admin_script'.tr,
+                          ),
+                          ButtonComponent(
+                            titleButton: "generate".tr,
+                            onClick: () => controller.onGenerateData(),
+                          ),
+                        ],
+                      ),
+                    ),
                   CardComponent(
                     title: 'general_information'.tr,
                     isHasTitle: true,
@@ -144,6 +163,11 @@ class NewManageView extends GetResponsiveView<MainController> {
                             ),
                           ),
                         ),
+                        if (AppService.loginUser.role?.toLowerCase() == "admin")
+                          ButtonComponent(
+                            titleButton: "search_map".tr,
+                            onClick: () => controller.onSearchMap(),
+                          ),
                       ],
                     ),
                   ),

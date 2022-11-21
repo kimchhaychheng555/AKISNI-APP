@@ -22,6 +22,7 @@ class MainController extends FullLifeCycleController {
   var isLoading = false.obs;
   var isDbLoad = false.obs;
   var isLogin = false.obs;
+  var isLoadingGetCurrentLocation = false.obs;
 
   @override
   void onInit() async {
@@ -34,6 +35,13 @@ class MainController extends FullLifeCycleController {
     _assignLocation();
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  var currentLocation = Rxn<Position>();
+  void getCurrentPostion() async {
+    isLoadingGetCurrentLocation(true);
+    currentLocation(await Geolocator.getLastKnownPosition());
+    isLoadingGetCurrentLocation(false);
   }
 
   Future<void> _checkLocationPermission() async {

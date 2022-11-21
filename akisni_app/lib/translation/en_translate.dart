@@ -50,5 +50,9 @@ Map<String, String> get enTranslate {
     "color_role": "Color Role",
     "setting": "Setting",
     "deposit": "Deposit",
+    "wrong_format": "Wrong Format",
+    "generate": "Generate",
+    "admin_script": "Admin Script",
+    "success_generate": "Success Generate",
   };
 }

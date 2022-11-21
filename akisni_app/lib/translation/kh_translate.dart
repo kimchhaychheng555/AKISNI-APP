@@ -50,5 +50,9 @@ Map<String, String> get khTranslate {
     "color_role": "ពណ៌មានតួនាទី",
     "setting": "កំណត់",
     "deposit": "ប្រាក់កក់",
+    "wrong_format": "ទម្រង់មិនត្រឹមត្រូវ",
+    "generate": "បង្កើត",
+    "admin_script": "Admin Script",
+    "success_generate": "ជោគជ័យ"
   };
 }

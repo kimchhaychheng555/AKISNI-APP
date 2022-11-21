@@ -1,7 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
@@ -80,7 +78,6 @@ class ResponsitoryServices {
 
   static Future<Response> updateLocation(LocationListModel locate) async {
     AppProvider provider = AppProvider();
-    print(jsonEncode(locate));
     var resp = await provider.updateLocationList(locate.toJson());
     return resp;
   }
@@ -140,21 +137,23 @@ class ResponsitoryServices {
   }
 
   static void updateActiveUser(UserModel user) async {
-    AppProvider provider = AppProvider();
-    var location = await Geolocator.getCurrentPosition();
-    var tempUserActive = UserActiveModel(
-      user_id: user.id,
-      fullName: user.fullName,
-      phoneNumber: user.phoneNumber,
-      username: user.username,
-      password: user.password,
-      role: user.role,
-      profile: user.profile,
-      active: "active",
-      lastLatitude: location.latitude,
-      lastLongitude: location.longitude,
-    );
-    provider.updateActiveUser(tempUserActive.toJson());
+    var location = await Geolocator.getLastKnownPosition();
+    if (location != null) {
+      AppProvider provider = AppProvider();
+      var tempUserActive = UserActiveModel(
+        user_id: user.id,
+        fullName: user.fullName,
+        phoneNumber: user.phoneNumber,
+        username: user.username,
+        password: user.password,
+        role: user.role,
+        profile: user.profile,
+        active: "active",
+        lastLatitude: location.latitude,
+        lastLongitude: location.longitude,
+      );
+      provider.updateActiveUser(tempUserActive.toJson());
+    }
   }
 
   static void deleteActiveUser(UserModel user) {
