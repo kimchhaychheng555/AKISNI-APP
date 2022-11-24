@@ -50,11 +50,11 @@ android {
     }
 
     defaultConfig { 
-        applicationId "com.chhaylow.akisni_app"
+        applicationId "com.chhaylow.akisni"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 1
+        versionName "1.0.0"
         multiDexEnabled true
     }
 
