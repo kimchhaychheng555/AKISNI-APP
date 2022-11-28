@@ -108,6 +108,16 @@ class HomeView extends GetResponsiveView<MainController> {
                                           '${'company'.tr} : ${controller.currentMarkerActive.value?.company ?? ""}',
                                       color: BluePrimary,
                                     ),
+                                    TextComponent(
+                                      text:
+                                          '${'deposit'.tr} : ${controller.currentMarkerActive.value?.deposit ?? ""}',
+                                      color: BluePrimary,
+                                    ),
+                                    TextComponent(
+                                      text:
+                                          '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate ?? ""}',
+                                      color: BluePrimary,
+                                    ),
                                   ],
                                 ),
                                 ClipRRect(
