@@ -53,6 +53,8 @@ Map<String, String> get khTranslate {
     "wrong_format": "ទម្រង់មិនត្រឹមត្រូវ",
     "generate": "បង្កើត",
     "admin_script": "Admin Script",
-    "success_generate": "ជោគជ័យ"
+    "success_generate": "ជោគជ័យ",
+    "please_activate_new_device": "សូមធ្វើការបើកដំណើរការឧបករណ៍ថ្មី",
+    "activate_new_device": "ដំណើរការឧបករណ៍ថ្មី",
   };
 }

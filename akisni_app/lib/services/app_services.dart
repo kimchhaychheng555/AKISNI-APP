@@ -2,9 +2,11 @@ import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
 import 'package:akisni_app/services/app_storage.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
 
 class AppService {
@@ -57,5 +59,15 @@ class AppService {
 
     // Re update translatation
     await Get.updateLocale(AppService.getLanguage);
+  }
+
+  static void locationService() async {
+    Location location = Location();
+    location.onLocationChanged.listen((LocationData currentLocation) async {
+      if ((AppService.loginUser.id ?? "") != "" &&
+          (AppService.loginUser.id != Uuid.NAMESPACE_NIL)) {
+        ResponsitoryServices.updateActiveUser(AppService.loginUser);
+      }
+    });
   }
 }

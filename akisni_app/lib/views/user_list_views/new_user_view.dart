@@ -1,3 +1,4 @@
+import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/select_opction_component.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
@@ -127,6 +128,28 @@ class NewUserView extends GetResponsiveView<MainController> {
                       ],
                     ),
                   ),
+                  if ((controller.isActivate.value ?? "") != "")
+                    CardComponent(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: ActiveColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                                child: TextComponent(
+                                    text: controller.isActivate.value ?? "")),
+                          ),
+                          const SizedBox(height: 10),
+                          ButtonComponent(
+                            titleButton: "activate_new_device".tr,
+                            onClick: () => controller.onActivateNewDevice(),
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
               ),
             ),

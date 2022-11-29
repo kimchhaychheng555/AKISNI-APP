@@ -15,29 +15,28 @@ class LocationsListController extends Controller
     }
 
     public function update(Request $request){
-
-        return response()->json("ASDFASDF", 200);
-        // $res = LocationsListModel::find($request->input('id'));
+ 
+        $res = LocationsListModel::find($request->input('id'));
     
-        // return response()->json($request, 200);
+        return response()->json($request, 200);
 
-        // if($res === null){
-        //     return response()->json('', 404);
-        // }else{
-        //     $res->title = $request->input('title');
-        //     $res->company = $request->input('company');
-        //     $res->name = $request->input('name');
-        //     $res->installDate = $request->input('installDate');
-        //     $res->power = $request->input('power');
-        //     $res->type = $request->input('type');
-        //     $res->deposit = $request->input('deposit');
-        //     $res->location = $request->input('location');
-        //     $res->image = $request->input('image');
-        //     $res->latitude = $request->input('latitude');
-        //     $res->longitude = $request->input('longitude');
-        //     $res->save();
-        //     return response()->json($res, 200);
-        // }
+        if($res === null){
+            return response()->json('', 404);
+        }else{
+            $res->title = $request->input('title');
+            $res->company = $request->input('company');
+            $res->name = $request->input('name');
+            $res->installDate = $request->input('installDate');
+            $res->power = $request->input('power');
+            $res->type = $request->input('type');
+            $res->deposit = $request->input('deposit');
+            $res->location = $request->input('location');
+            $res->image = $request->input('image');
+            $res->latitude = $request->input('latitude');
+            $res->longitude = $request->input('longitude');
+            $res->save();
+            return response()->json($res, 200);
+        }
 
     }
 

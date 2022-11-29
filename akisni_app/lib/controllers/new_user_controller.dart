@@ -1,3 +1,4 @@
+import 'package:akisni_app/controllers/user_list_controller.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/views/user_list_views/user_list_view.dart';
@@ -20,6 +21,7 @@ class NewUserController extends GetxController {
   var passWordCtrl = TextEditingController();
   var phoneNumberCtrl = TextEditingController();
   var role = Rxn<String>();
+  var isActivate = Rxn<String>();
   // End
   var tempImageStr = "".obs;
   var imagePath = "".obs;
@@ -38,6 +40,7 @@ class NewUserController extends GetxController {
       passWordCtrl.text = temp.password ?? "";
       fullNameCtrl.text = temp.fullName ?? "";
       phoneNumberCtrl.text = temp.phoneNumber ?? "";
+      isActivate(temp.active);
       role(temp.role);
       tempImageStr(temp.profile);
     }
@@ -56,6 +59,7 @@ class NewUserController extends GetxController {
         fullName: fullNameCtrl.text,
         phoneNumber: phoneNumberCtrl.text,
         role: role.value,
+        active: isActivate.value,
         profile: tempImageStr.value,
       );
 
@@ -63,6 +67,9 @@ class NewUserController extends GetxController {
         var resp = await ResponsitoryServices.updateUser(user);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
           AppAlert.successAlert(title: "update_successfully".tr);
+
+          var userCtrl = Get.find<UserListController>();
+          userCtrl.onInit();
           Get.offAllNamed(UserListView.routeName);
         } else {
           AppAlert.errorAlert(title: "save_error".tr);
@@ -71,6 +78,8 @@ class NewUserController extends GetxController {
         var resp = await ResponsitoryServices.insertUser(user);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
           AppAlert.successAlert(title: "save_successfully".tr);
+          var userCtrl = Get.find<UserListController>();
+          userCtrl.onInit();
           Get.offAllNamed(UserListView.routeName);
         } else {
           AppAlert.errorAlert(title: "save_error".tr);
@@ -112,6 +121,11 @@ class NewUserController extends GetxController {
       }
       update();
     }
+  }
+
+  void onActivateNewDevice() {
+    isActivate("");
+    onSave();
   }
 
   void onChangeRole(String? value) {

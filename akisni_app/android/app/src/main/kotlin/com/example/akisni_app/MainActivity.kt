@@ -1,4 +1,4 @@
-package com.chhaylow.akisni
+package com.chhaylow.akisni_app
 
 import io.flutter.embedding.android.FlutterActivity
 

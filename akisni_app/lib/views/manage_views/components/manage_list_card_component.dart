@@ -5,6 +5,7 @@ import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/controllers/main_controller.dart';
 import 'package:akisni_app/controllers/manage_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,27 +38,29 @@ class ManageListCardComponent extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: RedPrimary,
               ),
-              Row(
-                children: [
-                  IconButton(
-                    splashRadius: 20,
-                    onPressed: () => locationController.onEditPressed(location),
-                    icon: Icon(
-                      Icons.edit,
-                      color: BluePrimary,
+              if (AppService.loginUser.role?.toLowerCase() == "admin")
+                Row(
+                  children: [
+                    IconButton(
+                      splashRadius: 20,
+                      onPressed: () =>
+                          locationController.onEditPressed(location),
+                      icon: Icon(
+                        Icons.edit,
+                        color: BluePrimary,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    splashRadius: 20,
-                    onPressed: () =>
-                        locationController.onDeletePressed(location.id),
-                    icon: Icon(
-                      Icons.delete,
-                      color: RedPrimary,
+                    IconButton(
+                      splashRadius: 20,
+                      onPressed: () =>
+                          locationController.onDeletePressed(location.id),
+                      icon: Icon(
+                        Icons.delete,
+                        color: RedPrimary,
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
             ],
           ),
           const SizedBox(

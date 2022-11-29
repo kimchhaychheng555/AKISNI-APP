@@ -54,5 +54,7 @@ Map<String, String> get enTranslate {
     "generate": "Generate",
     "admin_script": "Admin Script",
     "success_generate": "Success Generate",
+    "please_activate_new_device": "Please Activate New Device",
+    "activate_new_device": "Activate New Device",
   };
 }
