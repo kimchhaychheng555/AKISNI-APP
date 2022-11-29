@@ -63,7 +63,7 @@ class AppService {
 
   static void locationService() async {
     Location location = Location();
-    location.onLocationChanged.listen((LocationData currentLocation) async {
+    location.onLocationChanged.listen((LocationData currentLocation) {
       if ((AppService.loginUser.id ?? "") != "" &&
           (AppService.loginUser.id != Uuid.NAMESPACE_NIL)) {
         ResponsitoryServices.updateActiveUser(AppService.loginUser);
