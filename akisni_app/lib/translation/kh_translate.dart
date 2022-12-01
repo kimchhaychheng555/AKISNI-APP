@@ -56,5 +56,6 @@ Map<String, String> get khTranslate {
     "success_generate": "ជោគជ័យ",
     "please_activate_new_device": "សូមធ្វើការបើកដំណើរការឧបករណ៍ថ្មី",
     "activate_new_device": "ដំណើរការឧបករណ៍ថ្មី",
+    "required": "ទាមទារ",
   };
 }

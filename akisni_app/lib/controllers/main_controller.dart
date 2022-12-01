@@ -106,13 +106,18 @@ class MainController extends FullLifeCycleController {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     super.didChangeAppLifecycleState(state);
     if ((AppService.loginUser.id ?? Uuid.NAMESPACE_NIL) != Uuid.NAMESPACE_NIL) {
-      if (state == AppLifecycleState.paused) {
-        ResponsitoryServices.deleteActiveUser(AppService.loginUser);
-      } else if (state == AppLifecycleState.detached) {
-        ResponsitoryServices.deleteActiveUser(AppService.loginUser);
-      } else if (state == AppLifecycleState.resumed) {
+      if (state == AppLifecycleState.resumed) {
         ResponsitoryServices.insertActiveUser(AppService.loginUser);
+      } else {
+        ResponsitoryServices.deleteActiveUser(AppService.loginUser);
       }
+      // if (state == AppLifecycleState.paused) {
+      //   ResponsitoryServices.deleteActiveUser(AppService.loginUser);
+      // } else if (state == AppLifecycleState.detached) {
+      //   ResponsitoryServices.deleteActiveUser(AppService.loginUser);
+      // } else if (state == AppLifecycleState.resumed) {
+      //   ResponsitoryServices.insertActiveUser(AppService.loginUser);
+      // }
     }
   }
 

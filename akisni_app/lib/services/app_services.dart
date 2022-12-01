@@ -63,10 +63,17 @@ class AppService {
 
   static void locationService() async {
     Location location = Location();
-    location.onLocationChanged.listen((LocationData currentLocation) {
+    location.onLocationChanged.listen((LocationData currentLocation) async {
       if ((AppService.loginUser.id ?? "") != "" &&
           (AppService.loginUser.id != Uuid.NAMESPACE_NIL)) {
-        ResponsitoryServices.updateActiveUser(AppService.loginUser);
+        var exist =
+            await ResponsitoryServices.findUserById(AppService.loginUser.id!);
+
+        if ((exist.id ?? "") != "") {
+          ResponsitoryServices.insertActiveUser(AppService.loginUser);
+        } else {
+          ResponsitoryServices.updateActiveUser(AppService.loginUser);
+        }
       }
     });
   }

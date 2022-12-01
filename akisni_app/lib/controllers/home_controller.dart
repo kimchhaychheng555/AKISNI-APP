@@ -2,6 +2,7 @@ import 'package:akisni_app/models/location_list_models/location_list_model.dart'
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -30,11 +31,15 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     isLoading(true);
-    ResponsitoryServices.insertActiveUser(AppService.loginUser);
     await _determinePosition();
     isLoading(false);
     await _onLoadMarker("");
     super.onInit();
+
+    if ((AppService.loginUser.fullName ?? "") == "" ||
+        (AppService.loginUser.phoneNumber ?? "") == "") {
+      Get.toNamed(NewUserView.routeName, arguments: AppService.loginUser);
+    }
   }
 
   Future<void> _determinePosition() async {

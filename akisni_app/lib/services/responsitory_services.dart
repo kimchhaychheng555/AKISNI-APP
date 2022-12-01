@@ -172,6 +172,11 @@ class ResponsitoryServices {
   static Future<Response> updateUser(UserModel user) async {
     AppProvider provider = AppProvider();
     var resp = await provider.updateUser(user.toJson());
+    if (resp.statusCode == 200) {
+      if (AppService.loginUser.id == user.id) {
+        AppService.loginUser = user;
+      }
+    }
     return resp;
   }
 

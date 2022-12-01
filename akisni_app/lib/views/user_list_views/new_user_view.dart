@@ -56,18 +56,42 @@ class NewUserView extends GetResponsiveView<MainController> {
                         InputTextComponent(
                           controller: controller.userNameCtrl,
                           placeholder: 'username'.tr,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'required'.tr;
+                            }
+                            return null;
+                          },
                         ),
                         InputTextComponent(
                           controller: controller.passWordCtrl,
                           placeholder: 'password'.tr,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'required'.tr;
+                            }
+                            return null;
+                          },
                         ),
                         InputTextComponent(
                           controller: controller.fullNameCtrl,
                           placeholder: 'fullname'.tr,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'required'.tr;
+                            }
+                            return null;
+                          },
                         ),
                         InputTextComponent(
                           controller: controller.phoneNumberCtrl,
                           placeholder: 'phone_number'.tr,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'required'.tr;
+                            }
+                            return null;
+                          },
                         ),
                         if (AppService.loginUser.role?.toLowerCase() == "admin")
                           SelectOpctionComponent<String>(
