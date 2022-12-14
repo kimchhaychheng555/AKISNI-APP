@@ -13,6 +13,7 @@ import 'package:akisni_app/views/user_list_views/user_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
@@ -40,6 +41,28 @@ class MainController extends FullLifeCycleController {
     isLoadingGetCurrentLocation(true);
     currentLocation(await Geolocator.getLastKnownPosition());
     isLoadingGetCurrentLocation(false);
+    locationService();
+  }
+
+  void locationService() async {
+    Location location = Location();
+    location.requestPermission().then((permissionStatus) {
+      if (permissionStatus == PermissionStatus.granted) {
+        location.onLocationChanged.listen((locationData) async {
+          if ((AppService.loginUser.id ?? "") != "" &&
+              (AppService.loginUser.id != Uuid.NAMESPACE_NIL)) {
+            var exist = await ResponsitoryServices.findUserById(
+                AppService.loginUser.id!);
+
+            if ((exist.id ?? "") != "") {
+              ResponsitoryServices.insertActiveUser(AppService.loginUser);
+            } else {
+              ResponsitoryServices.updateActiveUser(AppService.loginUser);
+            }
+          }
+        });
+      }
+    });
   }
 
   Future<void> _checkLocationPermission() async {

@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       debugShowCheckedModeBanner: false,
-      onInit: () => AppService.locationService(),
       translations: TranslateText(),
       locale: AppService.getLanguage,
       title: APP_TITLE.tr,

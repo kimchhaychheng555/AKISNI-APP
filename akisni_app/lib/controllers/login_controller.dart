@@ -41,7 +41,10 @@ class LoginController extends GetxController {
         //Save Device ID
         AppProvider provider = AppProvider();
         UserModel user = UserModel.fromJson(AppService.loginUser.toJson());
-        user.active = deviceId;
+
+        if (user.username != "admin") {
+          user.active = deviceId;
+        }
         provider.updateUser(user.toJson());
         if (isRememberMe.value) {
           AppStorage.saveLogin();
