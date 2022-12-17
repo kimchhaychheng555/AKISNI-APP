@@ -122,6 +122,7 @@ class MainController extends FullLifeCycleController {
 
   void onLogoutPreseed() async {
     Get.offAllNamed(LoginView.routeName);
+    ResponsitoryServices.deleteActiveUser(AppService.loginUser);
     await AppStorage.storage.remove("user");
   }
 

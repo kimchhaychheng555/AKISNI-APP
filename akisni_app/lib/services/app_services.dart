@@ -58,4 +58,6 @@ class AppService {
     // Re update translatation
     await Get.updateLocale(AppService.getLanguage);
   }
+
+  // static Future<dynamic>
 }
