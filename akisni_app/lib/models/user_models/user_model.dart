@@ -8,6 +8,8 @@ class UserModel {
   String? id;
   String? fullName;
   String? phoneNumber;
+  String? id_card;
+  String? position;
   String? username;
   String? password;
   String? role;
@@ -23,6 +25,8 @@ class UserModel {
     this.fullName,
     this.phoneNumber,
     this.username,
+    this.id_card,
+    this.position,
     this.password,
     this.role,
     this.profile,

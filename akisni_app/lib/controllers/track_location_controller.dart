@@ -28,7 +28,6 @@ class TrackLocationController extends GetxController {
     await _determinePosition();
     isLoading(false);
     _onLoadMapRefresh();
-    _onLoadMarker();
     super.onInit();
   }
 
@@ -45,28 +44,13 @@ class TrackLocationController extends GetxController {
     update();
   }
 
-  void _onLoadMarker() async {
-    var locations = await ResponsitoryServices.getLocation();
-
-    for (var marker in locations) {
-      if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
-        _addLocationList(
-          Marker(
-            infoWindow: InfoWindow(title: marker.title),
-            onTap: () => currentMarkerActive(marker),
-            markerId: MarkerId("${marker.id ?? 0}"),
-            position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
-            icon: await MarkerIcon.pictureAsset(
-                assetPath: "assets/images/tower.png", height: 80, width: 80),
-          ),
-        );
-      }
-    }
-  }
-
   Future<void> _onUserMarker() async {
     for (var marker in userActiveList) {
-      if (marker.user_id != AppService.loginUser.id) {
+      final date2 = DateTime.now();
+      int difference =
+          date2.difference(marker.updated_at ?? DateTime.now()).inMinutes;
+
+      if (marker.user_id != AppService.loginUser.id && (difference < 5)) {
         if (marker.active == "active") {
           _addUserList(
             Marker(
@@ -88,17 +72,6 @@ class TrackLocationController extends GetxController {
   }
 
   void _addUserList(Marker marker) async {
-    var exist = listMark.where((x) => x.markerId == marker.markerId).toList();
-    if (exist.isEmpty) {
-      listMark.add(marker);
-    } else {
-      listMark.removeWhere((x) => x.markerId == marker.markerId);
-      listMark.add(marker);
-    }
-    update();
-  }
-
-  void _addLocationList(Marker marker) async {
     var exist = listMark.where((x) => x.markerId == marker.markerId).toList();
     if (exist.isEmpty) {
       listMark.add(marker);

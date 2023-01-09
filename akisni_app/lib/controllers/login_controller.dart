@@ -24,7 +24,6 @@ class LoginController extends GetxController {
     var checkLogin = await ResponsitoryServices.checkLogin(
         password: passwordCtrl.text, username: usernameCtrl.text);
 
-    isLoading(false);
     if (checkLogin) {
       final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
       String deviceId = "";
@@ -49,7 +48,10 @@ class LoginController extends GetxController {
         if (isRememberMe.value) {
           AppStorage.saveLogin();
         }
-        Get.offAllNamed(HomeView.routeName);
+
+        await AppService.onLoadData();
+        isLoading(false);
+        await Get.offAllNamed(HomeView.routeName);
       } else {
         AppAlert.warningAlert(title: "please_activate_new_device".tr);
       }

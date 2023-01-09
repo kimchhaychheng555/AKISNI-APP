@@ -125,9 +125,16 @@ class HomeView extends GetResponsiveView<MainController> {
                                   child: SizedBox(
                                     height: 120,
                                     width: 150,
-                                    child: CacheNetworkImageComponent(
-                                      imageUrl: controller
-                                          .currentMarkerActive.value?.image,
+                                    child: InkWell(
+                                      onTap: () => controller
+                                          .onViewImagePressed(controller
+                                              .currentMarkerActive
+                                              .value
+                                              ?.image),
+                                      child: CacheNetworkImageComponent(
+                                        imageUrl: controller
+                                            .currentMarkerActive.value?.image,
+                                      ),
                                     ),
                                   ),
                                 ),

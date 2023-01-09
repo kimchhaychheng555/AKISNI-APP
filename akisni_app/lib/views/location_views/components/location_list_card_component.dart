@@ -98,7 +98,11 @@ class LocationListCardComponent extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   height: 120,
-                  child: CacheNetworkImageComponent(imageUrl: location.image),
+                  child: InkWell(
+                    onTap: () =>
+                        mainController.onViewImagePressed(location.image),
+                    child: CacheNetworkImageComponent(imageUrl: location.image),
+                  ),
                 ),
               ),
             ],

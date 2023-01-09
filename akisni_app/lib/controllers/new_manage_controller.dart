@@ -120,24 +120,21 @@ class NewManageController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      if (kIsWeb) {
-        unit8List(file.bytes!);
-        tempImageStr(file.name);
-      } else {
+      if (file.size <= 2000000) {
         imagePath(file.path);
-      }
 
-      var uploadImageResp = kIsWeb
-          ? await ResponsitoryServices.upload(
-              rawFile: unit8List.value,
-              name: tempImageStr.value,
-            )
-          : await ResponsitoryServices.upload(path: imagePath.value);
+        var uploadImageResp =
+            await ResponsitoryServices.upload(path: imagePath.value);
 
-      if (uploadImageResp.statusCode == 200) {
-        tempImageStr(uploadImageResp.body);
+        if (uploadImageResp.statusCode == 200) {
+          tempImageStr(uploadImageResp.body);
+          AppAlert.successAlert(title: "upload_success".tr);
+        } else {
+          tempImageStr("");
+          AppAlert.errorAlert(title: "upload_error".tr);
+        }
       } else {
-        tempImageStr("");
+        AppAlert.errorAlert(title: "image_limit_2mb".tr);
       }
       update();
     }

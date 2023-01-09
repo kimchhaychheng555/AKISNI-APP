@@ -10,6 +10,7 @@ import 'package:akisni_app/views/no_network_view.dart';
 import 'package:akisni_app/views/track_locations_views/track_location_view.dart';
 import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:akisni_app/views/user_list_views/user_list_view.dart';
+import 'package:akisni_app/views/view_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -33,34 +34,34 @@ class MainController extends FullLifeCycleController {
     isLoading(false);
     ResponsitoryServices.insertActiveUser(AppService.loginUser);
     super.onInit();
+    locationService();
     WidgetsBinding.instance.addObserver(this);
   }
 
-  var currentLocation = Rxn<Position>();
-  void getCurrentPostion() async {
-    isLoadingGetCurrentLocation(true);
-    currentLocation(await Geolocator.getLastKnownPosition());
-    isLoadingGetCurrentLocation(false);
-    locationService();
+  void onViewImagePressed(String? image) {
+    if ((image ?? "") != "") {
+      Get.dialog(
+        ViewImage(
+          imageUrl: image!,
+        ),
+        transitionDuration: const Duration(milliseconds: 100),
+      );
+    }
   }
 
   void locationService() async {
     Location location = Location();
-    location.requestPermission().then((permissionStatus) {
-      if (permissionStatus == PermissionStatus.granted) {
-        location.onLocationChanged.listen((locationData) async {
-          if ((AppService.loginUser.id ?? "") != "" &&
-              (AppService.loginUser.id != Uuid.NAMESPACE_NIL)) {
-            var exist = await ResponsitoryServices.findUserById(
-                AppService.loginUser.id!);
+    location.onLocationChanged.listen((locationData) async {
+      if ((AppService.loginUser.id ?? "") != "" &&
+          (AppService.loginUser.id != Uuid.NAMESPACE_NIL)) {
+        var exist =
+            await ResponsitoryServices.findUserById(AppService.loginUser.id!);
 
-            if ((exist.id ?? "") != "") {
-              ResponsitoryServices.insertActiveUser(AppService.loginUser);
-            } else {
-              ResponsitoryServices.updateActiveUser(AppService.loginUser);
-            }
-          }
-        });
+        if ((exist.id ?? "") != "") {
+          ResponsitoryServices.insertActiveUser(AppService.loginUser);
+        } else {
+          ResponsitoryServices.updateActiveUser(AppService.loginUser);
+        }
       }
     });
   }

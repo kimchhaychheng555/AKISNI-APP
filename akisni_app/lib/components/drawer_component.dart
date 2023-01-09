@@ -36,8 +36,12 @@ class DrawerComponent extends StatelessWidget {
                               child: SizedBox(
                                 width: 60,
                                 height: 60,
-                                child: CacheNetworkImageComponent(
-                                  imageUrl: AppService.loginUser.profile,
+                                child: InkWell(
+                                  onTap: () => controller.onViewImagePressed(
+                                      AppService.loginUser.profile),
+                                  child: CacheNetworkImageComponent(
+                                    imageUrl: AppService.loginUser.profile,
+                                  ),
                                 ),
                               ),
                             ),

@@ -57,5 +57,11 @@ Map<String, String> get enTranslate {
     "please_activate_new_device": "Please Activate New Device",
     "activate_new_device": "Activate New Device",
     "required": "Required",
+    "no_this_name": "No this name",
+    "position": "Position",
+    "id_card": "ID Card",
+    "upload_success": "Upload Success",
+    "upload_error": "Upload Error",
+    "image_limit_2mb": "Image Limit 2MB",
   };
 }

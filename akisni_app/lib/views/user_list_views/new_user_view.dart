@@ -77,7 +77,10 @@ class NewUserView extends GetResponsiveView<MainController> {
                           controller: controller.fullNameCtrl,
                           placeholder: 'fullname'.tr,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
+                            if (AppService.loginUser.role?.toLowerCase() ==
+                                "admin") {
+                              return null;
+                            } else if (value == null || value.isEmpty) {
                               return 'required'.tr;
                             }
                             return null;
@@ -87,7 +90,36 @@ class NewUserView extends GetResponsiveView<MainController> {
                           controller: controller.phoneNumberCtrl,
                           placeholder: 'phone_number'.tr,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
+                            if (AppService.loginUser.role?.toLowerCase() ==
+                                "admin") {
+                              return null;
+                            } else if (value == null || value.isEmpty) {
+                              return 'required'.tr;
+                            }
+                            return null;
+                          },
+                        ),
+                        InputTextComponent(
+                          controller: controller.positionCtrl,
+                          placeholder: 'position'.tr,
+                          validator: (value) {
+                            if (AppService.loginUser.role?.toLowerCase() ==
+                                "admin") {
+                              return null;
+                            } else if (value == null || value.isEmpty) {
+                              return 'required'.tr;
+                            }
+                            return null;
+                          },
+                        ),
+                        InputTextComponent(
+                          controller: controller.idCardCtrl,
+                          placeholder: 'id_card'.tr,
+                          validator: (value) {
+                            if (AppService.loginUser.role?.toLowerCase() ==
+                                "admin") {
+                              return null;
+                            } else if (value == null || value.isEmpty) {
                               return 'required'.tr;
                             }
                             return null;

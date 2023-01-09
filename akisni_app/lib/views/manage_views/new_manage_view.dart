@@ -80,6 +80,11 @@ class NewManageView extends GetResponsiveView<MainController> {
                           placeholder: 'dk'.toUpperCase(),
                         ),
                         InputTextComponent(
+                          controller: controller.locationCtrl,
+                          isTextArea: true,
+                          placeholder: 'location'.tr,
+                        ),
+                        InputTextComponent(
                           controller: controller.powerCtrl,
                           placeholder: 'power'.tr,
                         ),
@@ -114,11 +119,6 @@ class NewManageView extends GetResponsiveView<MainController> {
                           controller: controller.longtitudeCtrl,
                           textInputType: TextInputType.number,
                           placeholder: 'longtitude'.tr,
-                        ),
-                        InputTextComponent(
-                          controller: controller.locationCtrl,
-                          isTextArea: true,
-                          placeholder: 'location'.tr,
                         ),
                         const SizedBox(height: 10),
                         Container(

@@ -19,6 +19,8 @@ class NewUserController extends GetxController {
   var fullNameCtrl = TextEditingController();
   var userNameCtrl = TextEditingController();
   var passWordCtrl = TextEditingController();
+  var positionCtrl = TextEditingController();
+  var idCardCtrl = TextEditingController();
   var phoneNumberCtrl = TextEditingController();
   var role = Rxn<String>();
   var isActivate = Rxn<String>();
@@ -39,6 +41,8 @@ class NewUserController extends GetxController {
       userNameCtrl.text = temp.username ?? "";
       passWordCtrl.text = temp.password ?? "";
       fullNameCtrl.text = temp.fullName ?? "";
+      idCardCtrl.text = temp.id_card ?? "";
+      positionCtrl.text = temp.position ?? "";
       phoneNumberCtrl.text = temp.phoneNumber ?? "";
       isActivate(temp.active);
       role(temp.role);
@@ -56,6 +60,8 @@ class NewUserController extends GetxController {
         id: userID.value ?? const Uuid().v4(),
         username: userNameCtrl.text,
         password: passWordCtrl.text,
+        id_card: positionCtrl.text,
+        position: idCardCtrl.text,
         fullName: fullNameCtrl.text,
         phoneNumber: phoneNumberCtrl.text,
         role: role.value,
@@ -67,7 +73,6 @@ class NewUserController extends GetxController {
         var resp = await ResponsitoryServices.updateUser(user);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
           AppAlert.successAlert(title: "update_successfully".tr);
-
           var userCtrl = Get.find<UserListController>();
           userCtrl.onInit();
           Get.offAllNamed(UserListView.routeName);
@@ -100,24 +105,21 @@ class NewUserController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      if (kIsWeb) {
-        unit8List(file.bytes!);
-        tempImageStr(file.name);
-      } else {
+      if (file.size <= 2000000) {
         imagePath(file.path);
-      }
 
-      var uploadImageResp = kIsWeb
-          ? await ResponsitoryServices.upload(
-              rawFile: unit8List.value,
-              name: tempImageStr.value,
-            )
-          : await ResponsitoryServices.upload(path: imagePath.value);
+        var uploadImageResp =
+            await ResponsitoryServices.upload(path: imagePath.value);
 
-      if (uploadImageResp.statusCode == 200) {
-        tempImageStr(uploadImageResp.body);
+        if (uploadImageResp.statusCode == 200) {
+          tempImageStr(uploadImageResp.body);
+          AppAlert.successAlert(title: "upload_success".tr);
+        } else {
+          tempImageStr("");
+          AppAlert.errorAlert(title: "upload_error".tr);
+        }
       } else {
-        tempImageStr("");
+        AppAlert.errorAlert(title: "image_limit_2mb".tr);
       }
       update();
     }

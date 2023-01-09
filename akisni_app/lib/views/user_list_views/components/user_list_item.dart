@@ -1,6 +1,7 @@
 import 'package:akisni_app/components/cache_network_image_component.dart';
 import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/views/view_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,8 +53,20 @@ class UserListItem extends StatelessWidget {
             height: 70,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
-              child: CacheNetworkImageComponent(
-                imageUrl: profile,
+              child: InkWell(
+                onTap: () {
+                  if ((profile) != "") {
+                    Get.dialog(
+                      ViewImage(
+                        imageUrl: profile,
+                      ),
+                      transitionDuration: const Duration(milliseconds: 100),
+                    );
+                  }
+                },
+                child: CacheNetworkImageComponent(
+                  imageUrl: profile,
+                ),
               ),
             ),
           ),

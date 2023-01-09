@@ -1,12 +1,12 @@
+import 'package:akisni_app/constants/app_data.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
-import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/app_services.dart';
-import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/views/user_list_views/new_user_view.dart';
-import 'package:custom_marker/marker_icon.dart';
+import 'package:akisni_app/views/view_image.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+// ignore: depend_on_referenced_packages
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -33,7 +33,7 @@ class HomeController extends GetxController {
     isLoading(true);
     await _determinePosition();
     isLoading(false);
-    await _onLoadMarker("");
+    listLocation(AppData.listLocationMarker);
     super.onInit();
 
     if ((AppService.loginUser.fullName ?? "") == "" ||
@@ -62,70 +62,16 @@ class HomeController extends GetxController {
     update();
   }
 
-  void onSearch(String? value) {
-    if (value?.toLowerCase() == "lv" || value?.toLowerCase() == "mv") {
-      _onLoadMarker(value);
-    } else {
-      var temps = listLocationTemp
-          .where((l) => l.title?.toLowerCase() == value?.toLowerCase())
-          .toList();
+  void onSearch(String? value) {}
 
-      if (temps.isNotEmpty) {
-        currentMarkerActive(temps.first);
-      } else {
-        AppAlert.errorAlert(title: "no_this_name".tr);
-      }
+  void onViewImagePressed(String? image) {
+    if ((image ?? "") != "") {
+      Get.dialog(
+        ViewImage(
+          imageUrl: image!,
+        ),
+        transitionDuration: const Duration(milliseconds: 100),
+      );
     }
-  }
-
-  Future<void> _onLoadMarker(String? type) async {
-    listLocation([]);
-    type = (type ?? "") == "" ? "" : type;
-    var locations = await ResponsitoryServices.getLocation();
-    listLocationTemp(locations);
-
-    for (var marker in locations) {
-      if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
-        if ((type ?? "") != "") {
-          if (marker.type?.toLowerCase() == type) {
-            _addLocationList(
-              Marker(
-                infoWindow: InfoWindow(title: marker.title),
-                onTap: () => currentMarkerActive(marker),
-                markerId: MarkerId("${marker.id ?? 0}"),
-                position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
-                icon: await MarkerIcon.pictureAsset(
-                    assetPath: "assets/images/tower.png",
-                    height: 80,
-                    width: 80),
-              ),
-            );
-          }
-        } else {
-          _addLocationList(
-            Marker(
-              infoWindow: InfoWindow(title: marker.title),
-              onTap: () => currentMarkerActive(marker),
-              markerId: MarkerId("${marker.id ?? 0}"),
-              position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
-              icon: await MarkerIcon.pictureAsset(
-                  assetPath: "assets/images/tower.png", height: 80, width: 80),
-            ),
-          );
-        }
-      }
-    }
-  }
-
-  void _addLocationList(Marker marker) async {
-    var exist =
-        listLocation.where((x) => x.markerId == marker.markerId).toList();
-    if (exist.isEmpty) {
-      listLocation.add(marker);
-    } else {
-      listLocation.removeWhere((x) => x.markerId == marker.markerId);
-      listLocation.add(marker);
-    }
-    update();
   }
 }

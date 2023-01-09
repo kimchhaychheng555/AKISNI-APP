@@ -49,6 +49,7 @@ class AppStartup extends GetConnect {
 
       if (checkLogin) {
         var controller = Get.find<MainController>();
+        await AppService.onLoadData();
         controller.isLogin(true);
       }
     }

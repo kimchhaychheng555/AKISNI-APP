@@ -15,7 +15,7 @@ class CacheNetworkImageComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: "$BASE_URL/public/images/$imageUrl",
+      imageUrl: "$BASE_URL/uploads/$imageUrl",
       fit: BoxFit.cover,
       errorWidget: (context, url, error) =>
           errorWidget ??

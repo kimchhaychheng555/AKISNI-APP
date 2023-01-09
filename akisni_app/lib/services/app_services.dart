@@ -1,7 +1,11 @@
+import 'package:akisni_app/constants/app_data.dart';
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/controllers/home_controller.dart';
 import 'package:akisni_app/models/user_models/user_model.dart';
 import 'package:akisni_app/services/app_startup.dart';
 import 'package:akisni_app/services/app_storage.dart';
+import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -59,5 +63,48 @@ class AppService {
     await Get.updateLocale(AppService.getLanguage);
   }
 
-  // static Future<dynamic>
+  static Future<void> onLoadData() async {
+    await _onLoadMapMarker();
+    await _onLoadLocation();
+  }
+
+  static Future<void> _onLoadLocation() async {}
+
+  static Future<void> _onLoadMapMarker() async {
+    var homeCtrl = Get.find<HomeController>();
+    var locations = await ResponsitoryServices.getLocation();
+    locations.sort((a, b) {
+      return (a.title ?? "")
+          .toLowerCase()
+          .compareTo((b.title ?? "").toLowerCase());
+    });
+    AppData.listLocation = locations;
+    for (var marker in locations) {
+      if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
+        _addLocationList(
+          Marker(
+            infoWindow: InfoWindow(title: marker.title),
+            onTap: () => homeCtrl.currentMarkerActive(marker),
+            markerId: MarkerId("${marker.id ?? 0}"),
+            position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
+            icon: await MarkerIcon.pictureAsset(
+                assetPath: "assets/images/tower.png", height: 80, width: 80),
+          ),
+        );
+      }
+    }
+  }
+
+  static void _addLocationList(Marker marker) async {
+    var exist = AppData.listLocationMarker
+        .where((x) => x.markerId == marker.markerId)
+        .toList();
+    if (exist.isEmpty) {
+      AppData.listLocationMarker.add(marker);
+    } else {
+      AppData.listLocationMarker
+          .removeWhere((x) => x.markerId == marker.markerId);
+      AppData.listLocationMarker.add(marker);
+    }
+  }
 }

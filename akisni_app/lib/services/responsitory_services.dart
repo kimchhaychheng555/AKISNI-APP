@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
@@ -103,19 +102,13 @@ class ResponsitoryServices {
     return userActiveList;
   }
 
-  static Future<Response> upload(
-      {String? path, String? name, Uint8List? rawFile}) async {
+  static Future<Response> upload({String? path, String? name}) async {
     AppProvider provider = AppProvider();
 
-    if (kIsWeb) {
-      var resp = await provider.upload(name: name, uint8list: rawFile);
-      return resp;
-    } else {
-      final extension = p.extension(path!);
-      var rename = "${name ?? const Uuid().v4().toString()}$extension";
-      var resp = await provider.upload(path: path, name: rename);
-      return resp;
-    }
+    final extension = p.extension(path!);
+    var rename = "${name ?? const Uuid().v4().toString()}$extension";
+    var resp = await provider.upload(path: path, name: rename);
+    return resp;
   }
 
   static void insertActiveUser(UserModel user) {
@@ -156,9 +149,9 @@ class ResponsitoryServices {
     }
   }
 
-  static void deleteActiveUser(UserModel user) {
+  static void deleteActiveUser(UserModel user) async {
     AppProvider provider = AppProvider();
-    provider.deleteActiveUser(user.id ?? "");
+    await provider.deleteActiveUser(user.id ?? "");
   }
 
   // ================================

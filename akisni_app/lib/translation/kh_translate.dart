@@ -57,5 +57,11 @@ Map<String, String> get khTranslate {
     "please_activate_new_device": "សូមធ្វើការបើកដំណើរការឧបករណ៍ថ្មី",
     "activate_new_device": "ដំណើរការឧបករណ៍ថ្មី",
     "required": "ទាមទារ",
+    "no_this_name": "ពុំមានឈ្មោះ",
+    "position": "មុខងារ",
+    "id_card": "ID Card",
+    "upload_success": "បញ្ចូលរូបជោគជ័យ",
+    "upload_error": "បញ្ចូលរូបបរាជ័យ",
+    "image_limit_2mb": "ទំហំរូបត្រូវតែតូចជាង 2MB",
   };
 }

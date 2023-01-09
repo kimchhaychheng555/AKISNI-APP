@@ -1,0 +1,5 @@
+- New Location can't upload image
+- Move location field under DK
+- Sort Location
+========
+- 

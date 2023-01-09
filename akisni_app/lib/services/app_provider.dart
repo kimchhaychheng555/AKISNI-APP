@@ -1,43 +1,35 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:io';
+
 import 'package:path/path.dart' as p;
-import 'package:http/http.dart' as http;
 import 'package:akisni_app/constants/constant.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class AppProvider extends GetConnect {
   Future<Response> ping() => get('${API_STRING_URL}ping');
 
-  Future<Response> upload(
-      {String? path, String? name, Uint8List? uint8list}) async {
-    if (kIsWeb) {
-      var uri = Uri.parse("${API_STRING_URL}image/$name");
-      var request = http.MultipartRequest("POST", uri);
-      List<int> bytes = uint8list!;
+  Future<Response> upload({String? path, String? name}) async {
+    var extension = p.extension(name ?? "");
+    extension = extension.replaceAll(".", "");
 
-      var multipartFile = http.MultipartFile.fromBytes(
-        'image',
-        bytes,
-        filename: name,
-      );
-      request.files.add(multipartFile);
-      var response = await request.send();
-      return Response(statusCode: response.statusCode, body: name);
-    } else {
-      var extension = p.extension(name ?? "");
-      extension = extension.replaceAll(".", "");
+    var result = File(path!);
 
-      var response = await post(
-        '${API_STRING_URL}image/$name',
-        FormData({
-          'image': MultipartFile(File(path!), filename: name ?? ""),
-        }),
-      );
+    var response = await post(
+      '${API_STRING_URL}upload',
+      FormData({
+        'file': MultipartFile(
+          result,
+          filename: name ?? "",
+        ),
+      }),
+    );
 
-      return Response(statusCode: response.statusCode, body: name);
-    }
+    return Response(
+      statusCode: response.statusCode,
+      body: name,
+      bodyString: response.body,
+    );
   }
 
   // USER

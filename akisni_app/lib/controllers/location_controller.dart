@@ -1,7 +1,9 @@
 import 'package:akisni_app/components/button_component.dart';
 import 'package:akisni_app/components/tage_component.dart';
 import 'package:akisni_app/components/text_component.dart';
+import 'package:akisni_app/constants/app_data.dart';
 import 'package:akisni_app/constants/constant.dart';
+import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,8 +23,7 @@ class LocationController extends GetxController {
 
   Future<void> _onGetData() async {
     isLoading(true);
-    var locations = await ResponsitoryServices.getLocation();
-    listLocations.assignAll(locations);
+    listLocations.assignAll(AppData.listLocation);
     isLoading(false);
   }
 
@@ -32,16 +33,33 @@ class LocationController extends GetxController {
       _onGetData();
     } else {
       isLoading(true);
-      var locations = await ResponsitoryServices.getLocation();
-      listLocations.assignAll(locations
-          .where((x) => (x.type ?? "").contains(filterType.value))
-          .toList());
+      var temp = AppData.listLocation
+          .where((e) => (e.type ?? "").contains(filterType.value))
+          .toList();
+      listLocations.assignAll(temp);
       isLoading(false);
     }
   }
 
   void onTypePressed(String? type) {
-    filterType(type);
+    if (type?.toLowerCase() != "all" && type?.toLowerCase() != "ទាំងអស់") {
+      filterType(type);
+    }
+  }
+
+  void onSearch(String? value) async {
+    isLoading(true);
+    var locations = await ResponsitoryServices.getLocation();
+    var temps = locations
+        .where((l) => (l.title ?? "").contains(value ?? "".toLowerCase()))
+        .toList();
+
+    if (temps.isNotEmpty) {
+      listLocations(temps);
+    } else {
+      AppAlert.errorAlert(title: "no_this_name".tr);
+    }
+    isLoading(false);
   }
 
   void onFilterActionPressed() {
