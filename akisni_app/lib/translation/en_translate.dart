@@ -63,5 +63,10 @@ Map<String, String> get enTranslate {
     "upload_success": "Upload Success",
     "upload_error": "Upload Error",
     "image_limit_2mb": "Image Limit 2MB",
+    "pin_map": "Pin Map",
+    "delete_location": "Delete Location",
+    "are_you_sure": "Are you sure ?",
+    "delete": "Delete",
+    "cancel": "Cancel",
   };
 }

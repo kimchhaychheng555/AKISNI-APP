@@ -64,14 +64,11 @@ class AppService {
   }
 
   static Future<void> onLoadData() async {
+    await onLoadLocation();
     await _onLoadMapMarker();
-    await _onLoadLocation();
   }
 
-  static Future<void> _onLoadLocation() async {}
-
-  static Future<void> _onLoadMapMarker() async {
-    var homeCtrl = Get.find<HomeController>();
+  static Future<void> onLoadLocation() async {
     var locations = await ResponsitoryServices.getLocation();
     locations.sort((a, b) {
       return (a.title ?? "")
@@ -79,12 +76,17 @@ class AppService {
           .compareTo((b.title ?? "").toLowerCase());
     });
     AppData.listLocation = locations;
+  }
+
+  static Future<void> _onLoadMapMarker() async {
+    var homeCtrl = Get.find<HomeController>();
+    var locations = AppData.listLocation;
     for (var marker in locations) {
       if ((marker.latitude ?? 0) != 0 && (marker.longitude ?? 0) != 0) {
         _addLocationList(
           Marker(
             infoWindow: InfoWindow(title: marker.title),
-            onTap: () => homeCtrl.currentMarkerActive(marker),
+            onTap: () => homeCtrl.onMapPressedActive(marker),
             markerId: MarkerId("${marker.id ?? 0}"),
             position: LatLng(marker.latitude ?? 0, marker.longitude ?? 0),
             icon: await MarkerIcon.pictureAsset(

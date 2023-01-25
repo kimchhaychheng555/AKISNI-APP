@@ -63,5 +63,10 @@ Map<String, String> get khTranslate {
     "upload_success": "បញ្ចូលរូបជោគជ័យ",
     "upload_error": "បញ្ចូលរូបបរាជ័យ",
     "image_limit_2mb": "ទំហំរូបត្រូវតែតូចជាង 2MB",
+    "pin_map": "ទីតាំង",
+    "delete_location": "លុបទីតាំង",
+    "are_you_sure": "តើអ្នកប្រាកដមែនទេ ?",
+    "delete": "លុប",
+    "cancel": "បោះបង់",
   };
 }

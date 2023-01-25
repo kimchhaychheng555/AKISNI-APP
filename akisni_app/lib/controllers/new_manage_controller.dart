@@ -1,5 +1,7 @@
+import 'package:akisni_app/controllers/manage_controller.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
+import 'package:akisni_app/services/app_services.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:akisni_app/services/telegram_service.dart';
 import 'package:akisni_app/views/manage_views/components/pin_mark_get_location.dart';
@@ -31,6 +33,9 @@ class NewManageController extends GetxController {
   var tempImageStr = "".obs;
   var imagePath = "".obs;
   var unit8List = Rxn<Uint8List>();
+
+  //
+  var manageCtrl = Get.find<ManageController>();
 
   void onSelectChangeDate(String? value) {
     installDate(value);
@@ -99,6 +104,7 @@ class NewManageController extends GetxController {
             "Add Location",
             locate,
           );
+          await AppService.onLoadLocation();
           AppAlert.successAlert(title: "save_successfully".tr);
           Get.offAllNamed(ManageView.routeName);
         } else {
@@ -107,7 +113,7 @@ class NewManageController extends GetxController {
       }
     }
 
-    onInit();
+    manageCtrl.onInit();
     isLoading(false);
   }
 
@@ -120,21 +126,17 @@ class NewManageController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      if (file.size <= 2000000) {
-        imagePath(file.path);
+      imagePath(file.path);
 
-        var uploadImageResp =
-            await ResponsitoryServices.upload(path: imagePath.value);
+      var uploadImageResp =
+          await ResponsitoryServices.upload(path: imagePath.value);
 
-        if (uploadImageResp.statusCode == 200) {
-          tempImageStr(uploadImageResp.body);
-          AppAlert.successAlert(title: "upload_success".tr);
-        } else {
-          tempImageStr("");
-          AppAlert.errorAlert(title: "upload_error".tr);
-        }
+      if (uploadImageResp.statusCode == 200) {
+        tempImageStr(uploadImageResp.body);
+        AppAlert.successAlert(title: "upload_success".tr);
       } else {
-        AppAlert.errorAlert(title: "image_limit_2mb".tr);
+        tempImageStr("");
+        AppAlert.errorAlert(title: "upload_error".tr);
       }
       update();
     }

@@ -66,5 +66,6 @@ class LoginController extends GetxController {
         fontSize: 16.0,
       );
     }
+    isLoading(false);
   }
 }

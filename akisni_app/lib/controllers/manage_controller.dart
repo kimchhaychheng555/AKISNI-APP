@@ -6,6 +6,7 @@ import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
 import 'package:akisni_app/services/app_alert.dart';
 import 'package:akisni_app/services/responsitory_services.dart';
+import 'package:akisni_app/services/telegram_service.dart';
 import 'package:akisni_app/views/manage_views/new_manage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,16 +36,64 @@ class ManageController extends GetxController {
       Get.toNamed(NewManageView.routeName, arguments: location);
 
   void onDeletePressed(String? value) async {
-    var resp = await ResponsitoryServices.deleteLocation(value);
-    if (resp.statusCode == 200) {}
+    Get.defaultDialog(
+      title: ('delete_location'.tr),
+      content: SizedBox(
+        width: 300,
+        child: Column(
+          children: [
+            TextComponent(
+              text: "are_you_sure".tr,
+              color: BluePrimary,
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                const SizedBox(width: 5),
+                Expanded(
+                  child: ButtonComponent(
+                    onClick: () => Get.back(),
+                    titleButton: "cancel".tr,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ButtonComponent(
+                    onClick: () => _onDeleteSubmit(value),
+                    buttonColor: RedPrimary,
+                    titleButton: "delete".tr,
+                  ),
+                ),
+                const SizedBox(width: 5),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _onDeleteSubmit(String? value) async {
+    isLoading(true);
+    await ResponsitoryServices.deleteLocation(value);
+    Get.back();
+
+    LocationListModel item =
+        AppData.listLocation.where((e) => e.id == value).first;
+    AppData.listLocation.remove(item);
+
+    TelegramService.sendMessage("Delete Location", item);
+
     _onGetData();
+    isLoading(false);
   }
 
   void onSearch(String? value) async {
     isLoading(true);
-    var locations = await ResponsitoryServices.getLocation();
+    var locations = AppData.listLocation;
     var temps = locations
-        .where((l) => (l.title ?? "").contains(value ?? "".toLowerCase()))
+        .where((l) =>
+            (l.title?.toLowerCase() ?? "").contains(value ?? "".toLowerCase()))
         .toList();
 
     if (temps.isNotEmpty) {

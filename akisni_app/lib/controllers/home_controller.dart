@@ -62,6 +62,11 @@ class HomeController extends GetxController {
     update();
   }
 
+  void onMapPressedActive(LocationListModel location) {
+    currentMarkerActive(location);
+    update();
+  }
+
   void onSearch(String? value) {}
 
   void onViewImagePressed(String? image) {

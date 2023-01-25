@@ -6,7 +6,6 @@ import 'package:akisni_app/views/home_views/home_view.dart';
 import 'package:akisni_app/views/location_views/location_view.dart';
 import 'package:akisni_app/views/login_views/login_view.dart';
 import 'package:akisni_app/views/manage_views/manage_view.dart';
-import 'package:akisni_app/views/no_network_view.dart';
 import 'package:akisni_app/views/track_locations_views/track_location_view.dart';
 import 'package:akisni_app/views/user_list_views/new_user_view.dart';
 import 'package:akisni_app/views/user_list_views/user_list_view.dart';
@@ -90,11 +89,7 @@ class MainController extends FullLifeCycleController {
   }
 
   Widget get afterLoading {
-    return AppService.isHasNetwork
-        ? isLogin.value
-            ? HomeView()
-            : LoginView()
-        : NoNetWorkView();
+    return isLogin.value ? HomeView() : LoginView();
   }
 
   void onDirectionPressed(String latitude, String longitude) async {

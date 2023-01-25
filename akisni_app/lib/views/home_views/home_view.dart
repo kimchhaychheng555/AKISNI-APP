@@ -85,41 +85,40 @@ class HomeView extends GetResponsiveView<MainController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextComponent(
-                                      text:
-                                          '${'location'.tr} : ${controller.currentMarkerActive.value?.location ?? ""}',
-                                      color: BluePrimary,
-                                    ),
-                                    TextComponent(
-                                      text:
-                                          '${'power'.tr} : ${controller.currentMarkerActive.value?.power ?? ""}',
-                                      color: BluePrimary,
-                                    ),
-                                    TextComponent(
-                                      text:
-                                          '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate ?? ""}',
-                                      color: BluePrimary,
-                                    ),
-                                    TextComponent(
-                                      text:
-                                          '${'company'.tr} : ${controller.currentMarkerActive.value?.company ?? ""}',
-                                      color: BluePrimary,
-                                    ),
-                                    TextComponent(
-                                      text:
-                                          '${'deposit'.tr} : ${controller.currentMarkerActive.value?.deposit ?? ""}',
-                                      color: BluePrimary,
-                                    ),
-                                    TextComponent(
-                                      text:
-                                          '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate ?? ""}',
-                                      color: BluePrimary,
-                                    ),
-                                  ],
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextComponent(
+                                        text:
+                                            '${'location'.tr} : ${controller.currentMarkerActive.value?.location ?? ""}',
+                                        color: BluePrimary,
+                                      ),
+                                      TextComponent(
+                                        text:
+                                            '${'power'.tr} : ${controller.currentMarkerActive.value?.power ?? ""}',
+                                        color: BluePrimary,
+                                      ),
+                                      TextComponent(
+                                        text:
+                                            '${'company'.tr} : ${controller.currentMarkerActive.value?.company ?? ""}',
+                                        color: BluePrimary,
+                                      ),
+                                      TextComponent(
+                                        text:
+                                            '${'deposit'.tr} : ${controller.currentMarkerActive.value?.deposit ?? ""}',
+                                        color: BluePrimary,
+                                      ),
+                                      TextComponent(
+                                        text:
+                                            '${'install_date'.tr} : ${controller.currentMarkerActive.value?.installDate ?? ""}',
+                                        color: BluePrimary,
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                const SizedBox(width: 10),
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: SizedBox(

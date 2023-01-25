@@ -163,11 +163,10 @@ class NewManageView extends GetResponsiveView<MainController> {
                             ),
                           ),
                         ),
-                        if (AppService.loginUser.role?.toLowerCase() == "admin")
-                          ButtonComponent(
-                            titleButton: "search_map".tr,
-                            onClick: () => controller.onSearchMap(),
-                          ),
+                        ButtonComponent(
+                          titleButton: "search_map".tr,
+                          onClick: () => controller.onSearchMap(),
+                        ),
                       ],
                     ),
                   ),

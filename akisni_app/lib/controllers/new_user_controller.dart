@@ -72,10 +72,10 @@ class NewUserController extends GetxController {
       if (userID.value != null) {
         var resp = await ResponsitoryServices.updateUser(user);
         if (resp.statusCode == 201 || resp.statusCode == 200) {
+          Get.back();
           AppAlert.successAlert(title: "update_successfully".tr);
           var userCtrl = Get.find<UserListController>();
           userCtrl.onInit();
-          Get.offAllNamed(UserListView.routeName);
         } else {
           AppAlert.errorAlert(title: "save_error".tr);
         }
@@ -105,22 +105,19 @@ class NewUserController extends GetxController {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      if (file.size <= 2000000) {
-        imagePath(file.path);
+      imagePath(file.path);
 
-        var uploadImageResp =
-            await ResponsitoryServices.upload(path: imagePath.value);
+      var uploadImageResp =
+          await ResponsitoryServices.upload(path: imagePath.value);
 
-        if (uploadImageResp.statusCode == 200) {
-          tempImageStr(uploadImageResp.body);
-          AppAlert.successAlert(title: "upload_success".tr);
-        } else {
-          tempImageStr("");
-          AppAlert.errorAlert(title: "upload_error".tr);
-        }
+      if (uploadImageResp.statusCode == 200) {
+        tempImageStr(uploadImageResp.body);
+        AppAlert.successAlert(title: "upload_success".tr);
       } else {
-        AppAlert.errorAlert(title: "image_limit_2mb".tr);
+        tempImageStr("");
+        AppAlert.errorAlert(title: "upload_error".tr);
       }
+
       update();
     }
   }

@@ -58,8 +58,8 @@ android {
         applicationId "com.chhaylow.akisni_app"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 8
+        versionName "1.0.8"
         multiDexEnabled true
     }
 

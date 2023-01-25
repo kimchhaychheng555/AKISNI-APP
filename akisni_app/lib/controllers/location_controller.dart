@@ -4,7 +4,6 @@ import 'package:akisni_app/components/text_component.dart';
 import 'package:akisni_app/constants/app_data.dart';
 import 'package:akisni_app/constants/constant.dart';
 import 'package:akisni_app/services/app_alert.dart';
-import 'package:akisni_app/services/responsitory_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/location_list_models/location_list_model.dart';
@@ -49,9 +48,10 @@ class LocationController extends GetxController {
 
   void onSearch(String? value) async {
     isLoading(true);
-    var locations = await ResponsitoryServices.getLocation();
+    var locations = AppData.listLocation;
     var temps = locations
-        .where((l) => (l.title ?? "").contains(value ?? "".toLowerCase()))
+        .where((l) =>
+            (l.title?.toLowerCase() ?? "").contains(value ?? "".toLowerCase()))
         .toList();
 
     if (temps.isNotEmpty) {

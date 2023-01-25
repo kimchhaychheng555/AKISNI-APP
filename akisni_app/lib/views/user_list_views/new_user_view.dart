@@ -102,28 +102,10 @@ class NewUserView extends GetResponsiveView<MainController> {
                         InputTextComponent(
                           controller: controller.positionCtrl,
                           placeholder: 'position'.tr,
-                          validator: (value) {
-                            if (AppService.loginUser.role?.toLowerCase() ==
-                                "admin") {
-                              return null;
-                            } else if (value == null || value.isEmpty) {
-                              return 'required'.tr;
-                            }
-                            return null;
-                          },
                         ),
                         InputTextComponent(
                           controller: controller.idCardCtrl,
                           placeholder: 'id_card'.tr,
-                          validator: (value) {
-                            if (AppService.loginUser.role?.toLowerCase() ==
-                                "admin") {
-                              return null;
-                            } else if (value == null || value.isEmpty) {
-                              return 'required'.tr;
-                            }
-                            return null;
-                          },
                         ),
                         if (AppService.loginUser.role?.toLowerCase() == "admin")
                           SelectOpctionComponent<String>(
@@ -184,7 +166,8 @@ class NewUserView extends GetResponsiveView<MainController> {
                       ],
                     ),
                   ),
-                  if ((controller.isActivate.value ?? "") != "")
+                  if (((controller.isActivate.value ?? "") != "") &&
+                      AppService.loginUser.role?.toLowerCase() == "admin")
                     CardComponent(
                       child: Column(
                         children: [
