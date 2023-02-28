@@ -21,25 +21,39 @@ class LocationView extends GetResponsiveView<MainController> {
           return false;
         },
         child: MainViewLayout(
-            actions: [
-              IconButton(
-                  onPressed: () => controller.onFilterActionPressed(),
-                  icon: const Icon(Icons.tune))
-            ],
-            onSearch: (value) => controller.onSearch(value),
-            title: "location_list".tr.toUpperCase(),
-            body: LoadingOverlayComponent(
-              isLoading: controller.isLoading.value,
-              child: ListView.builder(
-                itemCount: controller.listLocations.length,
-                itemBuilder: ((BuildContext context, int index) {
-                  final locations = controller.listLocations[index];
-                  return LocationListCardComponent(
-                    location: locations,
-                  );
-                }),
-              ),
-            )),
+          actions: [
+            IconButton(
+                onPressed: () => controller.onFilterActionPressed(),
+                icon: const Icon(Icons.tune))
+          ],
+          onSearch: (value) => controller.onSearch(value),
+          title: "location_list".tr.toUpperCase(),
+          body: LoadingOverlayComponent(
+            isLoading: controller.isLoading.value,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      child: const Text(""),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.listLocations.length,
+                    itemBuilder: ((BuildContext context, int index) {
+                      final locations = controller.listLocations[index];
+                      return LocationListCardComponent(
+                        location: locations,
+                      );
+                    }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

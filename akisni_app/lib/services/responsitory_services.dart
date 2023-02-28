@@ -1,7 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:convert';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:path/path.dart' as p;
 import 'package:akisni_app/models/location_list_models/location_list_model.dart';
@@ -166,13 +164,7 @@ class ResponsitoryServices {
 
   static Future<Response> updateUser(UserModel user) async {
     AppProvider provider = AppProvider();
-    print("======================");
-    print(jsonEncode(user));
-    print("======================");
     var resp = await provider.updateUser(user.toJson());
-    print("======================");
-    print(resp.statusCode);
-    print("======================");
     if (resp.statusCode == 200) {
       if (AppService.loginUser.id == user.id) {
         AppService.loginUser = user;

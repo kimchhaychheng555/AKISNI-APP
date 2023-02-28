@@ -25,6 +25,7 @@ class TelegramService {
 <b>Install Date: </b>${locate?.installDate}
 <b>Customer Name: </b>${locate?.name}
 <b>Install By: </b>${locate?.company}
+<b>Location : </b>${locate?.location}
 <b>Lat: </b>${locate?.latitude}
 <b>Long: </b>${locate?.longitude}
 ''';

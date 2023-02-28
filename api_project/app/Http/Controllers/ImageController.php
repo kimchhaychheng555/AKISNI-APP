@@ -10,7 +10,8 @@ class ImageController extends Controller
         //Move Uploaded File to public folder 
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]); 
+        ]);
+         
         $myimage = $request->filename; 
         $result = $request->image->move("images", $myimage);
         return $myimage;
